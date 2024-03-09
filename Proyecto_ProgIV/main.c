@@ -3,6 +3,7 @@
 #include "menu.h"
 #include "usuario.h"
 #include "listaUsuarios.h"
+#include "fichero.h"
 #define TAM 100
 int main(){
 
@@ -10,6 +11,7 @@ int main(){
 	Usuario u;
 	ListaUsuarios lu;
 	lu = reservarMemoriaLU(TAM);
+	volcadoFicheroListaU(&lu,"usuarios.txt");
 	do{
 		opcion = menuPrincipal();
 		switch(opcion){
