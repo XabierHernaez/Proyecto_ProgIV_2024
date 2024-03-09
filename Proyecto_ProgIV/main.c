@@ -2,11 +2,14 @@
 #include <string.h>
 #include "menu.h"
 #include "usuario.h"
-
+#include "listaUsuarios.h"
+#define TAM 100
 int main(){
 
 	char opcion, opcion2;
 	Usuario u;
+	ListaUsuarios lu;
+	lu = reservarMemoriaLU(TAM);
 	do{
 		opcion = menuPrincipal();
 		switch(opcion){
@@ -24,7 +27,7 @@ int main(){
 				fflush(stdout);
 				opcion2 = mostrarDatosUsuario(u);
 				if(opcion2 == '1'){
-					printf("Perfecto\n");
+					anyadirUsuario(&lu, u);
 					fflush(stdout);
 				}else{
 					printf("Registro cancelado...\n");
@@ -39,7 +42,7 @@ int main(){
 	}while(opcion != '0');
 
 
-
+	liberarMemoriaLU(&lu);
 
 
 
