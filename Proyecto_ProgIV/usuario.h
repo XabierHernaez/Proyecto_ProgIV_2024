@@ -12,7 +12,7 @@ typedef struct{
 		char tipo;
 }Usuario;
 
-Usuario datosUsuario();
+Usuario datosUsuarioR();
 char mostrarDatosUsuario(Usuario u);
 
 #endif

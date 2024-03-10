@@ -1,6 +1,6 @@
 #include "usuario.h"
 #include <stdio.h>
-Usuario datosUsuario()
+Usuario datosUsuarioR()
 {
 	Usuario u;
 	printf("Porfavor introduzca los siguientes campos:\n");

@@ -1,6 +1,7 @@
 #include "listaUsuarios.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 ListaUsuarios reservarMemoriaLU(int tam)
 {
 	ListaUsuarios lu;
@@ -25,4 +26,21 @@ void anyadirUsuario(ListaUsuarios *lu, Usuario u)
 		fflush(stdout);
 	}
 
+}
+int buscarUsuario(ListaUsuarios lu, char *usuario)
+{
+	int pos = 0, enc = 0;
+	while(!enc && pos < lu.numU){
+		if(stricmp(lu.aUsuario[pos].usuario, usuario) == 0){
+			enc = 1;
+		}else{
+			pos++;
+		}
+	}
+	if(enc){
+		return pos;
+	}else{
+		return -1;
+	}
+	return pos;
 }

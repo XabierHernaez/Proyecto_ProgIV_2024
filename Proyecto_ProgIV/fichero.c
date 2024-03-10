@@ -14,4 +14,12 @@ void volcadoFicheroListaU(ListaUsuarios *lu, char *nomFich)
 		pclose(pf);
 	}
 }
-
+void anyadirUsuarioAlFichero(Usuario u, char *nomFich)
+{
+	FILE *pf;
+		pf = fopen(nomFich, "a");
+		if(pf != (FILE*)NULL){
+			fprintf(pf, "%s %s %s %s %s %s %d %c\n", u.nombre, u.primerApellido, u.segundoApellido, u.dni, u.usuario, u.contrasenya, u.telefono, u.tipo);
+			fclose(pf);
+		}
+}

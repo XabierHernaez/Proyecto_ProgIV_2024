@@ -8,6 +8,7 @@
 int main(){
 
 	char opcion, opcion2;
+	int posU;
 	Usuario u;
 	ListaUsuarios lu;
 	lu = reservarMemoriaLU(TAM);
@@ -20,17 +21,27 @@ int main(){
 				printf("Muchas gracias.");
 				fflush(stdout);
 				break;
-			case '1': break;
+			case '1':
+				printf("A continucacion se va a realizar el inicio de sesion del usuario...\n");fflush(stdout);
+
+				break;
+
 			case '2':
 				printf("A continucacion se va a realizar el registro del usuario...\n");fflush(stdout);
-				u = datosUsuario();
+				u = datosUsuarioR();
 				printf("Porfavor revise sus datos\n");
 				printf("---------\n");
 				fflush(stdout);
 				opcion2 = mostrarDatosUsuario(u);
 				if(opcion2 == '1'){
-					anyadirUsuario(&lu, u);
-					fflush(stdout);
+					posU = buscarUsuario(lu, u.usuario);
+					if(posU != -1){
+						printf("Porfavor introduzca otro nombre de usuario\n");
+						fflush(stdout);
+					}else{
+						anyadirUsuario(&lu, u);
+						anyadirUsuarioAlFichero(u, "usuarios.txt");
+					}
 				}else{
 					printf("Registro cancelado...\n");
 					printf("Volviendo a la pagina principal.\n");
