@@ -1,5 +1,6 @@
 #include "usuario.h"
 #include <stdio.h>
+#include <string.h>
 Usuario datosUsuarioR()
 {
 	Usuario u;
@@ -42,6 +43,29 @@ Usuario datosUsuarioR()
 	scanf("%d", &u.telefono);
 
 	return u;
+}
+Usuario datosUsuarioI()
+{
+	Usuario u;
+	printf("Usuario: ");
+	fflush(stdout);
+	fflush(stdin);
+	gets(u.usuario);
+
+	printf("Contraseña: ");
+	fflush(stdout);
+	fflush(stdin);
+	gets(u.contrasenya);
+
+	return u;
+}
+int contraseniaCorrecta(char *conU, char *con)
+{
+	int correcta = 0;
+	if(strcmp(conU, con) == 0){
+		correcta = 1;
+	}
+	return correcta;
 }
 char mostrarDatosUsuario(Usuario u)
 {

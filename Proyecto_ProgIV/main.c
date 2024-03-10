@@ -23,7 +23,17 @@ int main(){
 				break;
 			case '1':
 				printf("A continucacion se va a realizar el inicio de sesion del usuario...\n");fflush(stdout);
-
+				u = datosUsuarioI();
+				posU = buscarUsuario(lu, u.usuario);
+				if(posU != -1){
+					if(contraseniaCorrecta(u.contrasenya, lu.aUsuario[posU].contrasenya) == 1){
+						printf("Bienvenido %s\n", lu.aUsuario[posU].nombre);fflush(stdout);
+					}else{
+						printf("La contraseña es incorrecta\n");fflush(stdout);
+					}
+				}else{
+					printf("Error. No se ha encontrado al usuario\n");
+				}
 				break;
 
 			case '2':

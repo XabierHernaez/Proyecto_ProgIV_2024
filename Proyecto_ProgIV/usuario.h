@@ -13,6 +13,8 @@ typedef struct{
 }Usuario;
 
 Usuario datosUsuarioR();
+Usuario datosUsuarioI();
+int contraseniaCorrecta(char *conU, char *con);
 char mostrarDatosUsuario(Usuario u);
 
 #endif
