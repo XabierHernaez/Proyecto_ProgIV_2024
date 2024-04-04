@@ -42,6 +42,9 @@ Usuario datosUsuarioR()
 	fflush(stdin);
 	scanf("%d", &u.telefono);
 
+	char tipo = 'C';
+	u.tipo = tipo;
+
 	return u;
 }
 Usuario datosUsuarioI()
@@ -77,6 +80,7 @@ char mostrarDatosUsuario(Usuario u)
 	printf("Usuario: %s\n", u.usuario);
 	printf("Contraseña: %s\n", u.contrasenya);
 	printf("Telefono: %d\n", u.telefono);
+	printf("Tipo: %c\n",u.tipo);
 	printf("Porfavor, mire si los campos son correctos introduzca [1], si hay algun error introduzca [2]: ");
 	fflush(stdout);
 	fflush(stdin);

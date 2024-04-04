@@ -5,5 +5,5 @@
 
 
 char menuPrincipal();
-
+char menuCliente();
 #endif

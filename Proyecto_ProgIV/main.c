@@ -7,7 +7,7 @@
 #define TAM 100
 int main(){
 
-	char opcion, opcion2;
+	char opcion, opcion2, opcion3;
 	int posU;
 	Usuario u;
 	ListaUsuarios lu;
@@ -28,6 +28,27 @@ int main(){
 				if(posU != -1){
 					if(contraseniaCorrecta(u.contrasenya, lu.aUsuario[posU].contrasenya) == 1){
 						printf("Bienvenido %s\n", lu.aUsuario[posU].nombre);fflush(stdout);
+						do {
+							opcion3 = menuCliente();
+							switch(opcion3){
+							case '0':
+								printf("Saliendo al menu principal...\n");
+								fflush(stdout);
+								break;
+							case '1':
+								printf("A continuacion se realizara una reserva paso a paso...\n");
+								fflush(stdout);
+								break;
+							case '2':
+								printf("A continuacion se realizara la modificacion de una reserva paso a paso...\n");
+								fflush(stdout);
+								break;
+							default:
+								printf("Error. La opcion introducida no es correcta\n");
+								fflush(stdout);
+								break;
+							}
+						} while (opcion3 != '0');
 					}else{
 						printf("La contraseña es incorrecta\n");fflush(stdout);
 					}

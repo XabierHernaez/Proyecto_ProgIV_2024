@@ -13,12 +13,19 @@ char menuPrincipal()
 	fflush(stdout);
 	fflush(stdin);
 	scanf("%c", &opcion);
-
-
-
-
-
-
 	return opcion;
 }
-
+char menuCliente()
+{
+	char opcion;
+	printf("MENU CLIENTE\n");
+	printf("-------\n");
+	printf("0. Salir\n");
+	printf("1. Realizar reserva\n");
+	printf("2. Modificar reserva\n");
+	printf("Eliga una opcion[0-2]: ");
+	fflush(stdout);
+	fflush(stdin);
+	scanf("%c", &opcion);
+	return opcion;
+}
