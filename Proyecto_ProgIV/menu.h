@@ -6,4 +6,5 @@
 
 char menuPrincipal();
 char menuCliente();
+char menuAdministrador();
 #endif

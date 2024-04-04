@@ -89,4 +89,11 @@ char mostrarDatosUsuario(Usuario u)
 
 
 }
-
+int tipoUsuario(char tipo)
+{
+	if(tipo == 'A'){
+		return 1;
+	}else{
+		return -1;
+	}
+}
