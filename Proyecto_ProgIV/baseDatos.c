@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "sqlite3.h"
-#include "baseDatos/baseDatos.h"
+#include "baseDatos.h"
 
 
 int crearBDD()
