@@ -113,8 +113,8 @@ int crearBDD()
 			return 1;
 		}
 
-int cerrarBD()
-{
+int cerrarBDD(){
+
 	sqlite3 *db;
 	sqlite3_close(db);
 	return 1;
