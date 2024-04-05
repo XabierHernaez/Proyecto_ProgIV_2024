@@ -2,7 +2,7 @@
 #include "sqlite3.h"
 #include "baseDatos.h"
 
-
+/*
 int crearBDD()
 {
 	sqlite3 *db;
@@ -123,3 +123,4 @@ int cerrarBDD(){
 
 
 }
+*/

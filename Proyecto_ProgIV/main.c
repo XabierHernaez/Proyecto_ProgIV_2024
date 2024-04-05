@@ -4,10 +4,12 @@
 #include "usuario.h"
 #include "listaUsuarios.h"
 #include "fichero.h"
+#include "habitacion.h"
 #define TAM 100
 int main(){
 
 	char opcion, opcion2, opcion3, opcion4;
+	Habitacion h;
 	int posU, tipoU;
 	Usuario u;
 	ListaUsuarios lu;
@@ -38,8 +40,14 @@ int main(){
 										fflush(stdout);
 										break;
 									case '1':
-										printf("A continuacion se realizara una reserva paso a paso...\n");
-										fflush(stdout);
+										printf("A continuacion se realizara una reserva paso a paso...\n");fflush(stdout);
+										h = pedirHabitacion();
+										if(fechaCorrecta(h) == 1){
+											printf("Comprobando disponibilidad...\n");fflush(stdout);
+											printf("A continuacion se muestran las habitaciones disponibles...\n");
+										}else{
+											printf("La fecha no es correcta\n");fflush(stdout);
+										}
 										break;
 									case '2':
 										printf("A continuacion se realizara la modificacion de una reserva paso a paso...\n");
