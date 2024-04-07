@@ -4,17 +4,7 @@
 Habitacion pedirHabitacion()
 {
 	Habitacion h;
-	printf("Fecha de entrada[dd-mm-yyyy]: ");
-	fflush(stdout);
-	fflush(stdin);
-	gets(h.f_entrada);
-
-	printf("Fecha de salida[dd-mm-yyyy]: ");
-	fflush(stdout);
-	fflush(stdin);
-	gets(h.f_salida);
-
-	printf("Fecha el numero de huspedes: ");
+	printf("numero de huspedes: ");
 	fflush(stdout);
 	fflush(stdin);
 	scanf("%d", &h.numP);
