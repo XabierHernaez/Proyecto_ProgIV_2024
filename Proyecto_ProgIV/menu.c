@@ -38,7 +38,7 @@ char menuAdministrador()
 	printf("1. Visualizar las reservas activas\n");
 	printf("2. Realizar la asignacion de las habitaciones\n");
 	printf("3. Eliminar las reservas pasadas\n");
-	printf("Eliga una opcion[0-2]: ");
+	printf("Elija una opcion[0-2]: ");
 	fflush(stdout);
 	fflush(stdin);
 	scanf("%c", &opcion);
