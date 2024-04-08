@@ -44,3 +44,16 @@ char menuAdministrador()
 	scanf("%c", &opcion);
 	return opcion;
 }
+char menuModificarReservaC()
+{
+	char opcion;
+	printf("Desea modificar la reserva actual?\n");
+	fflush(stdout);
+	printf("0. Cancelar\n");
+	printf("1. Modificar\n");
+	printf("Elija una opcion[0-1]: ");
+	fflush(stdout);
+	fflush(stdin);
+	scanf("%c",&opcion);
+	return opcion;
+}

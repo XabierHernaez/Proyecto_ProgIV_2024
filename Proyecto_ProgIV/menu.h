@@ -7,4 +7,5 @@
 char menuPrincipal();
 char menuCliente();
 char menuAdministrador();
+char menuModificarReservaC();
 #endif

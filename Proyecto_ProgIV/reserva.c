@@ -47,26 +47,6 @@ void mostrarReserva(Reserva r){
 	printf("Tu reserva actual es:\nUsuario: %s, Fecha de entrada: %d/%d/%d, Fecha de salida: %d/%d/%d, Num huespedes: %d\n",
 			r.usuario,r.entrada.dia,r.entrada.mes,r.entrada.anyo,r.salida.dia,r.salida.mes,r.salida.anyo,r.habitacion.numP);
 }
-void modificarReserva(Reserva *r){
-	mostrarReserva(*r);
-	char opcion;
-	printf("Desea modificar la reserva actual?\n");
-	fflush(stdout);
-	printf("0. cancelar\n");
-	printf("1. modificar\n");
-	printf("Elija una opcion[0-1]: ");
-	fflush(stdout);
-	fflush(stdin);
-	scanf("%d",&opcion);
-	fflush(stdout);
-	fflush(stdin);
-	if(opcion == 0){
-		printf("\nse ha cancelado la modificacion\n ");
-	}if (opcion == 1){
-		comenzarReserva();
-	}
-
-}
 int fechaCorrecta(Fecha f)
 {
 	if((f.anyo > 0) ||(f.mes > 0)||(f.mes < 13)||(f.dia > 0)||(f.dia < 32)){
