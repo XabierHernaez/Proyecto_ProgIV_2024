@@ -9,7 +9,7 @@ char menuPrincipal()
 	printf("0. Salir\n");
 	printf("1. Inicio de sesion\n");
 	printf("2. Registrarse\n");
-	printf("Eliga una opcion[0-2]: ");
+	printf("Elija una opcion[0-2]: ");
 	fflush(stdout);
 	fflush(stdin);
 	scanf("%c", &opcion);
@@ -23,7 +23,7 @@ char menuCliente()
 	printf("0. Salir\n");
 	printf("1. Realizar reserva\n");
 	printf("2. Modificar reserva\n");
-	printf("Eliga una opcion[0-2]: ");
+	printf("Elija una opcion[0-2]: ");
 	fflush(stdout);
 	fflush(stdin);
 	scanf("%c", &opcion);
