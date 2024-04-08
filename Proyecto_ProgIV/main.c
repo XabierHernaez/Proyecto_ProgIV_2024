@@ -16,7 +16,7 @@ int main(){
 	ListaUsuarios lu;
 	ListaHabitacion lH;
 	ListaReservas lR;
-	Reserva r;
+	Reserva r, r2;
 	lH = reservarMemoriaH(TAM);
 	lu = reservarMemoriaLU(TAM);
 	lR = reservarMemoria(TAM);
@@ -56,11 +56,13 @@ int main(){
 											printf("Comprobando disponibilidad...\n");fflush(stdout);
 											printf("A continuacion se muestran las habitaciones disponibles...\n");fflush(stdout);
 											habitacionesDisponibles(lH, numP);
-											int numH = numH;
+											int numH = numHabitacion();
 											int posH = buscarHabitacion(lH, numH);
 											if(posH == 1){
-												printf("Habitacion reservada\n");fflush(stdout);
 												h2 = lH.aHabitacion[posH];
+												r2 = realizarReserva(h2,u.usuario,r.entrada,r.salida);
+												anyadirReserva(&lR, r2);
+												printf("Habitacion reservada\n");fflush(stdout);
 											}else{
 												printf("No se ha encontrado la habitacion\n");fflush(stdout);
 											}

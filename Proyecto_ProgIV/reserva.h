@@ -24,5 +24,5 @@ int fechaCorrecta(Fecha f);
 void mostrarReserva(Reserva r);
 void modificarReserva(Reserva *r);
 int numHabitacion();
-void realizarReserva(Reserva *r, Habitacion h, char * usuario, Fecha entrada, Fecha salida);
+Reserva realizarReserva(Habitacion h, char * usuario, Fecha entrada, Fecha salida);
 #endif
