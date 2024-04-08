@@ -8,8 +8,9 @@ typedef struct{
 	int tam;
 }ListaHabitacion;
 
-ListaHabitacion reservarMemoria(int tam);
-void habitacionesDisponibles(ListaHabitacion aH, Habitacion h);
-void liberarMemoria(ListaHabitacion *aH);
+ListaHabitacion reservarMemoriaH(int tam);
+void habitacionesDisponibles(ListaHabitacion aH, int numP);
+int buscarHabitacion(ListaHabitacion aH, int numH);
+void liberarMemoriaH(ListaHabitacion *aH);
 
 #endif /* LISTAHABITACION_H_ */

@@ -3,9 +3,11 @@
 #include "menu.h"
 #include "usuario.h"
 #include "listaUsuarios.h"
+#include "listaHabitacion.h"
 #include "fichero.h"
 #include "habitacion.h"
 #include "reserva.h"
+#include "listaReservas.h"
 #define TAM 100
 int main(){
 
@@ -13,8 +15,13 @@ int main(){
 	int posU, tipoU;
 	Usuario u;
 	ListaUsuarios lu;
+	ListaHabitacion lH;
+	ListaReservas lR;
 	Reserva r;
+	lH = reservarMemoriaH(TAM);
 	lu = reservarMemoriaLU(TAM);
+	lR = reservarMemoria(TAM);
+	Habitacion h2;
 	volcadoFicheroListaU(&lu,"usuarios.txt");
 	do{
 		opcion = menuPrincipal();
@@ -43,9 +50,19 @@ int main(){
 									case '1':
 										printf("A continuacion se realizara una reserva paso a paso...\n");fflush(stdout);
 										r = comenzarReserva();
-										if(fechaCorrecta(r.habitacion) == 1){
+										int numP = numeroPersonas();
+										if(fechaCorrecta(r.entrada) == 1 && fechaCorrecta(r.salida) == 1){
 											printf("Comprobando disponibilidad...\n");fflush(stdout);
-											printf("A continuacion se muestran las habitaciones disponibles...\n");
+											printf("A continuacion se muestran las habitaciones disponibles...\n");fflush(stdout);
+											habitacionesDisponibles(lH, numP);
+											int numH = numH;
+											int posH = buscarHabitacion(lH, numH);
+											if(posH == 1){
+												printf("Habitacion reservada\n");fflush(stdout);
+												h2 = lH.aHabitacion[posH];
+											}else{
+												printf("No se ha encontrado la habitacion\n");fflush(stdout);
+											}
 										}else{
 											printf("La fecha no es correcta\n");fflush(stdout);
 										}
@@ -124,6 +141,8 @@ int main(){
 	}while(opcion != '0');
 
 	liberarMemoriaLU(&lu);
+	liberarMemoria(&lR);
+	liberarMemoriaH(&lH);
 
 	return 0;
 }

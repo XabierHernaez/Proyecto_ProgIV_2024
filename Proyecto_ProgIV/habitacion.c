@@ -1,22 +1,17 @@
 #include "habitacion.h"
 #include <stdio.h>
 #include <string.h>
-Habitacion pedirHabitacion()
+int numeroPersonas()
 {
-	Habitacion h;
+	int num;
 	printf("numero de huspedes: ");
 	fflush(stdout);
 	fflush(stdin);
-	scanf("%d", &h.numP);
+	scanf("%d", &num);
 
-	return h;
+	return num;
 }
-
-int fechaCorrecta(Habitacion h)
+void mostrarHabitacion(Habitacion h)
 {
-	if(strcmp(h.f_entrada, h.f_salida)<0){
-		return 1;
-	}else{
-		return -1;
-	}
+	printf("Numero habitacion: %d - Tipo: %s - Descripcion: %s - Precio: %.3f\n",h.numA, h.tipo,h.descr, h.precio);fflush(stdout);
 }

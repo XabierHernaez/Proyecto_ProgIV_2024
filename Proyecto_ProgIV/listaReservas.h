@@ -1,0 +1,15 @@
+
+#ifndef LISTARESERVAS_H_
+#define LISTARESERVAS_H_
+
+#include "reserva.h"
+
+typedef struct{
+	Reserva *aR;
+	int tam;
+	int numR;
+}ListaReservas;
+
+ListaReservas reservarMemoria(int tam);
+void liberarMemoria(ListaReservas *aR);
+#endif /* LISTARESERVAS_H_ */

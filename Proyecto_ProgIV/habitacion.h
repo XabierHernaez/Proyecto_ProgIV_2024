@@ -6,14 +6,12 @@ typedef struct{
 	int numA; // Numero de habitacio
 	char *tipo;
 	char *descr;
-	char f_entrada[11];
-	char f_salida[11];
 	int numP; // El numero de personas que entran en la habiatcion
 	float precio;
-	char ocupada; // 1 ocupada; 0 libre
+	int ocupada; // 1 ocupada; 0 libre
 	char usuario[10];
 }Habitacion;
 
-Habitacion pedirHabitacion();
-int fechaCorrecta(Habitacion h);
+int numeroPersonas();
+void mostrarHabitacion(Habitacion h);
 #endif

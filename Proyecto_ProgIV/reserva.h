@@ -9,17 +9,19 @@ typedef struct
 {
 	int dia;
 	int mes;
-	int año;
+	int anyo;
 }Fecha;
 
 typedef struct{
-	Usuario usuario;
+	char *usuario;
 	Fecha entrada;
 	Fecha salida;
 	Habitacion habitacion;
 }Reserva;
 
 Reserva comenzarReserva();
-int fechaFormatoCorrecto(Fecha f);
+int fechaCorrecta(Fecha f);
 void modificarReserva(Reserva *r);
+int numHabitacion();
+void realizarReserva(Reserva *r, Habitacion h, char * usuario, Fecha entrada, Fecha salida);
 #endif
