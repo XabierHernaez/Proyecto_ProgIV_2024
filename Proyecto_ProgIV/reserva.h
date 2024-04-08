@@ -21,6 +21,7 @@ typedef struct{
 
 Reserva comenzarReserva();
 int fechaCorrecta(Fecha f);
+void mostrarReserva(Reserva r);
 void modificarReserva(Reserva *r);
 int numHabitacion();
 Reserva realizarReserva(Habitacion h, char * usuario, Fecha entrada, Fecha salida);

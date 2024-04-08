@@ -112,6 +112,7 @@ int crearBDD()
 			sqlite3_close(db);
 			return 1;
 		}
+
 }
 
 int cerrarBDD(){
@@ -119,6 +120,18 @@ int cerrarBDD(){
 	sqlite3 *db;
 	sqlite3_close(db);
 	return 1;
+}
+
+void ejecutar_query(sqlite3 *db, const char query)
+{
+	char *error_message = 0;
+	//Ejecutar consulta
+	int rc = sqlite3_exec(db, query, 0, 0, &error_message);
+	if(rc != SQLITE_OK){
+		fprintf(stderr, "Error al ejecutar la consulta: %s\n", error_message);
+		sqlite3_free(error_message);
+	}
+
 }
 
 

@@ -10,7 +10,6 @@
 #include "listaReservas.h"
 #define TAM 100
 int main(){
-
 	char opcion, opcion2, opcion3, opcion4;
 	int posU, tipoU;
 	Usuario u;
@@ -50,7 +49,9 @@ int main(){
 									case '1':
 										printf("A continuacion se realizara una reserva paso a paso...\n");fflush(stdout);
 										r = comenzarReserva();
+										r.usuario = u.usuario;
 										int numP = numeroPersonas();
+										r.habitacion.numP = numP;
 										if(fechaCorrecta(r.entrada) == 1 && fechaCorrecta(r.salida) == 1){
 											printf("Comprobando disponibilidad...\n");fflush(stdout);
 											printf("A continuacion se muestran las habitaciones disponibles...\n");fflush(stdout);
@@ -70,8 +71,9 @@ int main(){
 										}
 										break;
 									case '2':
-										printf("A continuacion se realizara la modificacion de una reserva paso a paso...\n");
+										printf("A continuacion se realizara la modificacion de la reserva paso a paso...\n");
 										fflush(stdout);
+										modificarReserva(&r);
 										break;
 									default:
 										printf("Error. La opcion introducida no es correcta\n");
