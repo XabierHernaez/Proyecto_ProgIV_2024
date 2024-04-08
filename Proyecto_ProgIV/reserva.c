@@ -63,11 +63,13 @@ int numHabitacion()
 	scanf("%d", &numH);
 	return numH;
 }
-void realizarReserva(Reserva *r, Habitacion h, char *usuario, Fecha entrada, Fecha salida)
+Reserva realizarReserva(Habitacion h, char *usuario, Fecha entrada, Fecha salida)
 {
-	r->habitacion = h;
-	r->entrada = entrada;
-	r->salida = salida;
-	r->usuario = usuario;
-
+	Reserva r;
+	h.ocupada = 1;
+	r.habitacion = h;
+	r.entrada = entrada;
+	r.salida = salida;
+	r.usuario = usuario;
+	return r;
 }

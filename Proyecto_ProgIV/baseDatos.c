@@ -2,14 +2,14 @@
 #include "sqlite3.h"
 #include "baseDatos.h"
 
-/*
+
 int crearBDD()
 {
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
 
 		char * mensaje_error = 0;
-		int rc = sqlite3_open("Hotel.db", &db);
+		int rc = sqlite3_open("hotel.s3db", &db);
 		if(rc != SQLITE_OK){
 			fprintf(stderr, "Error al abrir la base de datos: %s\n", sqlite3_errmsg(db));
 			sqlite3_close(db);
@@ -112,6 +112,7 @@ int crearBDD()
 			sqlite3_close(db);
 			return 1;
 		}
+}
 
 int cerrarBDD(){
 
@@ -122,5 +123,5 @@ int cerrarBDD(){
 
 
 
-}
-*/
+
+
