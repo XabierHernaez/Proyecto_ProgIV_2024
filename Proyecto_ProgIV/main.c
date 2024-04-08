@@ -5,14 +5,15 @@
 #include "listaUsuarios.h"
 #include "fichero.h"
 #include "habitacion.h"
+#include "reserva.h"
 #define TAM 100
 int main(){
 
 	char opcion, opcion2, opcion3, opcion4;
-	Habitacion h;
 	int posU, tipoU;
 	Usuario u;
 	ListaUsuarios lu;
+	Reserva r;
 	lu = reservarMemoriaLU(TAM);
 	volcadoFicheroListaU(&lu,"usuarios.txt");
 	do{
@@ -41,8 +42,8 @@ int main(){
 										break;
 									case '1':
 										printf("A continuacion se realizara una reserva paso a paso...\n");fflush(stdout);
-										h = pedirHabitacion();
-										if(fechaCorrecta(h) == 1){
+										r = comenzarReserva();
+										if(fechaCorrecta(r.habitacion) == 1){
 											printf("Comprobando disponibilidad...\n");fflush(stdout);
 											printf("A continuacion se muestran las habitaciones disponibles...\n");
 										}else{
@@ -122,10 +123,7 @@ int main(){
 		}
 	}while(opcion != '0');
 
-
 	liberarMemoriaLU(&lu);
-
-
 
 	return 0;
 }
