@@ -10,7 +10,7 @@
 #include "listaReservas.h"
 #define TAM 100
 int main(){
-	char opcion, opcion2, opcion3, opcion4, opcion5;
+	char opcion, opcion2, opcion3, opcion4, opcion5, opcion6;
 	int posU, tipoU;
 	Usuario u;
 	ListaUsuarios lu;
@@ -22,6 +22,7 @@ int main(){
 	lR = reservarMemoria(TAM);
 	Habitacion h2;
 	volcadoFicheroListaU(&lu,"usuarios.txt");
+	volcadoFicheroListaH(&lH, "habitaciones.txt");
 	do{
 		opcion = menuPrincipal();
 		switch(opcion){
@@ -51,18 +52,28 @@ int main(){
 										r = comenzarReserva();
 										r.usuario = u.usuario;
 										int numP = numeroPersonas();
-										r.habitacion.numP = numP;
 										if(fechaCorrecta(r.entrada) == 1 && fechaCorrecta(r.salida) == 1){
 											printf("Comprobando disponibilidad...\n");fflush(stdout);
 											printf("A continuacion se muestran las habitaciones disponibles...\n");fflush(stdout);
 											habitacionesDisponibles(lH, numP);
 											int numH = numHabitacion();
-											int posH =  buscarHabitacion(lH, numH);
+											int posH = buscarHabitacion(lH, numH);
 											if(posH == 1){
+												modificarOcupacionH(&lH, posH);
+												volcadoListaHaFichero(lH, "habitaciones.txt");
 												h2 = lH.aHabitacion[posH];
 												r2 = realizarReserva(h2,u.usuario,r.entrada,r.salida);
-												anyadirReserva(&lR, r2);
-												printf("Habitacion reservada\n");fflush(stdout);
+												mostrarReserva(r2);
+												printf("Es correcta la reserva [S/N]: ");
+												fflush(stdout);
+												fflush(stdin);
+												scanf("%c", &opcion6);
+												if(opcion6 == 'S'){
+													//anyadirReserva(&lR, r2);
+													printf("Habitacion reservada\n");fflush(stdout);
+												}else{
+													printf("La reserva se ha cancelado con exito\n");fflush(stdout);
+												}
 											}else{
 												printf("No se ha encontrado la habitacion\n");fflush(stdout);
 											}

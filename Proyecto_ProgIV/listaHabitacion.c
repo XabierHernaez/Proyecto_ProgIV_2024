@@ -21,7 +21,7 @@ void habitacionesDisponibles(ListaHabitacion aH, int numP)
 int buscarHabitacion(ListaHabitacion aH, int numH)
 {
 
-	int enc =0, pos;
+	int enc =0, pos = 0;
 	while(!enc && pos < aH.numH){
 		if(aH.aHabitacion[pos].numA == numH){
 			enc = 1;
@@ -35,8 +35,16 @@ int buscarHabitacion(ListaHabitacion aH, int numH)
 		return -1;
 	}
 }
+void modificarOcupacionH(ListaHabitacion *aH, int posH)
+{
+	aH->aHabitacion[posH].ocupada = 1;
+}
 void liberarMemoriaH(ListaHabitacion *aH)
 {
 	free(aH);
+	int i;
+	for(i=0;i<aH->numH;i++){
+		free(aH->aHabitacion[i].tipo);
+	}
 }
 

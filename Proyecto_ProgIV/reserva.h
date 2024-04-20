@@ -17,6 +17,7 @@ typedef struct{
 	Fecha entrada;
 	Fecha salida;
 	Habitacion habitacion;
+	float precio;
 }Reserva;
 
 Reserva comenzarReserva();

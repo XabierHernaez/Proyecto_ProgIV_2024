@@ -13,5 +13,5 @@ int numeroPersonas()
 }
 void mostrarHabitacion(Habitacion h)
 {
-	printf("Numero habitacion: %d - Tipo: %s - Descripcion: %s - Precio: %.3f\n",h.numA, h.tipo,h.descr, h.precio);fflush(stdout);
+	printf("Numero habitacion: %d - Tipo: %s - Precio: %.2f\n",h.numA, h.tipo, h.precio);fflush(stdout);
 }
