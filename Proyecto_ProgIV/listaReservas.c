@@ -17,6 +17,22 @@ void anyadirReserva(ListaReservas *aR, Reserva r)
 		printf("La lista de reservas esta llena\n");fflush(stdout);
 	}
 }
+int buscarHabitacionReservada(ListaReservas aR, int numA)
+{
+	int i=0, enc =0;
+	while(!enc && i<aR.numR){
+		if(aR.aR[i].habitacion.numA == numA){
+			enc = 1;
+		}else{
+			i++;
+		}
+	}
+	if(enc){
+		return 1;
+	}else{
+		return -1;
+	}
+}
 void liberarMemoria(ListaReservas *aR)
 {
 	free(aR->aR);

@@ -9,12 +9,14 @@ ListaHabitacion reservarMemoriaH(int tam)
 	lH.aHabitacion = (Habitacion*)malloc(tam*sizeof(Habitacion));
 	return lH;
 }
-void habitacionesDisponibles(ListaHabitacion aH, int numP)
+void habitacionesDisponibles(ListaHabitacion aH, int numP,int *numHD)
 {
 	int i;
+	*numHD = 0;
 	for(i=0;i<aH.numH;i++){
 		if(aH.aHabitacion[i].numP == numP && aH.aHabitacion[i].ocupada == 0){
 			mostrarHabitacion(aH.aHabitacion[i]);
+			(*numHD)++;
 		}
 	}
 }

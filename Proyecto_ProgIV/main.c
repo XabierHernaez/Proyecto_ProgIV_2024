@@ -11,12 +11,12 @@
 #define TAM 100
 int main(){
 	char opcion, opcion2, opcion3, opcion4, opcion5, opcion6;
-	int posU, tipoU;
+	int posU, tipoU, numHDisponibles;
 	Usuario u;
 	ListaUsuarios lu;
 	ListaHabitacion lH;
 	ListaReservas lR;
-	Reserva r, r2;
+	Reserva r;
 	lH = reservarMemoriaH(TAM);
 	lu = reservarMemoriaLU(TAM);
 	lR = reservarMemoria(TAM);
@@ -50,32 +50,36 @@ int main(){
 									case '1':
 										printf("A continuacion se realizara una reserva paso a paso...\n");fflush(stdout);
 										r = comenzarReserva();
-										r.usuario = u.usuario;
 										int numP = numeroPersonas();
-										if(fechaCorrecta(r.entrada) == 1 && fechaCorrecta(r.salida) == 1){
+										if(fechaCorrecta(r) == 1){
 											printf("Comprobando disponibilidad...\n");fflush(stdout);
 											printf("A continuacion se muestran las habitaciones disponibles...\n");fflush(stdout);
-											habitacionesDisponibles(lH, numP);
-											int numH = numHabitacion();
-											int posH = buscarHabitacion(lH, numH);
-											if(posH == 1){
-												modificarOcupacionH(&lH, posH);
-												volcadoListaHaFichero(lH, "habitaciones.txt");
-												h2 = lH.aHabitacion[posH];
-												r2 = realizarReserva(h2,u.usuario,r.entrada,r.salida);
-												mostrarReserva(r2);
-												printf("Es correcta la reserva [S/N]: ");
-												fflush(stdout);
-												fflush(stdin);
-												scanf("%c", &opcion6);
-												if(opcion6 == 'S'){
-													//anyadirReserva(&lR, r2);
-													printf("Habitacion reservada\n");fflush(stdout);
+											habitacionesDisponibles(lH, numP, &numHDisponibles);
+											if(numHDisponibles > 0){
+												int numH = numHabitacion();
+												int posH = buscarHabitacion(lH, numH);
+												int Hreservada = buscarHabitacionReservada(lR, numH);
+												if(posH != -1 && Hreservada != 1){
+													h2 = lH.aHabitacion[posH];
+													realizarReserva(&r, h2,u.usuario);
+													mostrarReserva(r);
+													printf("Es correcta la reserva [S/N]: ");
+													fflush(stdout);
+													fflush(stdin);
+													scanf("%c", &opcion6);
+													if(opcion6 == 'S'){
+														modificarOcupacionH(&lH, posH);
+														volcadoListaHaFichero(lH, "habitaciones.txt");
+														anyadirReserva(&lR, r);
+														printf("Habitacion reservada\n");fflush(stdout);
+													}else{
+														printf("La reserva se ha cancelado con exito\n");fflush(stdout);
+													}
 												}else{
-													printf("La reserva se ha cancelado con exito\n");fflush(stdout);
+													printf("No se ha encontrado la habitacion\n");fflush(stdout);
 												}
 											}else{
-												printf("No se ha encontrado la habitacion\n");fflush(stdout);
+												printf("Actualmente todas las habitaciones con ese numero de personas estan ocupadas\n");fflush(stdout);
 											}
 										}else{
 											printf("La fecha no es correcta\n");fflush(stdout);
