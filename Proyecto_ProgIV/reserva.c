@@ -44,13 +44,13 @@ Reserva comenzarReserva(){
 
 }
 void mostrarReserva(Reserva r){
-	printf("Tu reserva actual es:\nUsuario: %s - Fecha de entrada: %d/%d/%d - Fecha de salida: %d/%d/%d - Num huespedes: %d - precio: %.2f €\n",
-			r.usuario,r.entrada.dia,r.entrada.mes,r.entrada.anyo,r.salida.dia,r.salida.mes,r.salida.anyo,r.habitacion.numP, r.precio);
+	printf("Tu reserva actual es:\n Numero habitacion. %d - Fecha de entrada: %d/%d/%d - Fecha de salida: %d/%d/%d - Num huespedes: %d - precio: %.2f €\n",
+			r.habitacion.numA,r.entrada.dia,r.entrada.mes,r.entrada.anyo,r.salida.dia,r.salida.mes,r.salida.anyo,r.habitacion.numP, r.precio);
 }
 int fechaCorrecta(Reserva r)
 {
-	if ((r.entrada.anyo >= 1) && (r.entrada.mes >= 1 && r.entrada.mes <= 12) && (r.entrada.dia >= 1 && r.entrada.dia <= 31) && (r.salida.anyo >= 1) && (r.salida.mes >= 1 && r.salida.mes <= 12) && (r.salida.dia >= 1 && r.salida.dia <= 31)
-		&& (r.entrada.anyo == r.salida.anyo) && ((r.entrada.mes == r.salida.mes) || (r.entrada.mes - r.salida.mes == -1)) && (r.entrada.dia < r.salida.dia)) {
+	if ((r.entrada.anyo == 2024) && (r.entrada.mes >= 1 && r.entrada.mes <= 12) && (r.entrada.dia >= 1 && r.entrada.dia <= 31) && (r.salida.anyo >= 1) && (r.salida.mes >= 1 && r.salida.mes <= 12) && (r.salida.dia >= 1 && r.salida.dia <= 31)
+		 && ((r.entrada.mes == r.salida.mes) || (r.entrada.mes - r.salida.mes == -1)) && (r.entrada.dia < r.salida.dia)) {
 		return 1;
 	}else{
 		return 0;

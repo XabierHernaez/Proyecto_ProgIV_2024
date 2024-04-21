@@ -10,8 +10,8 @@
 #include "listaReservas.h"
 #define TAM 100
 int main(){
-	char opcion, opcion2, opcion3, opcion4, opcion5, opcion6;
-	int posU, tipoU, numHDisponibles;
+	char opcion, opcion2, opcion3, opcion4, opcion5, opcion6, opcion7;
+	int posU, tipoU, numHDisponibles, numReserH;
 	Usuario u;
 	ListaUsuarios lu;
 	ListaHabitacion lH;
@@ -86,24 +86,40 @@ int main(){
 										}
 										break;
 									case '2':
-										printf("A continuacion se realizara la modificacion de la reserva paso a paso...\n");
-										fflush(stdout);
 										do {
-											mostrarReserva(r);
 											opcion5 = menuModificarReservaC();
 											switch (opcion5) {
-												case '0':
-													printf("Se ha cancelado la modificacion\n");fflush(stdout);
-													break;
-												case '1':
-													printf("Comenzando la modificacion de la resserva...\n");fflush(stdout);
-													comenzarReserva();
-											}
+											case '0':
+												printf("Se ha cancelado la modificacion\n");fflush(stdout);
+												break;
+											case '1':
+												printf("Reservas actuales...\n");fflush(stdout);
+												obtenerReservasUsuario(lR, u.usuario, &numReserH);
+												if(numReserH > 0){
+													printf("¿Desea borrar su reserva [S/N]?: ");fflush(stdout);fflush(stdin);
+													scanf("%c", &opcion7);
+													if(opcion7 == 'S'){
+														int numH2 = numHabitacion();
+														eliminarReserva(&lR, numH2, u.usuario);
+														printf("La reserva se ha eliminado con exito\n");fflush(stdout);
+														printf("Reservas actuales...\n");fflush(stdout);
+														obtenerReservasUsuario(lR, u.usuario, &numReserH);
+													}else{
+														printf("Se modificara solo la fecha de la reserva, si usted quiere añadir mas personas debera eliminar la reserva y volver a realizar una reserva\n");fflush(stdout);
+														int numH3 = numHabitacion();
+														modificarReserva(&lR, numH3, u.usuario);
+														printf("La reserva se ha modificado con exito...\n");fflush(stdout);
+														obtenerReservasUsuario(lR, u.usuario, &numReserH);
+													}
+												}else{
+													printf("No se han encontrado reservas a su nombre\n");fflush(stdout);
+												}
+												}
+											} while (opcion5 != '0');
+											break;
 
-										} while (opcion5 != '0');
-										break;
 									default:
-										printf("Error. La opcion introducida no es correcta\n");
+										printf("Error. La opcion introducida no es correcta o realize alguna reserva\n");
 										fflush(stdout);
 										break;
 								}
