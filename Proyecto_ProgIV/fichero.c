@@ -56,4 +56,47 @@ void volcadoListaHaFichero(ListaHabitacion aH, char *nomFich)
 		fclose(pf);
 	}
 }
+void volcadoListaRFichero(ListaReservas aR, char *nomFich)
+{
+	FILE *pf;
+	pf = fopen(nomFich, "w");
+	if(pf != (FILE*)NULL){
+		int i;
+		for(i=0;i<aR.numR;i++){
+			fprintf(pf, "%s %d/%d/%d %d/%d/%d %d %s %d %f %d %f\n", aR.aR[i].usuario,aR.aR[i].entrada.anyo, aR.aR[i].entrada.mes, aR.aR[i].entrada.dia, aR.aR[i].salida.anyo,
+					aR.aR[i].salida.mes, aR.aR[i].salida.dia, aR.aR[i].habitacion.numA, aR.aR[i].habitacion.tipo, aR.aR[i].habitacion.numP, aR.aR[i].habitacion.precio, aR.aR[i].habitacion.ocupada, aR.aR[i].precio);
+		}
+		fclose(pf);
+	}
+}
+void volcadoFicheroListaR(ListaReservas *aR, char *nomFich)
+{
+	FILE *pf;
+	Reserva r;
+	char usuario[10];
+	char tipo[20];
+	pf = fopen(nomFich, "r");
+	if(pf != (FILE*)NULL){
+		while(fscanf(pf, "%s %d/%d/%d %d/%d/%d %d %s %d %f %d %f", usuario, &r.entrada.anyo,&r.entrada.mes,&r.entrada.dia, &r.salida.anyo,
+				&r.salida.mes, &r.salida.dia, &r.habitacion.numA,
+				tipo, &r.habitacion.numP, &r.habitacion.precio,&r.habitacion.ocupada, &r.precio) != EOF){
+			aR->aR[aR->numR].usuario = (char*)malloc((strlen(usuario)+1)*sizeof(char));
+			strcpy(aR->aR[aR->numR].usuario, usuario);
+			aR->aR[aR->numR].entrada.anyo = r.entrada.anyo;
+			aR->aR[aR->numR].entrada.mes = r.entrada.mes;
+			aR->aR[aR->numR].entrada.dia = r.entrada.dia;
+			aR->aR[aR->numR].salida.anyo = r.salida.anyo;
+			aR->aR[aR->numR].salida.mes = r.salida.mes;
+			aR->aR[aR->numR].salida.dia = r.salida.dia;
+			aR->aR[aR->numR].habitacion.numA = r.habitacion.numA;
+			aR->aR[aR->numR].habitacion.tipo = (char*)malloc((strlen(tipo)+1)*sizeof(char));
+			strcpy(aR->aR[aR->numR].habitacion.tipo, tipo);
+			aR->aR[aR->numR].habitacion.numP = r.habitacion.numP;
+			aR->aR[aR->numR].habitacion.precio = r.habitacion.precio;
+			aR->aR[aR->numR].habitacion.ocupada = r.habitacion.ocupada;
+			aR->aR[aR->numR].precio = r.precio;
+			(aR->numR)++;
+		}
+	}
 
+}

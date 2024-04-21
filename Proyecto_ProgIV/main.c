@@ -23,6 +23,7 @@ int main(){
 	Habitacion h2;
 	volcadoFicheroListaU(&lu,"usuarios.txt");
 	volcadoFicheroListaH(&lH, "habitaciones.txt");
+	volcadoFicheroListaR(&lR, "reservas.txt");
 	do{
 		opcion = menuPrincipal();
 		switch(opcion){
@@ -71,6 +72,7 @@ int main(){
 														modificarOcupacionH(&lH, posH);
 														volcadoListaHaFichero(lH, "habitaciones.txt");
 														anyadirReserva(&lR, r);
+														volcadoListaRFichero(lR, "reservas.txt");
 														printf("Habitacion reservada\n");fflush(stdout);
 													}else{
 														printf("La reserva se ha cancelado con exito\n");fflush(stdout);
