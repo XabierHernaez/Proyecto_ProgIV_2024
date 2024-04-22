@@ -11,7 +11,7 @@ typedef struct{
 ListaHabitacion reservarMemoriaH(int tam);
 void habitacionesDisponibles(ListaHabitacion aH, int numP,int *numHD);
 int buscarHabitacion(ListaHabitacion aH, int numH);
-void modificarOcupacionH(ListaHabitacion *aH, int posH);
+void modificarOcupacionH(ListaHabitacion *aH, int *numH, int cont);
 void liberarMemoriaH(ListaHabitacion *aH);
 
 #endif

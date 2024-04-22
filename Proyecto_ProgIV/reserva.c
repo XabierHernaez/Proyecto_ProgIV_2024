@@ -44,7 +44,7 @@ Reserva comenzarReserva(){
 
 }
 void mostrarReserva(Reserva r){
-	printf("Tu reserva actual es:\n Numero habitacion. %d - Fecha de entrada: %d/%d/%d - Fecha de salida: %d/%d/%d - Num huespedes: %d - precio: %.2f €\n",
+	printf("Numero habitacion. %d - Fecha de entrada: %d/%d/%d - Fecha de salida: %d/%d/%d - Num huespedes: %d - precio: %.2f €\n",
 			r.habitacion.numA,r.entrada.dia,r.entrada.mes,r.entrada.anyo,r.salida.dia,r.salida.mes,r.salida.anyo,r.habitacion.numP, r.precio);
 }
 int fechaCorrecta(Reserva r)

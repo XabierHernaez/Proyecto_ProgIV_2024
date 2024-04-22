@@ -37,16 +37,24 @@ int buscarHabitacion(ListaHabitacion aH, int numH)
 		return -1;
 	}
 }
-void modificarOcupacionH(ListaHabitacion *aH, int posH)
+void modificarOcupacionH(ListaHabitacion *aH, int *numH, int cont)
 {
-	aH->aHabitacion[posH].ocupada = 1;
+	int i, j = 0;
+	for(i=0;i<cont;i++){
+		for(j=0;j<aH->numH;j++){
+			if(aH->aHabitacion[j].numA == numH[i]){
+				aH->aHabitacion[j].ocupada = 1;
+			}
+		}
+	}
 }
 void liberarMemoriaH(ListaHabitacion *aH)
 {
-	free(aH);
+
 	int i;
 	for(i=0;i<aH->numH;i++){
 		free(aH->aHabitacion[i].tipo);
 	}
+	free(aH->aHabitacion);
 }
 

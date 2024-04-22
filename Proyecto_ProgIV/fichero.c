@@ -43,19 +43,6 @@ void volcadoFicheroListaH(ListaHabitacion *aH, char * nomFich)
 		fclose(pf);
 	}
 }
-
-void volcadoListaHaFichero(ListaHabitacion aH, char *nomFich)
-{
-	FILE *pf;
-	pf = fopen(nomFich, "w");
-	if(pf != (FILE*)NULL){
-		int i;
-		for(i=0;i<aH.numH;i++){
-			fprintf(pf, "%d %s %d %f %d\n", aH.aHabitacion[i].numA, aH.aHabitacion[i].tipo,aH.aHabitacion[i].numP, aH.aHabitacion[i].precio, aH.aHabitacion[i].ocupada);
-		}
-		fclose(pf);
-	}
-}
 void volcadoListaRFichero(ListaReservas aR, char *nomFich)
 {
 	FILE *pf;
@@ -98,5 +85,16 @@ void volcadoFicheroListaR(ListaReservas *aR, char *nomFich)
 			(aR->numR)++;
 		}
 	}
+}
+void ficheroLog(char *mensaje, char * nomFich)
+{
+	FILE * pf;
+	pf = fopen(nomFich, "w");
+	if(pf != (FILE*)NULL){
+		fprintf(pf, "%s\n", mensaje);
+		fclose(pf);
+	}
+
+
 
 }
