@@ -25,7 +25,7 @@ int buscarHabitacion(ListaHabitacion aH, int numH)
 
 	int enc =0, pos = 0;
 	while(!enc && pos < aH.numH){
-		if(aH.aHabitacion[pos].numA == numH){
+		if(aH.aHabitacion[pos].numA == numH && aH.aHabitacion[pos].ocupada == 0){
 			enc = 1;
 		}else{
 			pos++;

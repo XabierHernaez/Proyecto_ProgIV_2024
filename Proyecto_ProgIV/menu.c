@@ -47,7 +47,6 @@ char menuAdministrador()
 char menuModificarReservaC()
 {
 	char opcion;
-	printf("Desea modificar la reserva actual?\n");
 	fflush(stdout);
 	printf("0. Cancelar\n");
 	printf("1. Modificar\n");

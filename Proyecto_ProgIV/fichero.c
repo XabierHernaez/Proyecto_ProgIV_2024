@@ -86,12 +86,12 @@ void volcadoFicheroListaR(ListaReservas *aR, char *nomFich)
 		}
 	}
 }
-void ficheroLog(char *mensaje, char * nomFich)
+void ficheroLog(char *mensaje, char *usuario, char * nomFich)
 {
 	FILE * pf;
-	pf = fopen(nomFich, "w");
+	pf = fopen(nomFich, "a");
 	if(pf != (FILE*)NULL){
-		fprintf(pf, "%s\n", mensaje);
+		fprintf(pf, "%s - Usuario: %s\n", mensaje, usuario);
 		fclose(pf);
 	}
 
