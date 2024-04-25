@@ -48,6 +48,17 @@ void modificarOcupacionH(ListaHabitacion *aH, int *numH, int cont)
 		}
 	}
 }
+void ocupacionLibre(ListaHabitacion *aH, int *numH, int cont)
+{
+	int i, j;
+	for(i=0;i<aH->numH;i++){
+		for(j=0;j<cont;j++){
+			if(aH->aHabitacion[i].numA == numH[j]){
+				aH->aHabitacion[i].ocupada = 0;
+			}
+		}
+	}
+}
 void liberarMemoriaH(ListaHabitacion *aH)
 {
 

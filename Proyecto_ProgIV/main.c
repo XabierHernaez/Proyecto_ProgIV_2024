@@ -87,26 +87,21 @@ int main(){
 														anyadirReserva(&lR, r);
 														volcadoListaRFichero(lR, "reservas.txt");
 														printf("Habitacion reservada\n");fflush(stdout);
+														ocupacionLibre(&lH, numHreser, contHDis);
 													}else{
 														ficheroLog("No realiza la reserva de esa habitacion",u.usuario, "fichero.log");
 														printf("La reserva se ha cancelado con exito\n");fflush(stdout);
-														liberarMemoriaH(&lH);
-														lH = reservarMemoriaH(TAM);
-														volcadoFicheroListaH(&lH, "habitaciones.txt");
+														ocupacionLibre(&lH, numHreser, contHDis);
 													}
 												}else{
 													ficheroLog("Ingresa un numero de habitacion erroneo",u.usuario, "fichero.log");
 													printf("No se ha encontrado la habitacion\n");fflush(stdout);
-													liberarMemoriaH(&lH);
-													lH = reservarMemoriaH(TAM);
-													volcadoFicheroListaH(&lH, "habitaciones.txt");
+													ocupacionLibre(&lH, numHreser, contHDis);
 												}
 											}else{
 												ficheroLog("No hay habitaciones libres en las fechas introducidas por el usuario",u.usuario, "fichero.log");
 												printf("Actualmente todas las habitaciones con ese numero de personas estan ocupadas\n");fflush(stdout);
-												liberarMemoriaH(&lH);
-												lH = reservarMemoriaH(TAM);
-												volcadoFicheroListaH(&lH, "habitaciones.txt");
+												ocupacionLibre(&lH, numHreser, contHDis);
 											}
 										}else{
 											ficheroLog("Introduce una fecha erronea",u.usuario, "fichero.log");
