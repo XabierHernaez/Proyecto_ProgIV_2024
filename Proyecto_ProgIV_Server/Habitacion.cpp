@@ -69,6 +69,18 @@ int Habitacion::getOcupada()
 {
 	return ocupada;
 }
+Habitacion& Habitacion::operator=(const Habitacion &r)
+{
+	numA = r.numA;
+	delete[] tipo;
+	tipo = new char[strlen(r.tipo)+1];
+	strcpy(tipo, r.tipo);
+	numP = r.numP;
+	precio = r.precio;
+	ocupada = r.ocupada;
+	return(*this);
+
+}
 Habitacion::~Habitacion()
 {
 	delete[] tipo;

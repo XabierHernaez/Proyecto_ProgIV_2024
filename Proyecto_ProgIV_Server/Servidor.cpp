@@ -12,6 +12,7 @@
 using namespace std;
 */
 #include "BaseDatos.h"
+#include "ListaHabitacion.h"
 
 int main(int argc, char *argv[]) {
 	/*
@@ -81,14 +82,18 @@ int main(int argc, char *argv[]) {
 	/*
 	/*EMPIEZA EL PROGRAMA DEL SERVIDOR*/
 
+	ListaHabitacion lH;
+	ListaUsuario lU;
 	sqlite3 *db;
-	//sqlite3_stmt *stmt;
 
 	BaseDatos baseDatos;
 	baseDatos.abrirBaseDatos(&db);
+	baseDatos.cargarFicheroABaseUsuario(db);
 	baseDatos.crearTablas(&db);
+	baseDatos.volcarBaseDatosListaHabitacion(db, lH);
+	baseDatos.volcarBaseDatosListaUsuario(db, lU);
+	lU.visualizar();
 	//baseDatos.cargarFicheroABaseHabitacion(db);
-	//baseDatos.cargarFicheroABaseUsuario(db);
 	baseDatos.cerrarBaseDatos(&db);
 
 

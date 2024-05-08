@@ -32,6 +32,7 @@ public:
 	char * getContrasenya();
 	int getTelefono();
 	char getTipo();
+	Usuario& operator=(const Usuario &u);
 	virtual ~Usuario();
 };
 

@@ -129,6 +129,27 @@ char Usuario::getTipo()
 {
 	return tipo;
 }
+Usuario& Usuario::operator=(const Usuario &u)
+{
+	delete [] nombre;
+	nombre = new char[strlen(u.nombre) +1];
+	strcpy(nombre, u.nombre);
+	delete[] primerApellido;
+	primerApellido = new char[strlen(u.primerApellido) +1];
+	strcpy(primerApellido, u.primerApellido);
+	delete[] segundoApellido;
+	segundoApellido = new char[strlen(u.segundoApellido) +1];
+	strcpy(segundoApellido, u.segundoApellido);
+	delete[] usuario;
+	usuario = new char[strlen(u.usuario) +1];
+	strcpy(usuario, u.usuario);
+	delete[] contrasenya;
+	contrasenya = new char[strlen(u.contrasenya) +1];
+	strcpy(contrasenya, u.contrasenya);
+	telefono = u.telefono;
+	tipo = u.tipo;
+
+}
 Usuario::~Usuario() {
 	delete[] nombre;
 	delete[] primerApellido;

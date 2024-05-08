@@ -23,6 +23,7 @@ public:
 	int getNumP();
 	float getPrecio();
 	int getOcupada();
+	Habitacion& operator=(const Habitacion &r);
 	virtual ~Habitacion();
 
 };
