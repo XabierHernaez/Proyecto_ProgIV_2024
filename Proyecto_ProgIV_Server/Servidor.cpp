@@ -1,3 +1,4 @@
+/*
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,9 +10,11 @@
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
 using namespace std;
+*/
+#include "BaseDatos.h"
 
 int main(int argc, char *argv[]) {
-
+	/*
 	WSADATA wsaData;
 	SOCKET conn_socket; //el que lleva la conexion
 	SOCKET comm_socket; //el que lo comunica
@@ -75,46 +78,25 @@ int main(int argc, char *argv[]) {
 
 	// Closing the listening sockets (is not going to be used anymore)
 	closesocket(conn_socket);
-
+	/*
 	/*EMPIEZA EL PROGRAMA DEL SERVIDOR*/
-	int fin = 0;
-	do {
-		char opcion;
-		int codigo = 1;
-		float precio = 4.5;
 
-		recv(comm_socket,recvBuff,sizeof(recvBuff),0);
-		//cout<<recvBuff<<endl;
+	sqlite3 *db;
+	//sqlite3_stmt *stmt;
 
-		do{
-			recv(comm_socket,recvBuff,sizeof(recvBuff),0);
-			sscanf(recvBuff,"%c",&opcion);
-			switch(opcion){
-				case '1':
-					cout<<"Opci�n 1"<<endl;
-					recv(comm_socket,recvBuff,sizeof(recvBuff),0);
-					sprintf(sendBuff,"%d %f",codigo,precio);
-					send(comm_socket,sendBuff,sizeof(sendBuff),0);
-					break;
-				case '2':
-					recv(comm_socket,recvBuff,sizeof(recvBuff),0);
-					sprintf(sendBuff,"Agur, %s", recvBuff);
-					send(comm_socket,sendBuff,sizeof(sendBuff),0);
-					break;
-				case '0':
-					fin = 1;
-					break;
-			}
-		}while(opcion!='0');
+	BaseDatos baseDatos;
+	baseDatos.abrirBaseDatos(&db);
+	baseDatos.crearTablas(&db);
+	//baseDatos.cargarFicheroABaseHabitacion(db);
+	//baseDatos.cargarFicheroABaseUsuario(db);
+	baseDatos.cerrarBaseDatos(&db);
 
-		/*ACABA EL PROGRAMA DEL SERVIDOR*/
-
-	} while (fin == 0);
 
 	// CLOSING the sockets and cleaning Winsock...
+	/*
 	closesocket(comm_socket);
 	WSACleanup();
-
+	*/
 	return 0;
 }
 
