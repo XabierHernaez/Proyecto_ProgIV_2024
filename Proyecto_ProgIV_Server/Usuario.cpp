@@ -149,6 +149,22 @@ Usuario& Usuario::operator=(const Usuario &u)
 	tipo = u.tipo;
 	return (*this);
 }
+int Usuario::contraseniaCorrecta(char *conU)
+{
+	int correcta = 0;
+	if(strcmp(conU, contrasenya) == 0){
+		correcta = 1;
+	}
+	return correcta;
+}
+int Usuario::tipoUsuario()
+{
+	if(tipo == 'A'){
+		return 1;
+	}else{
+		return 0;
+	}
+}
 Usuario::~Usuario() {
 	delete[] nombre;
 	delete[] primerApellido;
