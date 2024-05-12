@@ -96,16 +96,86 @@ int main(int argc, char *argv[]) {
 
 
 
-	char opcion, opcion2;
-	int posU; // Mirar si el usuario existe en la base de datos
+	char opcion, opcion2, opcion3;
+	int posU, contraCorrecta, tipoU;
 	char mensaje[200];
 	Usuario u;
 	do {
 		recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 		sscanf(recvBuff,"%c",&opcion);
 		switch(opcion){
-		case '0':break;
-		case '1':break;
+		case '0':
+			strcpy(mensaje, "Saliendo del sistema...");
+			sprintf(sendBuff,mensaje, "%s %s %s", recvBuff);
+			send(comm_socket,sendBuff,sizeof(sendBuff),0);
+			strcpy(mensaje, "Muchas gracias");
+			sprintf(sendBuff,mensaje, "%s %s", recvBuff);
+			send(comm_socket,sendBuff,sizeof(sendBuff),0);
+			break;
+		case '1':
+			strcpy(mensaje, "Realizando incio sesion...");
+			sprintf(sendBuff,mensaje, "%s %s %s", recvBuff);
+			send(comm_socket,sendBuff,sizeof(sendBuff),0);
+			recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+			sscanf(recvBuff,"%s",u.usuario);
+			recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+			sscanf(recvBuff,"%s",u.contrasenya);
+			posU = lU.buscarUsuarioExiste(u.usuario);
+			sprintf(sendBuff,"%d", posU);
+			send(comm_socket,sendBuff,sizeof(sendBuff),0);
+			if(posU != -1){
+				contraCorrecta = u.contraseniaCorrecta(lU.listaUsuario[posU].contrasenya);
+				sprintf(sendBuff,"%d", contraCorrecta);
+				send(comm_socket,sendBuff,sizeof(sendBuff),0);
+				if(contraCorrecta == 1){
+					strcpy(mensaje, "Bienvenido ");
+					strcat(mensaje, u.usuario);
+					sprintf(sendBuff,mensaje, "%s %s", recvBuff);
+					send(comm_socket,sendBuff,sizeof(sendBuff),0);
+					tipoU = lU.listaUsuario[posU].tipoUsuario();
+					sprintf(sendBuff,"%d", tipoU);
+					send(comm_socket,sendBuff,sizeof(sendBuff),0);
+					if(tipoU != -1){
+						do {
+							recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%c",&opcion3);
+							switch(opcion3){
+							case '0':
+								strcpy(mensaje, "Saliendo...");
+								sprintf(sendBuff,mensaje, "%s", recvBuff);
+								send(comm_socket,sendBuff,sizeof(sendBuff),0);
+								break;
+							case '1':
+								strcpy(mensaje, "Completar reserva...");
+								sprintf(sendBuff,mensaje, "%s %s", recvBuff);
+								send(comm_socket,sendBuff,sizeof(sendBuff),0);
+								break;
+							case '2':
+								strcpy(mensaje, "Modificar reserva...");
+								sprintf(sendBuff,mensaje, "%s %s", recvBuff);
+								send(comm_socket,sendBuff,sizeof(sendBuff),0);
+								break;
+							default:
+								strcpy(mensaje, "La opcion introducida no es correcta.");
+								sprintf(sendBuff,mensaje, "%s %s %s %s %s %s", recvBuff);
+								send(comm_socket,sendBuff,sizeof(sendBuff),0);
+								break;
+							}
+						} while (opcion3 != '0');
+					}else{
+
+					}
+				}else{
+					strcpy(mensaje, "Contraseña incorrecta");
+					sprintf(sendBuff,mensaje, "%s %s", recvBuff);
+					send(comm_socket,sendBuff,sizeof(sendBuff),0);
+				}
+			}else{
+				strcpy(mensaje, "Usuario no existente");
+				sprintf(sendBuff,mensaje, "%s %s %s", recvBuff);
+				send(comm_socket,sendBuff,sizeof(sendBuff),0);
+			}
+			break;
 		case '2':
 			recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 			sscanf(recvBuff,"%c",&opcion2);
@@ -144,6 +214,11 @@ int main(int argc, char *argv[]) {
 				sprintf(sendBuff,mensaje, "%s %s", recvBuff);
 				send(comm_socket,sendBuff,sizeof(sendBuff),0);
 			}
+			break;
+		default:
+			strcpy(mensaje, "La opcion introducida no es correcta.");
+			sprintf(sendBuff,mensaje, "%s %s %s %s %s %s", recvBuff);
+			send(comm_socket,sendBuff,sizeof(sendBuff),0);
 			break;
 		}
 

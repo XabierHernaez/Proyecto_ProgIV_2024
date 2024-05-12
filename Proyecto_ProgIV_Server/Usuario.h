@@ -33,6 +33,8 @@ public:
 	int getTelefono();
 	char getTipo();
 	Usuario& operator=(const Usuario &u);
+	int contraseniaCorrecta(char *conU);//Recibe la contraseña introducida en el incio sesion y su contraseña real
+	int tipoUsuario();
 	virtual ~Usuario();
 };
 
