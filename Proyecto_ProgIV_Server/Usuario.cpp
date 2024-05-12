@@ -1,22 +1,21 @@
-
 #include "Usuario.h"
 #include <string.h>
 Usuario::Usuario()
 {
-	nombre = new char[1];
+	nombre = new char[20];
 	nombre[0] = '\0';
-	primerApellido = new char[1];
+	primerApellido = new char[20];
 	primerApellido[0] = '\0';
-	segundoApellido = new char[1];
+	segundoApellido = new char[20];
 	segundoApellido[0] = '\0';
-	dni = new char[1];
+	dni = new char[20];
 	dni[0] = '\0';
-	usuario = new char[1];
+	usuario = new char[20];
 	usuario[0] = '\0';
-	contrasenya = new char[1];
+	contrasenya = new char[20];
 	contrasenya[0] = '\0';
 	telefono = 0;
-	tipo = 'C';
+	tipo = '\0';
 }
 Usuario::Usuario(char *n, char *a1, char *a2, char *d, char *u, char *c, int tf, char t)
 {
@@ -148,7 +147,7 @@ Usuario& Usuario::operator=(const Usuario &u)
 	strcpy(contrasenya, u.contrasenya);
 	telefono = u.telefono;
 	tipo = u.tipo;
-
+	return (*this);
 }
 Usuario::~Usuario() {
 	delete[] nombre;

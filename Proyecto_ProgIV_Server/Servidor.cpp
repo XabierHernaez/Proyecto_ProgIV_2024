@@ -1,4 +1,4 @@
-/*
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,12 +10,12 @@
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
 using namespace std;
-*/
+
 #include "BaseDatos.h"
 #include "ListaHabitacion.h"
 
 int main(int argc, char *argv[]) {
-	/*
+
 	WSADATA wsaData;
 	SOCKET conn_socket; //el que lleva la conexion
 	SOCKET comm_socket; //el que lo comunica
@@ -23,9 +23,9 @@ int main(int argc, char *argv[]) {
 	struct sockaddr_in client;
 	char sendBuff[512], recvBuff[512]; // lo que yo envio, lo que yo recibo
 
-	printf("\nInitialising Winsock...\n"); // inicializa la libreria
+	cout<<("\nInitialising Winsock...\n")<<endl; // inicializa la libreria
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-		printf("Failed. Error Code : %d", WSAGetLastError());
+		cout<<("Failed. Error Code : %d", WSAGetLastError())<<endl;
 		return -1;
 	}
 
@@ -33,12 +33,12 @@ int main(int argc, char *argv[]) {
 
 	//SOCKET creation creacion del socket( la primera estructura
 	if ((conn_socket = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
-		printf("Could not create socket : %d", WSAGetLastError());
+		cout<<("Could not create socket : %d", WSAGetLastError())<<endl;
 		WSACleanup();
 		return -1;
 	}
 
-	printf("Socket created.\n");
+	cout<<("Socket created.\n")<<endl;
 	// cual es la ip y cual es el puerto
 	server.sin_addr.s_addr = inet_addr(SERVER_IP); //INADDR_ANY;
 	server.sin_family = AF_INET;
@@ -47,39 +47,39 @@ int main(int argc, char *argv[]) {
 	//BIND (the IP/port with socket)
 	if (bind(conn_socket, (struct sockaddr*) &server,
 			sizeof(server)) == SOCKET_ERROR) {
-		printf("Bind failed with error code: %d", WSAGetLastError());
+		cout<<("Bind failed with error code: %d", WSAGetLastError())<<endl;
 		closesocket(conn_socket);
 		WSACleanup();
 		return -1;
 	}
 
-	printf("Bind done.\n"); //DEJAR EL SOCKET EN ESPERA
+	cout<<("Bind done.\n")<<endl; //DEJAR EL SOCKET EN ESPERA
 
 	//LISTEN to incoming connections (socket server moves to listening mode)
 	if (listen(conn_socket, 1) == SOCKET_ERROR) {
-		printf("Listen failed with error code: %d", WSAGetLastError());
+		cout<<("Listen failed with error code: %d", WSAGetLastError())<<endl;
 		closesocket(conn_socket);
 		WSACleanup();
 		return -1;
 	}
 
 	//ACCEPT incoming connections (server keeps waiting for them)
-	printf("Waiting for incoming connections...\n");
+	cout<<("Waiting for incoming connections...\n")<<endl;
 	int stsize = sizeof(struct sockaddr);
 	comm_socket = accept(conn_socket, (struct sockaddr*) &client, &stsize);
 	// Using comm_socket is able to send/receive data to/from connected client
 	if (comm_socket == INVALID_SOCKET) {
-		printf("accept failed with error code : %d", WSAGetLastError());
+		cout<<("accept failed with error code : %d", WSAGetLastError())<<endl;
 		closesocket(conn_socket);
 		WSACleanup();
 		return -1;
 	}
-	printf("Incomming connection from: %s (%d)\n", inet_ntoa(client.sin_addr),
-			ntohs(client.sin_port));
+	cout<<("Incomming connection from: %s (%d)\n", inet_ntoa(client.sin_addr),
+			ntohs(client.sin_port))<<endl;
 
 	// Closing the listening sockets (is not going to be used anymore)
 	closesocket(conn_socket);
-	/*
+
 	/*EMPIEZA EL PROGRAMA DEL SERVIDOR*/
 
 	ListaHabitacion lH;
@@ -88,20 +88,38 @@ int main(int argc, char *argv[]) {
 
 	BaseDatos baseDatos;
 	baseDatos.abrirBaseDatos(&db);
-	baseDatos.cargarFicheroABaseUsuario(db);
 	baseDatos.crearTablas(&db);
+	//baseDatos.cargarFicheroABaseHabitacion(db);
+	//baseDatos.cargarFicheroABaseUsuario(db);
 	baseDatos.volcarBaseDatosListaHabitacion(db, lH);
 	baseDatos.volcarBaseDatosListaUsuario(db, lU);
-	lU.visualizar();
-	//baseDatos.cargarFicheroABaseHabitacion(db);
+
+
+
+
+	char opcion;
+	do {
+		recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+		sscanf(recvBuff,"%c",&opcion);
+		switch(opcion){
+		case '0':break;
+		case '1':break;
+		case '2': break;
+		default: break;
+		}
+
+	} while (opcion != '0');
+
+
 	baseDatos.cerrarBaseDatos(&db);
 
 
+
 	// CLOSING the sockets and cleaning Winsock...
-	/*
+
 	closesocket(comm_socket);
 	WSACleanup();
-	*/
+
 	return 0;
 }
 

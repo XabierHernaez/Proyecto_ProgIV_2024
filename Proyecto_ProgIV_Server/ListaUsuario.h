@@ -9,7 +9,6 @@ public:
 public:
 	ListaUsuario();
 	void anyadirUsuario(const Usuario &u);
-	void visualizar();
 	virtual ~ListaUsuario();
 };
 

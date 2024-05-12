@@ -6,8 +6,7 @@ Mikel Gonzalez Lameira 76236787A mikelGonz mikel20 688764363 C
 Ana Garcia Lopez 73215787E anaGa ana87876 688764345 C
 Miren Montes Herboso 73213462U montesHe mirenMon76 688767876 C
 Maite Hernandez Palacios 73439742U maiteHer maite7723 687767876 C
-Eneko Mendizabal Aguirre 73568432H enekoM ene777 688766654 C
-Leire Sanchez Lopez 78329174J leireS leire99 688764322    C
+Leire Sanchez Lopez 78329174J leireS leire99 688764322 C
 Iker Fernandez Arriaga 78347298T ikerF iker777 688764311 C
 Unai Rodriguez Martinez 73489123U unaiR unai888 688764310 C
 Ane Gonzales Gutierrez 72364892I aneG ane222 688764305 C

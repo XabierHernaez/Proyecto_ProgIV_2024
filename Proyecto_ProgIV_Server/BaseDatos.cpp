@@ -81,8 +81,7 @@ void BaseDatos::volcarBaseDatosListaUsuario(sqlite3 *db, ListaUsuario &lU)
         u.telefono = sqlite3_column_int(stmt, 6); // Correcta posición de la columna del teléfono
         u.tipo = sqlite3_column_text(stmt, 7)[0]; // Correcta posición de la columna del tipo
         result = sqlite3_step(stmt); // Ejecutar la sentencia
-        lU.listaUsuario[lU.numU] = u;
-        lU.numU++; // Incrementar el contador de usuarios en la lista
+        lU.anyadirUsuario(u);
     }
     sqlite3_finalize(stmt); // Cerrar la sentencia
 }
@@ -109,33 +108,39 @@ BaseDatos::~BaseDatos() {
         fclose(pf);
     }
 }
-**/
-void BaseDatos::cargarFicheroABaseUsuario(sqlite3 *db) {
-    FILE *pf;
-    Usuario u;
-    char tipo;
-    char sql[200];
-    sqlite3_stmt *stmt;
-    pf = fopen("usuarios.txt", "r");
-    if (pf != NULL) {
-        while (fscanf(pf, "%s %s %s %s %s %s %d %c", u.nombre, u.primerApellido, u.segundoApellido, u.dni, u.usuario, u.contrasenya, &u.telefono, &tipo) == 8) {
-            u.setTipo(tipo);
-            sprintf(sql, "INSERT INTO usuario VALUES('%s', '%s', '%s', '%s', '%s', '%s', %d, '%c')", u.nombre, u.primerApellido, u.segundoApellido, u.dni, u.usuario, u.contrasenya, u.telefono, u.tipo);
-            int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
-            if (result != SQLITE_OK) {
-                cerr << "Error al preparar la consulta SQL: " << sqlite3_errmsg(db) << endl;
-                break;
-            }
-            result = sqlite3_step(stmt);
-            if (result != SQLITE_DONE) {
-                cerr << "Error al ejecutar la consulta SQL: " << sqlite3_errmsg(db) << endl;
-                break;
-            }
-            sqlite3_finalize(stmt);
-        }
-        fclose(pf);
-    } else {
-        cerr << "Error al abrir el archivo usuarios.txt" << endl;
-    }
+*/
+void BaseDatos::cargarFicheroABaseUsuario(sqlite3 *db)
+{
+	FILE* pf;
+	Usuario u;
+	char sql[100];
+	char nombre[20];
+	char p1[20];
+	char p2[20];
+	char dni[20];
+	char usu[20];
+	char contra[20];
+	int tel;
+	char tipo;
+	sqlite3_stmt *stmt;
+	pf = fopen("usuarios.txt", "r");
+	if(pf != (FILE*)NULL){
+		while(fscanf(pf, "%s %s %s %s %s %s %d %c", nombre, p1, p2, dni, usu, contra, &tel, &tipo) != EOF){
+			u.setNombre(nombre);
+			u.setprimerApellido(p1);
+			u.setsegundoApellido(p2);
+			u.setDni(dni);
+			u.setUsuario(usu);
+			u.setContrasenya(contra);
+			u.setTelefono(tel);
+			u.setTipo(tipo);
+			sprintf(sql, "insert into usuario values('%s','%s','%s','%s','%s','%s',%d,'%c')", u.getNombre(), u.getprimerApellido(), u.getsegundoApellido(), u.getDni(), u.getUsuario(), u.getContrasenya(), u.getTelefono(), u.getTipo());
+			sqlite3_prepare_v2(db, sql, -1, &stmt, NULL); //Preparar la sentencia
+			sqlite3_step(stmt); //Ejecutar la sentencia
+			sqlite3_reset(stmt); // Resetear la sentencia para reutilizarla en la siguiente iteración
+			sqlite3_finalize(stmt);
+		}
+		fclose(pf);
+	}
 }
-// * */
+//* */

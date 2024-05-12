@@ -27,14 +27,6 @@ void ListaUsuario::anyadirUsuario(const Usuario &u)
 	listaUsuario[numU] = u;
 	numU++;
 }
-void ListaUsuario::visualizar()
-{
-	int i;
-	cout<<"Imprimiendo usuarioa"<< endl;
-	for(i=0;i<numU;i++){
-		cout<<"Nombre: "<<listaUsuario[i].nombre<<endl;
-	}
-}
 ListaUsuario::~ListaUsuario()
 {
 	if(listaUsuario !=NULL){
