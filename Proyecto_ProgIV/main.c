@@ -9,7 +9,14 @@
 #include "reserva.h"
 #include "listaReservas.h"
 #define TAM 100
-int main(){
+
+#include <stdio.h>
+#include <winsock2.h>
+#define SERVER_IP "127.0.0.1"
+#define SERVER_PORT 6000
+
+int main(int argc, char *argv[]){
+	/*
 	char opcion, opcion2, opcion3, opcion4, opcion5, opcion6, opcion7;
 	int posU, tipoU, numHDisponibles, numReserH, *numHreser, contHDis, contR;
 	Usuario u;
@@ -24,6 +31,148 @@ int main(){
 	volcadoFicheroListaU(&lu,"usuarios.txt");
 	volcadoFicheroListaH(&lH, "habitaciones.txt");
 	volcadoFicheroListaR(&lR, "reservas.txt");
+	*/
+	WSADATA wsaData;
+	SOCKET s;
+	struct sockaddr_in server;
+	char sendBuff[512], recvBuff[512];
+
+	printf("\nInitialising Winsock...\n");
+	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+		printf("Failed. Error Code : %d", WSAGetLastError());
+		return -1;
+	}
+
+	printf("Initialised.\n");
+
+	//SOCKET creation
+	if ((s = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
+		printf("Could not create socket : %d", WSAGetLastError());
+		WSACleanup();
+		return -1;
+	}
+
+	printf("Socket created.\n");
+
+	server.sin_addr.s_addr = inet_addr(SERVER_IP); //INADDR_ANY;
+	server.sin_family = AF_INET;
+	server.sin_port = htons(SERVER_PORT);
+
+	//CONNECT to remote server
+	if (connect(s, (struct sockaddr*) &server, sizeof(server)) == SOCKET_ERROR) {
+		printf("Connection error: %d", WSAGetLastError());
+		closesocket(s);
+		WSACleanup();
+		return -1;
+	}
+
+	printf("Connection stablished with: %s (%d)\n", inet_ntoa(server.sin_addr),
+	ntohs(server.sin_port));
+
+
+	char opcion, opcion2;
+	int posU;
+	char mensaje1[100];
+	char mensaje2[100];
+	char mensaje3[100];
+	char mensaje4[100];
+	char mensaje5[100];
+	char mensaje6[100];
+	Usuario u;
+	do {
+		opcion = menuPrincipal();
+		sprintf(sendBuff,"%c",opcion);
+		send(s,sendBuff,sizeof(sendBuff),0);
+		switch(opcion){
+		case '0':break;
+		case '1':break;
+		case '2':
+				printf("A continucacion se va a realizar el registro del usuario...\n");fflush(stdout);
+				u = datosUsuarioR();
+				printf("---------\n");
+				fflush(stdout);
+				opcion2 = mostrarDatosUsuario(u);
+				sprintf(sendBuff,"%c",opcion2);
+				send(s,sendBuff,sizeof(sendBuff),0);
+				if(opcion2 == '1'){
+					sprintf(sendBuff,"%s",u.nombre);
+					send(s,sendBuff,sizeof(sendBuff),0);
+					sprintf(sendBuff,"%s",u.primerApellido);
+					send(s,sendBuff,sizeof(sendBuff),0);
+					sprintf(sendBuff,"%s",u.segundoApellido);
+					send(s,sendBuff,sizeof(sendBuff),0);
+					sprintf(sendBuff,"%s",u.dni);
+					send(s,sendBuff,sizeof(sendBuff),0);
+					sprintf(sendBuff,"%s",u.usuario);
+					send(s,sendBuff,sizeof(sendBuff),0);
+					sprintf(sendBuff,"%s",u.contrasenya);
+					send(s,sendBuff,sizeof(sendBuff),0);
+					sprintf(sendBuff,"%d",u.telefono);
+					send(s,sendBuff,sizeof(sendBuff),0);
+					sprintf(sendBuff,"%c",u.tipo);
+					send(s,sendBuff,sizeof(sendBuff),0);
+					recv(s,recvBuff,sizeof(recvBuff),0);
+					sscanf(recvBuff,"%d",&posU);
+					printf("%d\n", posU);fflush(stdout);
+					if(posU == -1){
+						recv(s,recvBuff,sizeof(recvBuff),0);
+						sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
+						printf("%s %s %s %s", mensaje1, mensaje2, mensaje3, mensaje4);fflush(stdout);
+						printf("\n");fflush(stdout);
+					}else{
+						recv(s,recvBuff,sizeof(recvBuff),0);
+						sscanf(recvBuff,"%s %s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5, mensaje6);
+						printf("%s %s %s %s %s %s", mensaje1, mensaje2, mensaje3, mensaje4,  mensaje5, mensaje6);fflush(stdout);
+						printf("\n");fflush(stdout);
+					}
+				}else{
+					recv(s,recvBuff,sizeof(recvBuff),0);
+					sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+					printf("%s %s", mensaje1, mensaje2);fflush(stdout);
+					printf("\n");fflush(stdout);
+				}
+				break;
+		default:
+				printf("Error. La opcion introducida no es correcta\n");
+				fflush(stdout);
+				break;
+		}
+	} while (opcion != '0');
+
+	closesocket(s);
+	WSACleanup();
+	/*
+	 * case '2':
+				printf("A continucacion se va a realizar el registro del usuario...\n");fflush(stdout);
+				u = datosUsuarioR();
+				ficheroLog("Selecciona la opcion de registro de un usuario",u.usuario, "fichero.log");
+				printf("Porfavor revise sus datos\n");
+				printf("---------\n");
+				fflush(stdout);
+				opcion2 = mostrarDatosUsuario(u);
+				if(opcion2 == '1'){
+					posU = buscarUsuario(lu, u.usuario);
+					if(posU != -1){
+						ficheroLog("Existe ese usuario",u.usuario, "fichero.log");
+						printf("Porfavor introduzca otro nombre de usuario\n");
+						fflush(stdout);
+					}else{
+						ficheroLog("Se añade ese usuario",u.usuario, "fichero.log");
+						anyadirUsuario(&lu, u);
+						anyadirUsuarioAlFichero(u, "usuarios.txt");
+					}
+				}else{
+					ficheroLog("Selecciona la opcion de cancelar el registro",u.usuario, "fichero.log");
+					printf("Registro cancelado...\n");
+					printf("Volviendo a la pagina principal.\n");
+				}
+				break;
+			default:
+				ficheroLog("Introduce una opcion erronea", u.usuario, "fichero.log");
+				printf("Error. La opcion introducida no es correcta\n");
+				fflush(stdout);
+				break;
+		}
 	do{
 		opcion = menuPrincipal();
 		switch(opcion){
@@ -248,6 +397,6 @@ int main(){
 	liberarMemoriaLU(&lu);
 	liberarMemoria(&lR);
 	liberarMemoriaH(&lH);
-
+	*/
 	return 0;
 }
