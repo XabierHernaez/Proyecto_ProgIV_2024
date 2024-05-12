@@ -70,8 +70,8 @@ int main(int argc, char *argv[]){
 	ntohs(server.sin_port));
 
 
-	char opcion, opcion2;
-	int posU;
+	char opcion, opcion2, opcion3;
+	int posU, contraCorrecta, tipoU;
 	char mensaje1[100];
 	char mensaje2[100];
 	char mensaje3[100];
@@ -84,8 +84,78 @@ int main(int argc, char *argv[]){
 		sprintf(sendBuff,"%c",opcion);
 		send(s,sendBuff,sizeof(sendBuff),0);
 		switch(opcion){
-		case '0':break;
-		case '1':break;
+		case '0':
+			recv(s,recvBuff,sizeof(recvBuff),0);
+			sscanf(recvBuff,"%s %s %s",mensaje1, mensaje2, mensaje3);
+			printf("%s %s %s", mensaje1, mensaje2, mensaje3);fflush(stdout);
+			printf("\n");fflush(stdout);
+			recv(s,recvBuff,sizeof(recvBuff),0);
+			sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+			printf("%s %s", mensaje1, mensaje2);fflush(stdout);
+			printf("\n");fflush(stdout);
+			break;
+		case '1':
+			recv(s,recvBuff,sizeof(recvBuff),0);
+			sscanf(recvBuff,"%s %s %s",mensaje1, mensaje2, mensaje3);
+			printf("%s %s %s\n", mensaje1, mensaje2, mensaje3);fflush(stdout);
+			u = datosUsuarioI();
+			sprintf(sendBuff,"%s",u.usuario);
+			send(s,sendBuff,sizeof(sendBuff),0);
+			sprintf(sendBuff,"%s",u.contrasenya);
+			send(s,sendBuff,sizeof(sendBuff),0);
+			recv(s,recvBuff,sizeof(recvBuff),0);
+			sscanf(recvBuff,"%d",&posU);
+			if(posU != -1){
+				recv(s,recvBuff,sizeof(recvBuff),0);
+				sscanf(recvBuff,"%d",&contraCorrecta);
+				if(contraCorrecta == 1){
+					recv(s,recvBuff,sizeof(recvBuff),0);
+					sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+					printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+					recv(s,recvBuff,sizeof(recvBuff),0);
+					sscanf(recvBuff,"%d",&tipoU);
+					if(tipoU != -1){
+						do {
+							opcion3 = menuCliente();
+							sprintf(sendBuff,"%c",opcion3);
+							send(s,sendBuff,sizeof(sendBuff),0);
+							switch(opcion3){
+							case '0':
+								recv(s,recvBuff,sizeof(recvBuff),0);
+								sscanf(recvBuff,"%s",mensaje1);
+								printf("%s\n", mensaje1);fflush(stdout);
+								break;
+							case '1':
+								recv(s,recvBuff,sizeof(recvBuff),0);
+								sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+								printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+								break;
+							case '2':
+								recv(s,recvBuff,sizeof(recvBuff),0);
+								sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+								printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+								break;
+							default:
+								recv(s,recvBuff,sizeof(recvBuff),0);
+								sscanf(recvBuff,"%s %s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5, mensaje6);
+								printf("%s %s %s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4,  mensaje5, mensaje6);fflush(stdout);
+								break;
+							}
+						} while (opcion3 != '0');
+					}else{
+
+					}
+				}else{
+					recv(s,recvBuff,sizeof(recvBuff),0);
+					sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+					printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+				}
+			}else{
+				recv(s,recvBuff,sizeof(recvBuff),0);
+				sscanf(recvBuff,"%s %s %s",mensaje1, mensaje2, mensaje3);
+				printf("%s %s %s\n", mensaje1, mensaje2, mensaje3);fflush(stdout);
+			}
+			break;
 		case '2':
 				printf("A continucacion se va a realizar el registro del usuario...\n");fflush(stdout);
 				u = datosUsuarioR();
@@ -113,7 +183,6 @@ int main(int argc, char *argv[]){
 					send(s,sendBuff,sizeof(sendBuff),0);
 					recv(s,recvBuff,sizeof(recvBuff),0);
 					sscanf(recvBuff,"%d",&posU);
-					printf("%d\n", posU);fflush(stdout);
 					if(posU == -1){
 						recv(s,recvBuff,sizeof(recvBuff),0);
 						sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
@@ -133,46 +202,18 @@ int main(int argc, char *argv[]){
 				}
 				break;
 		default:
-				printf("Error. La opcion introducida no es correcta\n");
-				fflush(stdout);
-				break;
+			recv(s,recvBuff,sizeof(recvBuff),0);
+			sscanf(recvBuff,"%s %s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5, mensaje6);
+			printf("%s %s %s %s %s %s", mensaje1, mensaje2, mensaje3, mensaje4,  mensaje5, mensaje6);fflush(stdout);
+			printf("\n");fflush(stdout);
+			break;
 		}
 	} while (opcion != '0');
 
 	closesocket(s);
 	WSACleanup();
 	/*
-	 * case '2':
-				printf("A continucacion se va a realizar el registro del usuario...\n");fflush(stdout);
-				u = datosUsuarioR();
-				ficheroLog("Selecciona la opcion de registro de un usuario",u.usuario, "fichero.log");
-				printf("Porfavor revise sus datos\n");
-				printf("---------\n");
-				fflush(stdout);
-				opcion2 = mostrarDatosUsuario(u);
-				if(opcion2 == '1'){
-					posU = buscarUsuario(lu, u.usuario);
-					if(posU != -1){
-						ficheroLog("Existe ese usuario",u.usuario, "fichero.log");
-						printf("Porfavor introduzca otro nombre de usuario\n");
-						fflush(stdout);
-					}else{
-						ficheroLog("Se añade ese usuario",u.usuario, "fichero.log");
-						anyadirUsuario(&lu, u);
-						anyadirUsuarioAlFichero(u, "usuarios.txt");
-					}
-				}else{
-					ficheroLog("Selecciona la opcion de cancelar el registro",u.usuario, "fichero.log");
-					printf("Registro cancelado...\n");
-					printf("Volviendo a la pagina principal.\n");
-				}
-				break;
-			default:
-				ficheroLog("Introduce una opcion erronea", u.usuario, "fichero.log");
-				printf("Error. La opcion introducida no es correcta\n");
-				fflush(stdout);
-				break;
-		}
+	 *
 	do{
 		opcion = menuPrincipal();
 		switch(opcion){
