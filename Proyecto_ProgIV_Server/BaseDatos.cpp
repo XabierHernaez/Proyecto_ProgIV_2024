@@ -85,6 +85,16 @@ void BaseDatos::volcarBaseDatosListaUsuario(sqlite3 *db, ListaUsuario &lU)
     }
     sqlite3_finalize(stmt); // Cerrar la sentencia
 }
+void BaseDatos::anyadirUsuarioBaseDatos(sqlite3 *db, Usuario u)
+{
+	char sql[100];
+	sqlite3_stmt *stmt;
+	sprintf(sql, "insert into usuario values('%s','%s','%s','%s','%s','%s',%d,'%c')", u.getNombre(), u.getprimerApellido(), u.getsegundoApellido(), u.getDni(), u.getUsuario(), u.getContrasenya(), u.getTelefono(), u.getTipo());
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL); //Preparar la sentencia
+	sqlite3_step(stmt); //Ejecutar la sentencia
+	sqlite3_reset(stmt); // Resetear la sentencia para reutilizarla en la siguiente iteración
+	sqlite3_finalize(stmt);
+}
 BaseDatos::~BaseDatos() {
 }
 /*
@@ -108,7 +118,7 @@ BaseDatos::~BaseDatos() {
         fclose(pf);
     }
 }
-*/
+
 void BaseDatos::cargarFicheroABaseUsuario(sqlite3 *db)
 {
 	FILE* pf;
@@ -143,4 +153,4 @@ void BaseDatos::cargarFicheroABaseUsuario(sqlite3 *db)
 		fclose(pf);
 	}
 }
-//* */
+* */

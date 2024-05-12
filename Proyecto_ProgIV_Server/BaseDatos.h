@@ -24,7 +24,8 @@ public:
     void volcarBaseDatosListaHabitacion(sqlite3 *db, ListaHabitacion &lH);
     void volcarBaseDatosListaUsuario(sqlite3 *db, ListaUsuario &lU);
     //void cargarFicheroABaseHabitacion(sqlite3 *db);
-    void cargarFicheroABaseUsuario(sqlite3 *db);
+   // void cargarFicheroABaseUsuario(sqlite3 *db);
+    void anyadirUsuarioBaseDatos(sqlite3 *db, Usuario u);
     virtual ~BaseDatos();
 };
 

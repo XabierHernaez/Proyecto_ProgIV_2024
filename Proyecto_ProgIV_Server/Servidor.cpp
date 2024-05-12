@@ -4,8 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
-
-#include <stdio.h>
+#include <string.h>
 #include <winsock2.h>
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
@@ -97,15 +96,55 @@ int main(int argc, char *argv[]) {
 
 
 
-	char opcion;
+	char opcion, opcion2;
+	int posU; // Mirar si el usuario existe en la base de datos
+	char mensaje[200];
+	Usuario u;
 	do {
 		recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 		sscanf(recvBuff,"%c",&opcion);
 		switch(opcion){
 		case '0':break;
 		case '1':break;
-		case '2': break;
-		default: break;
+		case '2':
+			recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+			sscanf(recvBuff,"%c",&opcion2);
+			if(opcion2 == '1'){
+				recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+				sscanf(recvBuff,"%s",u.nombre);
+				recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+				sscanf(recvBuff,"%s",u.primerApellido);
+				recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+				sscanf(recvBuff,"%s",u.segundoApellido);
+				recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+				sscanf(recvBuff,"%s",u.dni);
+				recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+				sscanf(recvBuff,"%s",u.usuario);
+				recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+				sscanf(recvBuff,"%s",u.contrasenya);
+				recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+				sscanf(recvBuff,"%d",&u.telefono);
+				recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+				sscanf(recvBuff,"%c",&u.tipo);
+				posU = lU.buscarUsuarioExiste(u.usuario);
+				sprintf(sendBuff,"%d", posU);
+				send(comm_socket,sendBuff,sizeof(sendBuff),0);
+				if(posU == -1){
+					baseDatos.anyadirUsuarioBaseDatos(db, u);
+					strcpy(mensaje,"Usuario añadido con exito" );
+					sprintf(sendBuff,mensaje, "%s %s %s %s", recvBuff);
+					send(comm_socket,sendBuff,sizeof(sendBuff),0);
+				}else{
+					strcpy(mensaje, "El usuario introducido esta en uso");
+					sprintf(sendBuff,mensaje, "%s %s %s %s %s %s", recvBuff);
+					send(comm_socket,sendBuff,sizeof(sendBuff),0);
+				}
+			}else{
+				strcpy(mensaje, "Cancelando registro...");
+				sprintf(sendBuff,mensaje, "%s %s", recvBuff);
+				send(comm_socket,sendBuff,sizeof(sendBuff),0);
+			}
+			break;
 		}
 
 	} while (opcion != '0');
