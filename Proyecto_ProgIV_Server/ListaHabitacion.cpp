@@ -14,26 +14,46 @@ void ListaHabitacion::anyadirHabitacion(const Habitacion &h)
 		numE++;
 	}
 }
-void ListaHabitacion::modificarOcupacion(int *numH, int cont)
-{
-	int i, j;
-	for(i=0;i<numE;i++){
-		for(j=0;j<cont;j++){
-			if(listaHabitacion[i].numA == numH[j]){
-				listaHabitacion[i].ocupada = 0;
-			}
-		}
-	}
+void ListaHabitacion::modificarOcupacion(int *numH, int cont, int numP) {
+    if (numH != NULL && cont > 0) {
+        for (int j = 0; j < cont; j++) {
+            for (int i = 0; i < numE; i++) {
+                if (listaHabitacion[i].numA == numH[j] || listaHabitacion[i].numP != numP) {
+                    listaHabitacion[i].ocupada = 1;
+                    break;
+                }
+            }
+        }
+    }
 }
-int ListaHabitacion::habitacionesDisponibles(int numP)
-{
-	int i, numHD = 0;
-	for(i=0;i<numE;i++){
-		if(listaHabitacion[i].numP == numP && listaHabitacion[i].ocupada == 0){
-			numHD++;
-		}
-	}
-	return numHD;
+Habitacion* ListaHabitacion::habitacionesDisponibles(int numP, int *numHD) {
+    if (numHD == nullptr) {
+        // Manejar el caso de un puntero nulo
+        return nullptr;
+    }
+
+    *numHD = 0;
+
+    // Primera pasada para contar las habitaciones disponibles
+    for (int i = 0; i < numE; i++) {
+        if (listaHabitacion[i].numP == numP && listaHabitacion[i].ocupada == 0) {
+            (*numHD)++;
+        }
+    }
+
+    // Crear un nuevo arreglo de habitaciones disponibles
+    Habitacion* aux = new Habitacion[*numHD];
+
+    // Segunda pasada para asignar las habitaciones disponibles al arreglo auxiliar
+    int index = 0;
+    for (int i = 0; i < numE; i++) {
+        if (listaHabitacion[i].numP == numP && listaHabitacion[i].ocupada == 0) {
+            aux[index] = listaHabitacion[i];
+            index++;
+        }
+    }
+
+    return aux;
 }
 int ListaHabitacion::buscarHabitacion(int numH)
 {
@@ -49,15 +69,6 @@ int ListaHabitacion::buscarHabitacion(int numH)
 		return pos;
 	}else{
 		return -1;
-	}
-}
-void ListaHabitacion::mostrarHabitacionesDisponibles(ListaHabitacion &aux, int numP)
-{
-	int i;
-	for(i=0;i<numE;i++){
-		if(listaHabitacion[i].numP == numP && listaHabitacion[i].ocupada == 0){
-				aux.anyadirHabitacion(listaHabitacion[i]);
-		}
 	}
 }
 void ListaHabitacion::ocupacionLibre(int *numH, int cont)

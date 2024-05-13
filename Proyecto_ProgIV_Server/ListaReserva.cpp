@@ -32,13 +32,13 @@ int* ListaReserva::habitacionesDisponibles(Reserva r, int numP, int *cont)
 	*cont = 0;
 	for(i=0;i<numR;i++){
 		//		1               5							3				4
-		if((r.entrada.dia - listaR[i].salida.dia < 0 && r.salida.dia >  listaR[i].entrada.dia&& r.entrada.mes == listaR[i].salida.mes) && listaR[i].habitacion.numP == numP){
+		if((r.entrada.dia - listaR[i].salida.dia <= 0 && r.salida.dia >  listaR[i].entrada.dia&& r.entrada.mes == listaR[i].salida.mes) && listaR[i].habitacion.numP == numP){
 			(*cont)++;
 		}
 	}
 	numH = new int[*cont];
 	for(i=0;i<numR;i++){
-		if((r.entrada.dia - listaR[i].salida.dia < 0 && r.entrada.mes == listaR[i].salida.mes) && listaR[i].habitacion.numP == numP){
+		if((r.entrada.dia - listaR[i].salida.dia < 0 && r.salida.dia >  listaR[i].entrada.dia&& r.entrada.mes == listaR[i].salida.mes) && listaR[i].habitacion.numP == numP){
 			numH[j] = listaR[i].habitacion.numA;
 			j++;
 		}
