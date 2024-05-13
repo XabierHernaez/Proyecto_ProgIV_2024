@@ -24,6 +24,7 @@ public:
 	float getPrecio();
 	int getOcupada();
 	Habitacion& operator=(const Habitacion &r);
+	void visualizarHabitacion();
 	virtual ~Habitacion();
 
 };

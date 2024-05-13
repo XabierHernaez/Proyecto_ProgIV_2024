@@ -29,7 +29,7 @@ void BaseDatos::crearTablas(sqlite3 **db)
 {
     const char *sql_insert = "CREATE TABLE IF NOT EXISTS habitacion(numH INT, tipo VARCHAR(20), numP INT, precio DOUBLE, ocupada INT)";
     const char *sql_insert2 = "CREATE TABLE IF NOT EXISTS usuario(nombre VARCHAR(20), primerApellido VARCHAR(20), segundoApellido VARCHAR(20), dni VARCHAR(20), usuario VARCHAR(20), contrasenya VARCHAR(20), telefono INT, tipo CHAR(1))";
-    const char *sql_insert3 = "CREATE TABLE IF NOT EXISTS reserva(usuario VARCHAR(20), numH INT, precio DOUBLE)";
+    const char *sql_insert3 = "CREATE TABLE IF NOT EXISTS reserva(usuario VARCHAR(20), numH INT, precio DOUBLE, añoE INT, mesE INT, diaE INT, añoS INT, mesS INT, diaS INT)";
     sqlite3_stmt *stmt1; // Puntero para la primera sentencia SQL
     sqlite3_stmt *stmt2; // Puntero para la segunda sentencia SQL
     sqlite3_stmt *stmt3; // Puntero para la segunda sentencia SQL
@@ -85,11 +85,45 @@ void BaseDatos::volcarBaseDatosListaUsuario(sqlite3 *db, ListaUsuario &lU)
     }
     sqlite3_finalize(stmt); // Cerrar la sentencia
 }
+void BaseDatos::volcarBaseDatosListaReserva(sqlite3 *db, ListaReserva &lR)
+{
+	char sql[200];
+	Reserva r;
+	sprintf(sql, "SELECT * FROM reserva");
+	sqlite3_stmt *stmt;
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL); // Preparar la sentencia
+	int result = sqlite3_step(stmt); // Ejecutar la sentencia
+	while (result == SQLITE_ROW) {
+		//(usuario VARCHAR(20), numH INT, precio DOUBLE, añoE INT, mesE INT, diaE INT, añoS INT, mesS INT, diaS INT)";
+		sprintf(r.usuario, "%s", (char*)sqlite3_column_text(stmt, 0));
+		r.habitacion.numA = sqlite3_column_int(stmt, 1);
+		r.precio = sqlite3_column_double(stmt, 2);
+		r.entrada.anyo = sqlite3_column_int(stmt, 3);
+		r.entrada.mes = sqlite3_column_int(stmt, 4);
+		r.entrada.dia = sqlite3_column_int(stmt, 5);
+		r.salida.anyo = sqlite3_column_int(stmt, 6);
+		r.salida.mes = sqlite3_column_int(stmt, 7);
+		r.salida.dia = sqlite3_column_int(stmt, 8);
+		result = sqlite3_step(stmt);
+		lR.anyadirReserva(r);
+	}
+	sqlite3_finalize(stmt);
+}
 void BaseDatos::anyadirUsuarioBaseDatos(sqlite3 *db, Usuario u)
 {
 	char sql[100];
 	sqlite3_stmt *stmt;
 	sprintf(sql, "insert into usuario values('%s','%s','%s','%s','%s','%s',%d,'%c')", u.getNombre(), u.getprimerApellido(), u.getsegundoApellido(), u.getDni(), u.getUsuario(), u.getContrasenya(), u.getTelefono(), u.getTipo());
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL); //Preparar la sentencia
+	sqlite3_step(stmt); //Ejecutar la sentencia
+	sqlite3_reset(stmt); // Resetear la sentencia para reutilizarla en la siguiente iteración
+	sqlite3_finalize(stmt);
+}
+void BaseDatos::anyadirReservaBaseDatos(sqlite3 *db, Reserva r)
+{
+	char sql[100];
+	sqlite3_stmt *stmt;
+	sprintf(sql, "insert into reserva values('%s',%d,%f,%d,%d,%d,%d,%d,%d)", r.usuario,r.habitacion.numA , r.precio,r.entrada.anyo, r.entrada.mes,r.entrada.dia,r.salida.anyo, r.salida.mes, r.salida.dia);
 	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL); //Preparar la sentencia
 	sqlite3_step(stmt); //Ejecutar la sentencia
 	sqlite3_reset(stmt); // Resetear la sentencia para reutilizarla en la siguiente iteración
