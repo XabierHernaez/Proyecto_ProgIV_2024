@@ -70,8 +70,8 @@ int main(int argc, char *argv[]){
 	ntohs(server.sin_port));
 
 
-	char opcion, opcion2, opcion3;
-	int posU, contraCorrecta, tipoU;
+	char opcion, opcion2, opcion3, opcion6;
+	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH;
 	char mensaje1[100];
 	char mensaje2[100];
 	char mensaje3[100];
@@ -79,6 +79,8 @@ int main(int argc, char *argv[]){
 	char mensaje5[100];
 	char mensaje6[100];
 	Usuario u;
+	Reserva r;
+	Habitacion h;
 	do {
 		opcion = menuPrincipal();
 		sprintf(sendBuff,"%c",opcion);
@@ -129,6 +131,88 @@ int main(int argc, char *argv[]){
 								recv(s,recvBuff,sizeof(recvBuff),0);
 								sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 								printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+								r = comenzarReserva();
+								sprintf(sendBuff,"%d",r.entrada.anyo);
+								send(s,sendBuff,sizeof(sendBuff),0);
+								sprintf(sendBuff,"%d",r.entrada.mes);
+								send(s,sendBuff,sizeof(sendBuff),0);
+								sprintf(sendBuff,"%d",r.entrada.dia);
+								send(s,sendBuff,sizeof(sendBuff),0);
+								sprintf(sendBuff,"%d",r.salida.anyo);
+								send(s,sendBuff,sizeof(sendBuff),0);
+								sprintf(sendBuff,"%d",r.salida.mes);
+								send(s,sendBuff,sizeof(sendBuff),0);
+								sprintf(sendBuff,"%d",r.salida.dia);
+								send(s,sendBuff,sizeof(sendBuff),0);
+								recv(s,recvBuff,sizeof(recvBuff),0);
+								sscanf(recvBuff,"%d",&fechaCorrecta);
+								if(fechaCorrecta == 1){
+									numP = numeroPersonas();
+									sprintf(sendBuff,"%d",numP);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									recv(s,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%d",&numHD);
+									if(numHD > 0){
+										for(int i =0;i<numHD;i++){
+											char tipo[200];
+											recv(s,recvBuff,sizeof(recvBuff),0);
+											sscanf(recvBuff,"%d",&h.numA);
+											recv(s,recvBuff,sizeof(recvBuff),0);
+											sscanf(recvBuff,"%s",tipo);
+											h.tipo = (char*)malloc((strlen(tipo)+1)*sizeof(char));
+											strcpy(h.tipo, tipo);
+											recv(s,recvBuff,sizeof(recvBuff),0);
+											sscanf(recvBuff,"%f",&h.precio);
+											mostrarHabitacion(h);
+										}
+										numHabitacionUsaurio = numHabitacion();
+										sprintf(sendBuff,"%d",numHabitacionUsaurio);
+										send(s,sendBuff,sizeof(sendBuff),0);
+										recv(s,recvBuff,sizeof(recvBuff),0);
+										sscanf(recvBuff,"%d",&posH);
+										if(posH != -1){
+											char usuario[20];
+											recv(s,recvBuff,sizeof(recvBuff),0);
+											sscanf(recvBuff,"%s", usuario);
+											r.usuario = (char*)malloc((strlen(usuario)+1)*sizeof(char));
+											strcpy(r.usuario, usuario);
+											recv(s,recvBuff,sizeof(recvBuff),0);
+											sscanf(recvBuff,"%d", &r.habitacion.numA);
+											recv(s,recvBuff,sizeof(recvBuff),0);
+											sscanf(recvBuff,"%d", &r.habitacion.numP);
+											recv(s,recvBuff,sizeof(recvBuff),0);
+											sscanf(recvBuff,"%f", &r.precio);
+											mostrarReserva(r);
+											printf("Es correcta la reserva [S/N]: ");
+											fflush(stdout);
+											fflush(stdin);
+											scanf("%c", &opcion6);
+											sprintf(sendBuff,"%c",opcion6);
+											send(s,sendBuff,sizeof(sendBuff),0);
+											if(opcion6 == 'S'){
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%s %s %s",mensaje1, mensaje2, mensaje3);
+												printf("%s %s %s\n", mensaje1, mensaje2, mensaje3);
+											}else{
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+												printf("%s %s\n", mensaje1, mensaje2);
+											}
+										}else{
+											recv(s,recvBuff,sizeof(recvBuff),0);
+											sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
+											printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);fflush(stdout);
+										}
+									}else{
+										recv(s,recvBuff,sizeof(recvBuff),0);
+										sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
+										printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);fflush(stdout);
+									}
+								}else{
+									recv(s,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+									printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+								}
 								break;
 							case '2':
 								recv(s,recvBuff,sizeof(recvBuff),0);
