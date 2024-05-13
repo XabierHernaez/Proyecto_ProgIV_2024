@@ -1,5 +1,7 @@
 #include "Habitacion.h"
 #include <string.h>
+#include <iostream>
+using namespace std;
 Habitacion::Habitacion()
 {
 	numA = 0;
@@ -80,6 +82,10 @@ Habitacion& Habitacion::operator=(const Habitacion &r)
 	ocupada = r.ocupada;
 	return(*this);
 
+}
+void Habitacion::visualizarHabitacion()
+{
+	cout<<"Numero habitacion: "<<numA<<" - Tipo: "<<tipo<<" - Precio: " <<precio<<endl;
 }
 Habitacion::~Habitacion()
 {
