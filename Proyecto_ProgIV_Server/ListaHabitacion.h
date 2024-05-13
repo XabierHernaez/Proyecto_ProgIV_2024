@@ -10,10 +10,9 @@ public:
 public:
 	ListaHabitacion();
 	void anyadirHabitacion(const Habitacion &h);
-	void modificarOcupacion(int *numH, int cont);
-	int habitacionesDisponibles(int numP);
+	void modificarOcupacion(int *numH, int cont, int numP);
+	Habitacion* habitacionesDisponibles(int numP, int *numHD);
 	int buscarHabitacion(int numH);
-	void mostrarHabitacionesDisponibles(ListaHabitacion &aux, int numP);
 	void ocupacionLibre(int *numH, int cont);
 	virtual ~ListaHabitacion();
 };

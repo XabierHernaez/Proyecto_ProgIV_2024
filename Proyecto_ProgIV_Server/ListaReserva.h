@@ -4,6 +4,7 @@
 #define LISTARESERVA_H_
 #include "Reserva.h"
 class ListaReserva {
+public:
 	Reserva *listaR;
 	int numR;
 public:

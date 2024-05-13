@@ -97,6 +97,10 @@ int main(int argc, char *argv[]) {
 	baseDatos.volcarBaseDatosListaHabitacion(db, lH);
 	baseDatos.volcarBaseDatosListaUsuario(db, lU);
 	baseDatos.volcarBaseDatosListaReserva(db,lR);
+	for(int i=0;i<4;i++){
+		sprintf(sendBuff,"%d", lR.listaR[i].habitacion.numA);
+		send(comm_socket,sendBuff,sizeof(sendBuff),0);
+	}
 
 
 
@@ -105,7 +109,7 @@ int main(int argc, char *argv[]) {
 	char mensaje[200];
 	Usuario u;
 	Reserva r;
-	ListaHabitacion aux;
+	Habitacion *aux = NULL;
 	Habitacion h;
 	do {
 		recv(comm_socket,recvBuff,sizeof(recvBuff),0);
@@ -175,20 +179,20 @@ int main(int argc, char *argv[]) {
 									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 									sscanf(recvBuff,"%d",&numP);
 									numHabitacionesReser = lR.habitacionesDisponibles(r, numP,&contHDis);
-									lH.modificarOcupacion(numHabitacionesReser, contHDis);
-									numHD = lH.habitacionesDisponibles(numP);
+									lH.modificarOcupacion(numHabitacionesReser, contHDis, numP);
+									aux = lH.habitacionesDisponibles(numP, &numHD);
 									sprintf(sendBuff,"%d", numHD);
 									send(comm_socket,sendBuff,sizeof(sendBuff),0);
 									if(numHD > 0){
-										lH.mostrarHabitacionesDisponibles(aux,numP);
 										for(int i=0;i<numHD;i++){
-											sprintf(sendBuff,"%d", aux.listaHabitacion[i].numA);
+											sprintf(sendBuff,"%d", aux[i].numA);
 											send(comm_socket,sendBuff,sizeof(sendBuff),0);
-											sprintf(sendBuff,"%s", aux.listaHabitacion[i].tipo);
+											sprintf(sendBuff,"%s", aux[i].tipo);
 											send(comm_socket,sendBuff,sizeof(sendBuff),0);
-											sprintf(sendBuff,"%f", aux.listaHabitacion[i].precio);
+											sprintf(sendBuff,"%f", aux[i].precio);
 											send(comm_socket,sendBuff,sizeof(sendBuff),0);
 										}
+										delete[] aux;
 										recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 										sscanf(recvBuff,"%d",&numeroHabitacionUsuario);
 										posH = lH.buscarHabitacion(numeroHabitacionUsuario);
@@ -213,20 +217,20 @@ int main(int argc, char *argv[]) {
 												sprintf(sendBuff,mensaje, "%s %s %s", recvBuff);
 												send(comm_socket,sendBuff,sizeof(sendBuff),0);
 												lH.ocupacionLibre(numHabitacionesReser,contHDis);
-												delete[] aux.listaHabitacion;
+
 											}else{
 												strcpy(mensaje, "Cancelando reserva...");
 												sprintf(sendBuff,mensaje, "%s %s", recvBuff);
 												send(comm_socket,sendBuff,sizeof(sendBuff),0);
 												lH.ocupacionLibre(numHabitacionesReser,contHDis);
-												delete[] aux.listaHabitacion;
+
 											}
 										}else{
 											strcpy(mensaje, "Numero de habitacion erroneo");
 											sprintf(sendBuff,mensaje, "%s %s %s %s", recvBuff);
 											send(comm_socket,sendBuff,sizeof(sendBuff),0);
 											lH.ocupacionLibre(numHabitacionesReser,contHDis);
-											delete[] aux.listaHabitacion;
+
 										}
 									}else{
 										strcpy(mensaje, "No hay habiatciones libres");
