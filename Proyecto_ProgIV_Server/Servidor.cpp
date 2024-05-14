@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
 	baseDatos.volcarBaseDatosListaReserva(db,lR);
 
 
-	char opcion, opcion2, opcion3, opcion6;
+	char opcion, opcion2, opcion3,opcion5, opcion6;
 	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, *numHabitacionesReser, contHDis, numHD, numeroHabitacionUsuario, posH;
 	char mensaje[200];
 	Usuario u;
@@ -151,7 +151,7 @@ int main(int argc, char *argv[]) {
 								sprintf(sendBuff,mensaje, "%s", recvBuff);
 								send(comm_socket,sendBuff,sizeof(sendBuff),0);
 								break;
-							case '1':
+							case '1': /*TERMINADO NO MODIFICAR*/
 								strcpy(mensaje, "Completar reserva...");
 								sprintf(sendBuff,mensaje, "%s %s", recvBuff);
 								send(comm_socket,sendBuff,sizeof(sendBuff),0);
@@ -242,9 +242,30 @@ int main(int argc, char *argv[]) {
 								}
 								break;
 							case '2':
-								strcpy(mensaje, "Modificar reserva...");
-								sprintf(sendBuff,mensaje, "%s %s", recvBuff);
-								send(comm_socket,sendBuff,sizeof(sendBuff),0);
+								do{
+									strcpy(mensaje, "Modificar reserva...");
+									sprintf(sendBuff,mensaje, "%s %s", recvBuff);
+									send(comm_socket,sendBuff,sizeof(sendBuff),0);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%c",&opcion5);
+									switch(opcion5){
+									case '0':
+										strcpy(mensaje, "Cancelando modificacion...");
+										sprintf(sendBuff,mensaje, "%s %s", recvBuff);
+										send(comm_socket,sendBuff,sizeof(sendBuff),0);
+										break;
+									case '1':
+										strcpy(mensaje, "Comenzando modificacion...");
+										sprintf(sendBuff,mensaje, "%s %s", recvBuff);
+										send(comm_socket,sendBuff,sizeof(sendBuff),0);
+										break;
+									default:
+										strcpy(mensaje, "La opcion introducida no es correcta.");
+										sprintf(sendBuff,mensaje, "%s %s %s %s %s %s", recvBuff);
+										send(comm_socket,sendBuff,sizeof(sendBuff),0);
+										break;
+									}
+								}while(opcion5 != '0');
 								break;
 							default:
 								strcpy(mensaje, "La opcion introducida no es correcta.");
