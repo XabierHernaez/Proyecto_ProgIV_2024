@@ -81,6 +81,12 @@ int main(int argc, char *argv[]){
 	Usuario u;
 	Reserva r;
 	Habitacion h;
+	for(int i= 0;i<4;i++){
+		int b;
+		recv(s,recvBuff,sizeof(recvBuff),0);
+		sscanf(recvBuff,"%d",&b);
+		printf("%d", b);
+	}
 	do {
 		opcion = menuPrincipal();
 		sprintf(sendBuff,"%c",opcion);
@@ -208,6 +214,7 @@ int main(int argc, char *argv[]){
 										sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
 										printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);fflush(stdout);
 									}
+
 								}else{
 									recv(s,recvBuff,sizeof(recvBuff),0);
 									sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
