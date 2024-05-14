@@ -97,11 +97,6 @@ int main(int argc, char *argv[]) {
 	baseDatos.volcarBaseDatosListaHabitacion(db, lH);
 	baseDatos.volcarBaseDatosListaUsuario(db, lU);
 	baseDatos.volcarBaseDatosListaReserva(db,lR);
-	for(int i=0;i<4;i++){
-		sprintf(sendBuff,"%d", lR.listaR[i].habitacion.numA);
-		send(comm_socket,sendBuff,sizeof(sendBuff),0);
-	}
-
 
 
 	char opcion, opcion2, opcion3, opcion6;
@@ -146,7 +141,7 @@ int main(int argc, char *argv[]) {
 					tipoU = lU.listaUsuario[posU].tipoUsuario();
 					sprintf(sendBuff,"%d", tipoU);
 					send(comm_socket,sendBuff,sizeof(sendBuff),0);
-					if(tipoU != -1){
+					if(tipoU == 0){
 						do {
 							recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%c",&opcion3);
@@ -180,6 +175,7 @@ int main(int argc, char *argv[]) {
 									sscanf(recvBuff,"%d",&numP);
 									numHabitacionesReser = lR.habitacionesDisponibles(r, numP,&contHDis);
 									lH.modificarOcupacion(numHabitacionesReser, contHDis, numP);
+									lH.modificarOcupacionRestante(numP);
 									aux = lH.habitacionesDisponibles(numP, &numHD);
 									sprintf(sendBuff,"%d", numHD);
 									send(comm_socket,sendBuff,sizeof(sendBuff),0);
@@ -216,27 +212,27 @@ int main(int argc, char *argv[]) {
 												strcpy(mensaje, "Reserva realizada correctamente");
 												sprintf(sendBuff,mensaje, "%s %s %s", recvBuff);
 												send(comm_socket,sendBuff,sizeof(sendBuff),0);
-												lH.ocupacionLibre(numHabitacionesReser,contHDis);
+												lH.ocupacionLibre(contHDis);
 
 											}else{
 												strcpy(mensaje, "Cancelando reserva...");
 												sprintf(sendBuff,mensaje, "%s %s", recvBuff);
 												send(comm_socket,sendBuff,sizeof(sendBuff),0);
-												lH.ocupacionLibre(numHabitacionesReser,contHDis);
+												lH.ocupacionLibre(contHDis);
 
 											}
 										}else{
 											strcpy(mensaje, "Numero de habitacion erroneo");
 											sprintf(sendBuff,mensaje, "%s %s %s %s", recvBuff);
 											send(comm_socket,sendBuff,sizeof(sendBuff),0);
-											lH.ocupacionLibre(numHabitacionesReser,contHDis);
+											lH.ocupacionLibre(contHDis);
 
 										}
 									}else{
 										strcpy(mensaje, "No hay habiatciones libres");
 										sprintf(sendBuff,mensaje, "%s %s %s %s", recvBuff);
 										send(comm_socket,sendBuff,sizeof(sendBuff),0);
-										lH.ocupacionLibre(numHabitacionesReser,contHDis);
+										lH.ocupacionLibre(contHDis);
 									}
 								}else{
 									strcpy(mensaje, "Fecha incorrecta");

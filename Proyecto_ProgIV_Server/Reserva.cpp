@@ -108,7 +108,12 @@ Reserva& Reserva::operator=(const Reserva &r)
 	delete[] usuario;
 	usuario = new char[strlen(r.usuario)+1];
 	strcpy(usuario, r.usuario);
-
+	habitacion.numA = r.habitacion.numA;
+	habitacion.tipo = new char[strlen(r.habitacion.tipo)];
+	strcpy(habitacion.tipo, r.habitacion.tipo);
+	habitacion.precio = r.habitacion.precio;
+	habitacion.ocupada = r.habitacion.ocupada;
+	habitacion.numP = r.habitacion.numP;
 	entrada.anyo = r.entrada.anyo;
 	entrada.mes = r.entrada.mes;
 	entrada.dia = r.entrada.dia;
@@ -123,6 +128,14 @@ void Reserva::resalizarReserva(char *usu, Habitacion h)
 	setUsuario(usu);
 	setHabitacion(h);
 	precio += h.precio * h.numP;
+}
+int Reserva::fechaDisponible(const Reserva& otraReserva) const
+{
+	if((entrada.dia - otraReserva.salida.dia < 0 && salida.dia >  otraReserva.entrada.dia&& entrada.mes == otraReserva.salida.mes) && otraReserva.habitacion.numP == habitacion.numP){
+		return 1;
+	}else{
+		return 0;
+	}
 }
 Reserva::~Reserva() {
 	delete[] usuario;

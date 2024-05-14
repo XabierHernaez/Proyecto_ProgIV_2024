@@ -9,8 +9,6 @@ void ListaReserva::anyadirReserva(const Reserva &r)
 {
 	if(numR == 0){
 		listaR = new Reserva[1];
-		listaR[numR] = r;
-		numR++;
 	}else{
 		Reserva *aux = new Reserva[numR];
 		int i;
@@ -22,17 +20,48 @@ void ListaReserva::anyadirReserva(const Reserva &r)
 		for(i=0;i<numR;i++){
 			listaR[i] = aux[i];
 		}
-		listaR[numR] = r;
-		numR++;
+		delete[] aux;
 	}
+	listaR[numR] = r;
+	numR++;
 }
+int* ListaReserva::habitacionesDisponibles(Reserva r, int numP, int *cont)
+{
+	// Contador de habitaciones disponibles
+	*cont = 0;
+
+	// Iterar sobre cada reserva en la lista
+	for (int i = 0; i < numR; i++) {
+		// Verificar si la habitación está disponible para la reserva actual
+		if (listaR[i].fechaDisponible(r) == 1) {
+			// Si la habitación está disponible, agregar su número al arreglo
+			(*cont)++; // Incrementar el contador de habitaciones disponibles
+	        }
+	}
+
+	int* numH = new int[*cont];
+	int j = 0;
+	// Iterar sobre cada reserva en la lista
+	for (int i = 0; i < numR; i++) {
+	// Verificar si la habitación está disponible para la reserva actual
+		if (listaR[i].fechaDisponible(r) == 1) {
+	// Si la habitación está disponible, agregar su número al arreglo
+			numH[j] = listaR[i].habitacion.numA;
+			j++;
+		}
+	}
+
+	// Devolver el arreglo de números de habitación disponibles
+	return numH;
+}
+/*
 int* ListaReserva::habitacionesDisponibles(Reserva r, int numP, int *cont)
 {
 	int i, *numH, j = 0;
 	*cont = 0;
 	for(i=0;i<numR;i++){
 		//		1               5							3				4
-		if((r.entrada.dia - listaR[i].salida.dia <= 0 && r.salida.dia >  listaR[i].entrada.dia&& r.entrada.mes == listaR[i].salida.mes) && listaR[i].habitacion.numP == numP){
+		if((r.entrada.dia - listaR[i].salida.dia < 0 && r.salida.dia >  listaR[i].entrada.dia&& r.entrada.mes == listaR[i].salida.mes) && listaR[i].habitacion.numP == numP){
 			(*cont)++;
 		}
 	}
@@ -44,7 +73,7 @@ int* ListaReserva::habitacionesDisponibles(Reserva r, int numP, int *cont)
 		}
 	}
 	return numH;
-}
+}*/
 ListaReserva::~ListaReserva() {
 	if(listaR != NULL){
 		delete[] listaR;

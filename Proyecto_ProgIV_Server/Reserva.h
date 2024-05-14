@@ -29,6 +29,7 @@ public:
 	int fechaCorrecta();
 	Reserva& operator=(const Reserva &r);
 	void resalizarReserva(char *usu, Habitacion h);
+	int fechaDisponible(const Reserva& otraReserva) const;
 	virtual ~Reserva();
 };
 
