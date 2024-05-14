@@ -70,7 +70,7 @@ int main(int argc, char *argv[]){
 	ntohs(server.sin_port));
 
 
-	char opcion, opcion2, opcion3, opcion6;
+	char opcion, opcion2, opcion3,opcion5, opcion6;
 	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH;
 	char mensaje1[100];
 	char mensaje2[100];
@@ -128,7 +128,7 @@ int main(int argc, char *argv[]){
 								sscanf(recvBuff,"%s",mensaje1);
 								printf("%s\n", mensaje1);fflush(stdout);
 								break;
-							case '1':
+							case '1':/*TERMINADO NO MODIFICAR*/
 								recv(s,recvBuff,sizeof(recvBuff),0);
 								sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 								printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
@@ -216,9 +216,31 @@ int main(int argc, char *argv[]){
 								}
 								break;
 							case '2':
-								recv(s,recvBuff,sizeof(recvBuff),0);
-								sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
-								printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+								do{
+									recv(s,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+									printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+									opcion5 = menuModificarReservaC();
+									sprintf(sendBuff,"%c",opcion5);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									switch(opcion5){
+									case '0':
+										recv(s,recvBuff,sizeof(recvBuff),0);
+										sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+										printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+										break;
+									case '1':
+										recv(s,recvBuff,sizeof(recvBuff),0);
+										sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+										printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+										break;
+									default:
+										recv(s,recvBuff,sizeof(recvBuff),0);
+										sscanf(recvBuff,"%s %s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5, mensaje6);
+										printf("%s %s %s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4,  mensaje5, mensaje6);fflush(stdout);
+										break;
+									}
+								}while(opcion5 != '0');
 								break;
 							default:
 								recv(s,recvBuff,sizeof(recvBuff),0);
@@ -299,6 +321,67 @@ int main(int argc, char *argv[]){
 	WSACleanup();
 	/*
 	 *
+	 *opcion5 = menuModificarReservaC();
+		switch (opcion5) {
+										case '0':
+												ficheroLog("Sale de la modificacion de la reserva",u.usuario, "fichero.log");
+												printf("Se ha cancelado la modificacion\n");fflush(stdout);
+												break;
+											case '1':
+												ficheroLog("Se empieza con la modificacion de la reserva",u.usuario, "fichero.log");
+												printf("Reservas actuales...\n");fflush(stdout);
+												obtenerReservasUsuario(lR, u.usuario, &numReserH);
+												printf("Introduzca el numero y la fecha de la habitacion que deseas modificar o eliminar...\n");fflush(stdout);
+												int numH2 = numHabitacion();
+												r3 = comenzarReserva();
+												if(numReserH > 0 && fechaCorrecta(r3)){
+													ficheroLog("El usuario ha introducido el numero y fecha de la reserva antigua",u.usuario, "fichero.log");
+													printf("¿Desea borrar su reserva [S/N]?: ");fflush(stdout);fflush(stdin);
+													scanf("%c", &opcion7);
+													if(opcion7 == 'S'){
+														ficheroLog("Se borra esa reserva",u.usuario, "fichero.log");
+														eliminarReserva(&lR, numH2, u.usuario, r3);
+														printf("La reserva se ha eliminado con exito\n");fflush(stdout);
+														printf("Reservas actuales...\n");fflush(stdout);
+														obtenerReservasUsuario(lR, u.usuario, &numReserH);
+														volcadoListaRFichero(lR, "reservas.txt");
+													}else{
+														ficheroLog("Se modifica la fecha",u.usuario, "fichero.log");
+														printf("Se modificara solo la fecha de la reserva, si usted quiere añadir mas personas debera eliminar la reserva y volver a realizar una reserva\n");fflush(stdout);
+														printf("Porfavor ingrese la nueva fecha...\n");fflush(stdout);
+														r2 = comenzarReserva();
+														if(fechaCorrecta(r2)){
+															contR = conthabitacionesDisponiblesReserva(lR, r2, numH2);
+															ficheroLog("Introduce la nueva fecha y se mira que haya habitaciones disponibles y la fecha sea correcta",u.usuario, "fichero.log");
+															if(contR == -1){
+																modificarReserva(&lR, numH2,r2, r3, u.usuario);
+																volcadoListaRFichero(lR, "reservas.txt");
+																printf("La reserva se ha modificado con exito...\n");fflush(stdout);
+																obtenerReservasUsuario(lR, u.usuario, &numReserH);
+																ficheroLog("Se modifica la reserva",u.usuario, "fichero.log");
+															}else{
+																ficheroLog("En las fechas seleccionadas no se puede reservar",u.usuario, "fichero.log");
+																printf("En esas fechas exite una reserva activa\n");
+																fflush(stdout);
+															}
+														}else{
+															ficheroLog("Introduce una fecha erronea",u.usuario, "fichero.log");
+															printf("Error. Fecha incorrecta\n");fflush(stdout);
+														}
+													}
+												}else{
+													ficheroLog("No tiene reservas",u.usuario, "fichero.log");
+													printf("No se han encontrado reservas a su nombre\n");fflush(stdout);
+												}
+												}
+											} while (opcion5 != '0');
+											break;
+
+									default:
+										printf("Error. La opcion introducida no es correcta o realize alguna reserva\n");
+										fflush(stdout);
+										break;
+								}
 	do{
 		opcion = menuPrincipal();
 		switch(opcion){
