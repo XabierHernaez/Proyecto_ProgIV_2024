@@ -18,13 +18,22 @@ void ListaHabitacion::modificarOcupacion(int *numH, int cont, int numP) {
     if (numH != NULL && cont > 0) {
         for (int j = 0; j < cont; j++) {
             for (int i = 0; i < numE; i++) {
-                if (listaHabitacion[i].numA == numH[j] || listaHabitacion[i].numP != numP) {
+                if (listaHabitacion[i].numA == numH[j]) {
                     listaHabitacion[i].ocupada = 1;
                     break;
                 }
             }
         }
     }
+}
+void ListaHabitacion::modificarOcupacionRestante(int numP)
+{
+	int i;
+	for(i=0;i<numE;i++){
+		if(listaHabitacion[i].numP != numP){
+			listaHabitacion[i].ocupada = 1;
+		}
+	}
 }
 Habitacion* ListaHabitacion::habitacionesDisponibles(int numP, int *numHD) {
     if (numHD == nullptr) {
@@ -71,14 +80,12 @@ int ListaHabitacion::buscarHabitacion(int numH)
 		return -1;
 	}
 }
-void ListaHabitacion::ocupacionLibre(int *numH, int cont)
+void ListaHabitacion::ocupacionLibre(int cont)
 {
-	int i, j;
+	int i;
 	for(i=0;i<numE;i++){
-		for(j=0;j<cont;j++){
-			if(listaHabitacion[i].numA == numH[j]){
-				listaHabitacion[i].ocupada = 0;
-			}
+		if(listaHabitacion[i].ocupada == 1){
+			listaHabitacion[i].ocupada = 0;
 		}
 	}
 }
