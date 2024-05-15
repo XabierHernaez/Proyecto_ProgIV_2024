@@ -29,6 +29,8 @@ public:
    // void cargarFicheroABaseUsuario(sqlite3 *db);
     void anyadirUsuarioBaseDatos(sqlite3 *db, Usuario u);
     void anyadirReservaBaseDatos(sqlite3 *db, Reserva r);
+    void borrarReserva(sqlite3 *db, Reserva &r);
+    void modificarReserva(sqlite3 *db, Reserva &nuevaReserva, Reserva &viejaReserva);
     virtual ~BaseDatos();
 };
 

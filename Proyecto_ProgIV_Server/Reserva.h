@@ -30,6 +30,7 @@ public:
 	Reserva& operator=(const Reserva &r);
 	void resalizarReserva(char *usu, Habitacion h);
 	int fechaDisponible(const Reserva& otraReserva) const;
+	int validarReserva(const Reserva &r) const;
 	virtual ~Reserva();
 };
 
