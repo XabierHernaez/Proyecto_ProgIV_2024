@@ -70,8 +70,8 @@ int main(int argc, char *argv[]){
 	ntohs(server.sin_port));
 
 
-	char opcion, opcion2, opcion3,opcion5, opcion6;
-	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH;
+	char opcion, opcion2, opcion3,opcion5, opcion6, opcion7;
+	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH, numReserAct, reservaCorrecta, fechaCorrecta2;
 	char mensaje1[100];
 	char mensaje2[100];
 	char mensaje3[100];
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
 	char mensaje5[100];
 	char mensaje6[100];
 	Usuario u;
-	Reserva r;
+	Reserva r, r2, r3, r4;
 	Habitacion h;
 
 	do {
@@ -233,6 +233,110 @@ int main(int argc, char *argv[]){
 										recv(s,recvBuff,sizeof(recvBuff),0);
 										sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 										printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+										printf("Reservas actuales...\n");fflush(stdout);
+										recv(s,recvBuff,sizeof(recvBuff),0);
+										sscanf(recvBuff,"%d",&numReserAct);
+										if(numReserAct > 0){
+											for(int i = 0;i<numReserAct;i++){
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%d",&r2.habitacion.numA);
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%d",&r2.habitacion.numP);
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%d",&r2.habitacion.ocupada);
+												char tipo[20];
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%s",tipo);
+												r2.habitacion.tipo = (char*)malloc(strlen(tipo)*sizeof(char));
+												strcpy(r2.habitacion.tipo, tipo);
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%f",&r2.habitacion.precio);
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%d",&r2.entrada.anyo);
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%d",&r2.entrada.mes);
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%d",&r2.entrada.dia);
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%d",&r2.salida.anyo);
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%d",&r2.salida.mes);
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%d",&r2.salida.dia);
+												mostrarReserva(r2);
+											}
+											printf("Introduzca el numero y la fecha de la habitacion que deseas modificar o eliminar...\n");fflush(stdout);
+											int numH2 = numHabitacion();
+											r3 = comenzarReserva();
+											sprintf(sendBuff,"%d",numH2);
+											send(s,sendBuff,sizeof(sendBuff),0);
+											sprintf(sendBuff,"%d",r3.entrada.anyo);
+											send(s,sendBuff,sizeof(sendBuff),0);
+											sprintf(sendBuff,"%d",r3.entrada.mes);
+											send(s,sendBuff,sizeof(sendBuff),0);
+											sprintf(sendBuff,"%d",r3.entrada.dia);
+											send(s,sendBuff,sizeof(sendBuff),0);
+											sprintf(sendBuff,"%d",r3.salida.anyo);
+											send(s,sendBuff,sizeof(sendBuff),0);
+											sprintf(sendBuff,"%d",r3.salida.mes);
+											send(s,sendBuff,sizeof(sendBuff),0);
+											sprintf(sendBuff,"%d",r3.salida.dia);
+											send(s,sendBuff,sizeof(sendBuff),0);
+											recv(s,recvBuff,sizeof(recvBuff),0);
+											sscanf(recvBuff,"%d",&reservaCorrecta);
+											printf("%d\n", reservaCorrecta);fflush(stdout);
+											if(reservaCorrecta == 1){
+												printf("¿Desea borrar su reserva [S/N]?: ");fflush(stdout);fflush(stdin);
+												scanf("%c", &opcion7);
+												sprintf(sendBuff,"%c",opcion7);
+												send(s,sendBuff,sizeof(sendBuff),0);
+												if(opcion7 == 'S'){
+													recv(s,recvBuff,sizeof(recvBuff),0);
+													sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+													printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+												}else{
+													printf("Se modificara solo la fecha de la reserva, si usted quiere añadir mas personas debera eliminar la reserva y volver a realizar una reserva\n");fflush(stdout);
+													printf("Porfavor ingrese la nueva fecha...\n");fflush(stdout);
+													r4 = comenzarReserva();
+													sprintf(sendBuff,"%d",r4.entrada.anyo);
+													printf("%d\n",r4.entrada.anyo);
+													send(s,sendBuff,sizeof(sendBuff),0);
+													sprintf(sendBuff,"%d",r4.entrada.mes);
+													printf("%d\n",r4.entrada.mes);
+													send(s,sendBuff,sizeof(sendBuff),0);
+													sprintf(sendBuff,"%d",r4.entrada.dia);
+													printf("%d\n",r4.entrada.dia);
+													send(s,sendBuff,sizeof(sendBuff),0);
+													sprintf(sendBuff,"%d",r4.salida.anyo);
+													printf("%d\n",r4.salida.anyo);
+													send(s,sendBuff,sizeof(sendBuff),0);
+													sprintf(sendBuff,"%d",r4.salida.mes);
+													printf("%d\n",r4.salida.mes);
+													send(s,sendBuff,sizeof(sendBuff),0);
+													sprintf(sendBuff,"%d",r4.salida.dia);
+													printf("%d\n",r4.salida.dia);
+													//recv(s,recvBuff,sizeof(recvBuff),0);
+													//sscanf(recvBuff,"%d",&fechaCorrecta2);
+													//printf("%d\n",fechaCorrecta2);fflush(stdout);
+													if(1){
+														//int contR;
+														//recv(s,recvBuff,sizeof(recvBuff),0);
+														//sscanf(recvBuff,"%d",&contR);
+														if(1){
+															recv(s,recvBuff,sizeof(recvBuff),0);
+															sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
+															printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+														}
+													}
+												}
+											}
+
+										}else{
+											recv(s,recvBuff,sizeof(recvBuff),0);
+											sscanf(recvBuff,"%s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);
+											printf("%s %s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4,  mensaje5);fflush(stdout);
+										}
+
 										break;
 									default:
 										recv(s,recvBuff,sizeof(recvBuff),0);
