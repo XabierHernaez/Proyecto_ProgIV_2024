@@ -129,6 +129,32 @@ void BaseDatos::anyadirReservaBaseDatos(sqlite3 *db, Reserva r)
 	sqlite3_reset(stmt); // Resetear la sentencia para reutilizarla en la siguiente iteración
 	sqlite3_finalize(stmt);
 }
+void BaseDatos::borrarReserva(sqlite3 *db, Reserva &r)
+{
+    char sql[300];
+    sqlite3_stmt *stmt;
+    sprintf(sql, "DELETE FROM Reserva WHERE usuario = '%s' AND numH = %d AND añoE = %d AND mesE = %d AND diaE = %d AND añoS = %d AND mesS = %d AND diaS = %d",
+            r.usuario, r.habitacion.numA, r.entrada.anyo, r.entrada.mes, r.entrada.dia, r.salida.anyo, r.salida.mes, r.salida.dia);
+    sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    sqlite3_step(stmt);
+    sqlite3_reset(stmt);
+    sqlite3_finalize(stmt);
+}
+void BaseDatos::modificarReserva(sqlite3 *db, Reserva &nuevaReserva, Reserva &viejaReserva)
+{
+
+	char sql[300];
+	sqlite3_stmt *stmt;
+
+	// Construir la consulta SQL con los parámetros adecuados
+	sprintf(sql, "UPDATE Reserva SET añoE = %d, mesE = %d, diaE = %d, añoS = %d, mesS = %d, diaS = %d WHERE usuario = '%s' AND numH = %d AND añoE = %d AND mesE = %d AND diaE = %d AND añoS = %d AND mesS = %d AND diaS = %d",
+			nuevaReserva.entrada.anyo, nuevaReserva.entrada.mes, nuevaReserva.entrada.dia, nuevaReserva.salida.anyo, nuevaReserva.salida.mes, nuevaReserva.salida.dia, viejaReserva.usuario,
+			viejaReserva.habitacion.numA, viejaReserva.entrada.anyo, viejaReserva.entrada.mes, viejaReserva.entrada.dia, viejaReserva.salida.anyo, viejaReserva.salida.mes, viejaReserva.salida.dia);
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	sqlite3_step(stmt);
+	sqlite3_reset(stmt);
+	sqlite3_finalize(stmt);
+}
 BaseDatos::~BaseDatos() {
 }
 /*

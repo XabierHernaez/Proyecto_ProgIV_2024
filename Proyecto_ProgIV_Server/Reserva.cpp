@@ -137,6 +137,14 @@ int Reserva::fechaDisponible(const Reserva& otraReserva) const
 		return 0;
 	}
 }
+int Reserva::validarReserva(const Reserva &r) const
+{
+	if(entrada.anyo == r.entrada.anyo && entrada.dia == r.entrada.dia && entrada.mes == r.entrada.mes && salida.anyo == r.salida.anyo && salida.mes == r.salida.mes &&salida.dia == r.salida.dia && habitacion.numA == r.habitacion.numA){
+		return 1;
+	}else{
+		return 0;
+	}
+}
 Reserva::~Reserva() {
 	delete[] usuario;
 }

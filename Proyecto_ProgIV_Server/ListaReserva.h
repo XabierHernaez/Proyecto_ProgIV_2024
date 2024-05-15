@@ -11,6 +11,9 @@ public:
 	ListaReserva();
 	void anyadirReserva(const Reserva &r);
 	int* habitacionesDisponibles(Reserva r, int numP, int *cont);
+	Reserva* obtenerReservasUsuario(char *usuario,int *numReser);
+	int comprobarReservaCorrecta(Reserva r);
+	int contHabitacionesDisponibles(Reserva r);
 	virtual ~ListaReserva();
 };
 

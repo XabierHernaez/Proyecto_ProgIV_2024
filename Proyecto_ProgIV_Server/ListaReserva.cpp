@@ -1,5 +1,6 @@
 #include "ListaReserva.h"
 #include <iostream>
+#include "string.h"
 ListaReserva::ListaReserva()
 {
 	listaR = NULL;
@@ -53,6 +54,53 @@ int* ListaReserva::habitacionesDisponibles(Reserva r, int numP, int *cont)
 
 	// Devolver el arreglo de números de habitación disponibles
 	return numH;
+}
+Reserva* ListaReserva::obtenerReservasUsuario(char *usuario,int *numReser)
+{
+	int i;
+	*numReser =0;
+	Reserva *r;
+	for(i=0;i<numR;i++){
+		if(strcmp(listaR[i].usuario, usuario) == 0){
+			(*numReser)++;
+		}
+	}
+	r = new Reserva[*numReser];
+	int j = 0;
+	for(i=0;i<numR;i++){
+		if(strcmp(listaR[i].usuario, usuario) == 0){
+			r[j] = listaR[i];
+			j++;
+		}
+	}
+	return r;
+
+}
+int ListaReserva::comprobarReservaCorrecta(Reserva r)
+{
+	int i, valido = 0;
+	for(i=0;i<numR;i++){
+		if(listaR[i].validarReserva(r) == 1){
+			valido = 1;
+		}
+	}
+	return valido;
+}
+int ListaReserva::contHabitacionesDisponibles(Reserva r)
+{
+	int i = 0, enc = 0;
+	while(!enc && i<numR){
+		if(listaR[i].validarReserva(r) == 1){
+			enc = 1;
+		}else{
+			i++;
+		}
+	}
+	if(enc){
+		return 1;
+	}else{
+		return -1;
+	}
 }
 /*
 int* ListaReserva::habitacionesDisponibles(Reserva r, int numP, int *cont)
