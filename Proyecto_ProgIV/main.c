@@ -71,7 +71,7 @@ int main(int argc, char *argv[]){
 
 
 	char opcion, opcion2, opcion3,opcion5, opcion6, opcion7;
-	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH, numReserAct, reservaCorrecta, fechaCorrecta2;
+	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH, numReserAct, reservaCorrecta, fechaCorrecta2, contR;
 	char mensaje1[100];
 	char mensaje2[100];
 	char mensaje3[100];
@@ -234,6 +234,7 @@ int main(int argc, char *argv[]){
 										sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 										printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
 										printf("Reservas actuales...\n");fflush(stdout);
+
 										recv(s,recvBuff,sizeof(recvBuff),0);
 										sscanf(recvBuff,"%d",&numReserAct);
 										if(numReserAct > 0){
@@ -265,6 +266,7 @@ int main(int argc, char *argv[]){
 												sscanf(recvBuff,"%d",&r2.salida.dia);
 												mostrarReserva(r2);
 											}
+
 											printf("Introduzca el numero y la fecha de la habitacion que deseas modificar o eliminar...\n");fflush(stdout);
 											int numH2 = numHabitacion();
 											r3 = comenzarReserva();
@@ -299,36 +301,41 @@ int main(int argc, char *argv[]){
 													printf("Porfavor ingrese la nueva fecha...\n");fflush(stdout);
 													r4 = comenzarReserva();
 													sprintf(sendBuff,"%d",r4.entrada.anyo);
-													printf("%d\n",r4.entrada.anyo);
 													send(s,sendBuff,sizeof(sendBuff),0);
 													sprintf(sendBuff,"%d",r4.entrada.mes);
-													printf("%d\n",r4.entrada.mes);
 													send(s,sendBuff,sizeof(sendBuff),0);
 													sprintf(sendBuff,"%d",r4.entrada.dia);
-													printf("%d\n",r4.entrada.dia);
 													send(s,sendBuff,sizeof(sendBuff),0);
 													sprintf(sendBuff,"%d",r4.salida.anyo);
-													printf("%d\n",r4.salida.anyo);
 													send(s,sendBuff,sizeof(sendBuff),0);
 													sprintf(sendBuff,"%d",r4.salida.mes);
-													printf("%d\n",r4.salida.mes);
 													send(s,sendBuff,sizeof(sendBuff),0);
 													sprintf(sendBuff,"%d",r4.salida.dia);
-													printf("%d\n",r4.salida.dia);
-													//recv(s,recvBuff,sizeof(recvBuff),0);
-													//sscanf(recvBuff,"%d",&fechaCorrecta2);
-													//printf("%d\n",fechaCorrecta2);fflush(stdout);
-													if(1){
-														//int contR;
-														//recv(s,recvBuff,sizeof(recvBuff),0);
-														//sscanf(recvBuff,"%d",&contR);
-														if(1){
+													send(s,sendBuff,sizeof(sendBuff),0);
+													recv(s,recvBuff,sizeof(recvBuff),0);
+													sscanf(recvBuff,"%d",&fechaCorrecta2);
+													if(fechaCorrecta2 == 1){
+														recv(s,recvBuff,sizeof(recvBuff),0);
+														sscanf(recvBuff,"%d",&contR);
+														if(contR == -1){
 															recv(s,recvBuff,sizeof(recvBuff),0);
 															sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
-															printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
+															printf("%s %s\n", mensaje1, mensaje2);
+														}else{
+															recv(s,recvBuff,sizeof(recvBuff),0);
+															sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
+															printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);
 														}
+													}else{
+														recv(s,recvBuff,sizeof(recvBuff),0);
+														sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
+														printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);
 													}
 												}
+											}else{
+												recv(s,recvBuff,sizeof(recvBuff),0);
+												sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
+												printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);
 											}
 
 										}else{
