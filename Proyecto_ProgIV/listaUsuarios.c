@@ -31,7 +31,7 @@ int buscarUsuario(ListaUsuarios lu, char *usuario)
 {
 	int pos = 0, enc = 0;
 	while(!enc && pos < lu.numU){
-		if(stricmp(lu.aUsuario[pos].usuario, usuario) == 0){
+		if(strcmp(lu.aUsuario[pos].usuario, usuario) == 0){
 			enc = 1;
 		}else{
 			pos++;
