@@ -100,7 +100,7 @@ int main(int argc, char *argv[]) {
 
 
 	char opcion, opcion2, opcion3,opcion5, opcion6, opcion7;
-	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, *numHabitacionesReser, contHDis, numHD, numeroHabitacionUsuario, posH, numReserAct;
+	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, *numHabitacionesReser, contHDis, numHD, numeroHabitacionUsuario, posH, numReserAct, fechaCorrecta2, contR;
 	char mensaje[200];
 	Usuario u;
 	Reserva r, r2, r3;
@@ -259,6 +259,7 @@ int main(int argc, char *argv[]) {
 										strcpy(mensaje, "Comenzando modificacion...");
 										sprintf(sendBuff,mensaje, "%s %s", recvBuff);
 										send(comm_socket,sendBuff,sizeof(sendBuff),0);
+
 										aux2 = lR.obtenerReservasUsuario(u.usuario,&numReserAct);
 										sprintf(sendBuff,"%d",numReserAct);
 										send(comm_socket,sendBuff,sizeof(sendBuff),0);
@@ -288,6 +289,7 @@ int main(int argc, char *argv[]) {
 												send(comm_socket,sendBuff,sizeof(sendBuff),0);
 											}
 											delete[] aux2;
+
 											recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 											sscanf(recvBuff,"%d",&r2.habitacion.numA);
 											recv(comm_socket,recvBuff,sizeof(recvBuff),0);
@@ -315,8 +317,6 @@ int main(int argc, char *argv[]) {
 													sprintf(sendBuff,mensaje, "%s %s %s %s %s", recvBuff);
 													send(comm_socket,sendBuff,sizeof(sendBuff),0);
 												}else{
-													r3.setUsuario(u.usuario);
-													r3.habitacion.setNumA(r2.habitacion.numA);
 													recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 													sscanf(recvBuff,"%d",&r3.entrada.anyo);
 													recv(comm_socket,recvBuff,sizeof(recvBuff),0);
@@ -329,27 +329,40 @@ int main(int argc, char *argv[]) {
 													sscanf(recvBuff,"%d",&r3.salida.mes);
 													recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 													sscanf(recvBuff,"%d",&r3.salida.dia);
-													//int fechaCorrecta2 = r3.fechaCorrecta();
-													//sprintf(sendBuff,"%d",fechaCorrecta2);
-													//send(comm_socket,sendBuff,sizeof(sendBuff),0);
-													if(1){
-														//int contR = lR.contHabitacionesDisponibles(r3);
-														//sprintf(sendBuff,"%d",contR);
-														//send(comm_socket,sendBuff,sizeof(sendBuff),0);
-														if(1){
-															//baseDatos.modificarReserva(db, r3, r2);
+													fechaCorrecta2 = r3.fechaCorrecta();
+													sprintf(sendBuff,"%d", fechaCorrecta2);
+													send(comm_socket,sendBuff,sizeof(sendBuff),0);
+													if(fechaCorrecta2 == 1){
+														contR =lR.contHabitacionesDisponibles(r3);
+														printf(sendBuff,"%d", fechaCorrecta2);
+														send(comm_socket,sendBuff,sizeof(sendBuff),0);
+														if(contR == -1){
+															baseDatos.modificarReserva(db, r3, r2);
 															strcpy(mensaje, "Reserva modificada");
 															sprintf(sendBuff,mensaje, "%s %s", recvBuff);
 															send(comm_socket,sendBuff,sizeof(sendBuff),0);
+														}else{
+															strcpy(mensaje, "Error modificando la reserva");
+															sprintf(sendBuff,mensaje, "%s %s", recvBuff);
+															send(comm_socket,sendBuff,sizeof(sendBuff),0);
 														}
+													}else{
+														strcpy(mensaje, "Formato de fecha incorrecta");
+														sprintf(sendBuff,mensaje, "%s %s %s %s", recvBuff);
+														send(comm_socket,sendBuff,sizeof(sendBuff),0);
 													}
 												}
+											}else{
+												strcpy(mensaje, "No se valida la reserva");
+												sprintf(sendBuff,mensaje, "%s %s %s %s", recvBuff);
+												send(comm_socket,sendBuff,sizeof(sendBuff),0);
 											}
 										}else{
 											strcpy(mensaje, "No se han encontrado reservas");
 											sprintf(sendBuff,mensaje, "%s %s %s %s %s", recvBuff);
 											send(comm_socket,sendBuff,sizeof(sendBuff),0);
 										}
+
 										break;
 									default:
 										strcpy(mensaje, "La opcion introducida no es correcta.");
