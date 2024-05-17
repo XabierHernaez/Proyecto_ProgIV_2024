@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
 	baseDatos.volcarBaseDatosListaReserva(db,lR);
 
 
-	char opcion, opcion2, opcion3,opcion5, opcion6, opcion7;
+	char opcion, opcion2, opcion3,opcion4, opcion5, opcion6, opcion7;
 	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, *numHabitacionesReser, contHDis, numHD, numeroHabitacionUsuario, posH, numReserAct, fechaCorrecta2, contR;
 	char mensaje[200];
 	Usuario u;
@@ -379,8 +379,83 @@ int main(int argc, char *argv[]) {
 								break;
 							}
 						} while (opcion3 != '0');
-					}else{
+					}else{ /*EMPIEZA PROGRAMA ADMINISTRADOR*/
+						sprintf(sendBuff, "%d", lH.numE);
+						send(comm_socket,sendBuff,sizeof(sendBuff),0);
+						for(int i = 0;i<lH.numE;i++){
+							sprintf(sendBuff, "%d", lH.listaHabitacion[i].getNumA());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff, "%s", lH.listaHabitacion[i].getTipo());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff, "%d", lH.listaHabitacion[i].numP);
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff, "%d", lH.listaHabitacion[i].ocupada);
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff, "%f", lH.listaHabitacion[i].precio);
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+						}
+						sprintf(sendBuff, "%d", lU.numU);
+						send(comm_socket,sendBuff,sizeof(sendBuff),0);
+						for(int i=0;i<lU.numU;i++){
+							sprintf(sendBuff, "%s", lU.listaUsuario[i].getNombre());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff, "%s", lU.listaUsuario[i].getprimerApellido());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff, "%s", lU.listaUsuario[i].getsegundoApellido());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff, "%s", lU.listaUsuario[i].getDni());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff, "%s", lU.listaUsuario[i].getUsuario());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff, "%s", lU.listaUsuario[i].getContrasenya());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff, "%d", lU.listaUsuario[i].getTelefono());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff, "%c", lU.listaUsuario[i].getTipo());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+						}
 
+						sprintf(sendBuff, "%d", lR.numR);
+						send(comm_socket,sendBuff,sizeof(sendBuff),0);
+
+						for(int i=0;i<lR.numR;i++){
+							sprintf(sendBuff,"%s",lR.listaR[i].getUsuario());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff,"%d",lR.listaR[i].habitacion.getNumA());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff,"%s",lR.listaR[i].habitacion.getTipo());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff,"%d",lR.listaR[i].habitacion.getNumP());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff,"%d",lR.listaR[i].habitacion.getOcupada());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff,"%f",lR.listaR[i].habitacion.getPrecio());
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff,"%d",lR.listaR[i].entrada.anyo);
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff,"%d",lR.listaR[i].entrada.mes);
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff,"%d",lR.listaR[i].entrada.dia);
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff,"%d",lR.listaR[i].salida.anyo);
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff,"%d",lR.listaR[i].salida.mes);
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+							sprintf(sendBuff,"%d",lR.listaR[i].salida.dia);
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+						}
+
+						do {
+							recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%c",&opcion4);
+							switch(opcion4){
+							case '0':break;
+							case '1': break;
+							case '2': break;
+							case '3': break;
+							default:break;
+							}
+						} while (opcion4 != '0');
 					}
 				}else{
 					strcpy(mensaje, "Contraseña incorrecta");
