@@ -1,6 +1,49 @@
 #include "listaReservas.h"
 #include <stdlib.h>
 #include <string.h>
+
+void anyadirReserva(ListaReservas *aR, Reserva r)
+{
+	if(aR->numR == 0){
+		aR->listaR = (Reserva*)malloc(1*sizeof(Reserva));
+	}else{
+		Reserva *aux = (Reserva*)malloc(aR->numR*sizeof(Reserva));
+		for(int i=0;i<aR->numR;i++){
+			aux[i] = aR->listaR[i];
+		}
+		free(aR->listaR);
+		aR->listaR = (Reserva*)malloc((aR->numR +1)*sizeof(Reserva));
+		for(int i=0;i<aR->numR;i++){
+			aR->listaR[i] = aux[i];
+		}
+		free(aux);
+	}
+	aR->listaR[aR->numR] = r;
+	(aR->numR)++;
+}
+void liberarMemoria(ListaReservas *aR)
+{
+	free(aR->listaR);
+}
+void visualizarR(ListaReservas lR)
+{
+	for(int i=0;i<lR.numR;i++){
+		printf("%s %d %s %d %d %.2f %d %d %d %d %d %d\n",
+				lR.listaR[i].usuario,
+				lR.listaR[i].habitacion.numA,
+				lR.listaR[i].habitacion.tipo,
+				lR.listaR[i].habitacion.numP,
+				lR.listaR[i].habitacion.ocupada,
+				lR.listaR[i].habitacion.precio,
+				lR.listaR[i].entrada.anyo,
+				lR.listaR[i].entrada.mes,
+				lR.listaR[i].entrada.dia,
+				lR.listaR[i].salida.anyo,
+				lR.listaR[i].salida.mes,
+				lR.listaR[i].salida.dia);fflush(stdout);
+	}
+}
+/*
 ListaReservas reservarMemoria(int tam)
 {
 	ListaReservas aR;
@@ -8,15 +51,6 @@ ListaReservas reservarMemoria(int tam)
 	aR.aR = (Reserva*)malloc(tam*sizeof(Reserva));
 	aR.numR = 0;
 	return aR;
-}
-void anyadirReserva(ListaReservas *aR, Reserva r)
-{
-	if(aR->numR < aR->tam){
-		aR->aR[aR->numR] = r;
-		aR->numR++;
-	}else{
-		printf("La lista de reservas esta llena\n");fflush(stdout);
-	}
 }
 void eliminarReserva(ListaReservas *aR, int numH, char * usuario, Reserva nuevaReserva)
 {
@@ -94,5 +128,5 @@ void liberarMemoria(ListaReservas *aR)
 {
 	free(aR->aR);
 }
-
+*/
 

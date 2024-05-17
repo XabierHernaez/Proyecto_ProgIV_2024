@@ -5,18 +5,19 @@
 #include "reserva.h"
 
 typedef struct{
-	Reserva *aR;
-	int tam;
+	Reserva *listaR;
 	int numR;
 }ListaReservas;
 
-ListaReservas reservarMemoria(int tam);
+void liberarMemoria(ListaReservas *aR);
 void anyadirReserva(ListaReservas *aR, Reserva r);
+void visualizarR(ListaReservas lR);
+/*
+ListaReservas reservarMemoria(int tam);
 void obtenerReservasUsuario(ListaReservas aR, char *usuario, int *numReserActu);
 void modificarReserva(ListaReservas *aR, int numH, Reserva nuevaReserva, Reserva viejaReserva, char * usuario);
 void eliminarReserva(ListaReservas *aR, int numH, char * usuario, Reserva nuevaReserva);
 int * habitacionesDisponiblesReserva(ListaReservas aR, Reserva r, int numP, int *cont);
 int conthabitacionesDisponiblesReserva(ListaReservas aR, Reserva r, int numH);
-void liberarMemoria(ListaReservas *aR);
-
+*/
 #endif

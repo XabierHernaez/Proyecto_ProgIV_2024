@@ -2,6 +2,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+void liberarMemoriaLU(ListaUsuarios *lu)
+{
+	free(lu->aUsuario);
+}
+void anyadirUsuario(ListaUsuarios *lU, Usuario u)
+{
+	if(lU->numU == 0){
+		lU->aUsuario = (Usuario*)malloc(1*sizeof(Usuario));
+	}else{
+		Usuario *aux = (Usuario*)malloc(lU->numU*sizeof(Usuario));
+		for(int i=0;i<lU->numU;i++){
+			aux[i] = lU->aUsuario[i];
+		}
+		free(lU->aUsuario);
+		lU->aUsuario = (Usuario*)malloc((lU->numU+1)*sizeof(Usuario));
+		for(int i=0;i<lU->numU;i++){
+			lU->aUsuario[i] = aux[i];
+		}
+		free(aux);
+	}
+	lU->aUsuario[lU->numU] = u;
+	(lU->numU)++;
+}
+void visualizarU(ListaUsuarios lU)
+{
+	for(int i =0;i<lU.numU;i++){
+		printf("%s %s %s %s %s %s %d %c\n", lU.aUsuario[i].nombre, lU.aUsuario[i].primerApellido, lU.aUsuario[i].segundoApellido, lU.aUsuario[i].dni,lU.aUsuario[i].usuario,lU.aUsuario[i].contrasenya, lU.aUsuario[i].telefono, lU.aUsuario[i].tipo);fflush(stdout);
+	}
+}
+/*
 ListaUsuarios reservarMemoriaLU(int tam)
 {
 	ListaUsuarios lu;
@@ -9,23 +40,6 @@ ListaUsuarios reservarMemoriaLU(int tam)
 	lu.numU = 0;
 	lu.aUsuario = (Usuario*)malloc(tam * sizeof(Usuario));
 	return lu;
-}
-void liberarMemoriaLU(ListaUsuarios *lu)
-{
-	free(lu);
-}
-void anyadirUsuario(ListaUsuarios *lu, Usuario u)
-{
-	if(lu->numU < lu->tam){
-		lu->aUsuario[lu->numU] = u;
-		lu->numU++;
-		printf("Usuario añadido correctamnete.\n");
-		fflush(stdout);
-	}else{
-		printf("ERROR. La lista de usuarios se encuentra actualmente llena.\n");
-		fflush(stdout);
-	}
-
 }
 int buscarUsuario(ListaUsuarios lu, char *usuario)
 {
@@ -44,3 +58,4 @@ int buscarUsuario(ListaUsuarios lu, char *usuario)
 	}
 	return pos;
 }
+*/
