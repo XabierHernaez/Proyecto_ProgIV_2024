@@ -31,7 +31,7 @@ int ListaUsuario::buscarUsuarioExiste(char *usuario)
 {
 	int pos = 0, enc = 0;
 	while(!enc && pos<numU){
-		if(strcmp(listaUsuario[pos].usuario, usuario) == 0){
+		if(strcmp(listaUsuario[pos].getUsuario(), usuario) == 0){
 			enc = 1;
 		}else{
 			pos++;
