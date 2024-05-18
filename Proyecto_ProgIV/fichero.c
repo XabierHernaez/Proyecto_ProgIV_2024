@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+/*
 void volcadoFicheroListaU(ListaUsuarios *lu, char *nomFich)
 {
 	FILE *pf;
@@ -56,6 +57,7 @@ void volcadoListaRFichero(ListaReservas aR, char *nomFich)
 		fclose(pf);
 	}
 }
+
 void volcadoFicheroListaR(ListaReservas *aR, char *nomFich)
 {
 	FILE *pf;
@@ -94,7 +96,5 @@ void ficheroLog(char *mensaje, char *usuario, char * nomFich)
 		fprintf(pf, "%s - Usuario: %s\n", mensaje, usuario);
 		fclose(pf);
 	}
-
-
-
 }
+*/

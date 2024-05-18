@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "menu.h"
 #include "usuario.h"
 #include "listaUsuarios.h"
@@ -10,10 +11,10 @@
 #include "listaReservas.h"
 #define TAM 100
 
-#include <stdio.h>
 #include <winsock2.h>
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
+
 
 int main(int argc, char *argv[]){
 	/*
@@ -70,17 +71,21 @@ int main(int argc, char *argv[]){
 	ntohs(server.sin_port));
 
 
-	char opcion, opcion2, opcion3,opcion5, opcion6, opcion7;
-	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH, numReserAct, reservaCorrecta, fechaCorrecta2, contR;
+	char opcion, opcion2, opcion3,opcion4, opcion5, opcion6, opcion7, opcion8, opcion9;
+	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH, numReserAct, reservaCorrecta, fechaCorrecta2, contR, tamH, tamU, tamR, numH3, posH2;
 	char mensaje1[100];
 	char mensaje2[100];
 	char mensaje3[100];
 	char mensaje4[100];
 	char mensaje5[100];
 	char mensaje6[100];
-	Usuario u;
-	Reserva r, r2, r3, r4;
-	Habitacion h;
+	Usuario u, u2;
+	Reserva r, r2, r3, r4, r5, r6, r7;
+	Habitacion h, h2, h3, h4;
+
+	ListaHabitacion lH;
+	ListaUsuarios lU;
+	ListaReservas lR;
 
 	do {
 		opcion = menuPrincipal();
@@ -361,7 +366,140 @@ int main(int argc, char *argv[]){
 							}
 						} while (opcion3 != '0');
 					}else{
+						recv(s,recvBuff,sizeof(recvBuff),0);
+						sscanf(recvBuff,"%d", &tamH);
+						lH = reservarMemoriaH(tamH);
+						for(int i=0;i<tamH;i++){
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&h2.numA);
+							char tipo[20];
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%s",tipo);
+							h2.tipo = (char*)malloc((strlen(tipo)+1)*sizeof(char));
+							strcpy(h2.tipo, tipo);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&h2.numP);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&h2.ocupada);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%f",&h2.precio);
+							anyadirHabitacion(&lH,h2, tamH);
+						}
+						recv(s,recvBuff,sizeof(recvBuff),0);
+						sscanf(recvBuff,"%d", &tamU);
+						lU.numU = 0;
+						for(int i=0;i<tamU;i++){
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%s",u2.nombre);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%s",u2.primerApellido);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%s",u2.segundoApellido);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%s",u2.dni);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%s",u2.usuario);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%s",u2.contrasenya);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&u2.telefono);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%c",&u2.tipo);
+							anyadirUsuario(&lU,u2);
+						}
 
+						recv(s,recvBuff,sizeof(recvBuff),0);
+						sscanf(recvBuff,"%d", &tamR);
+						lR.numR = 0;
+
+						for(int i = 0;i<tamR;i++){
+							char u[20];
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%s",u);
+							r5.usuario = (char*)malloc((strlen(u)+1)*sizeof(char));
+							strcpy(r5.usuario, u);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&r5.habitacion.numA);
+							char t[20];
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%s",t);
+							r5.habitacion.tipo = (char*)malloc((strlen(t)+1)*sizeof(char));
+							strcpy(r5.habitacion.tipo, t);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%f",&r5.precio);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&r5.entrada.anyo);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&r5.entrada.mes);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&r5.entrada.dia);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&r5.salida.anyo);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&r5.salida.mes);
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&r5.salida.dia);
+							h3 = buscarHabitacion(lH, r5.habitacion.numA);
+							r5.habitacion.numP = h3.numA;
+							r5.habitacion.precio = h3.precio;
+							anyadirReserva(&lR, r5);
+						}
+						do {
+							opcion4 = menuAdministrador();
+							sprintf(sendBuff,"%c",opcion4);
+							send(s,sendBuff,sizeof(sendBuff),0);
+							switch(opcion4){
+							case '0':
+								printf("Saliendo del sistema...\n");fflush(stdout);
+								printf("Muchas gracias\n");fflush(stdout);
+								liberarMemoriaH(&lH);
+								liberarMemoriaLU(&lU);
+								liberarMemoria(&lR);
+								break;
+							case '1':
+								visualizarReservasActias(lR);
+								printf("Quieres eliminar o modificar alguna reserva[S/N]: ");
+								fflush(stdout);
+								fflush(stdin);
+								scanf("%c", &opcion8);
+								if(opcion8 == 'S'){
+									printf("Rellene la siguinete informacion...\n");fflush(stdout);
+									int numH3 = numHabitacion();
+									r6 = comenzarReserva();
+									posH2 = encontrarReserva(lR, r6, numH3);
+									if(posH2 != -1){
+										printf("Eliminar [1] / Modificar [2]: ");
+										fflush(stdout);
+										fflush(stdin);
+										scanf("%c", &opcion9);
+										if(opcion9 == '1'){
+											printf("Eliminar reserva...\n");fflush(stdout);
+											printf("Reserva eliminada con exito\n");fflush(stdout);
+											eliminarReserva(&lR, posH2);
+										}else{
+											printf("Modificar reserva...\n");fflush(stdout);
+											printf("Se modificara solo la fecha de la reserva, si usted quiere añadir mas personas debera eliminar la reserva y volver a realizar una reserva\n");fflush(stdout);
+											printf("Porfavor ingrese la nueva fecha...\n");fflush(stdout);
+											r7 = comenzarReserva();
+											if(reservafechaCorrecta(r7) == 1){
+													if(disponibilidadHabitacion(lR, r7,numH3) == -1){
+														printf("Reserva modificada...\n");fflush(stdout);
+													modificarReserva(&lR, r7, posH2);
+													}else{
+														printf("Habitacion ocupada en esas fechas\n");fflush(stdout);
+													}
+											}else{
+												printf("Fecha incorrecta\n");fflush(stdout);
+											}
+										}
+									}
+								}
+								break;
+							case '2': break;
+							case '3':break;
+							default: break;
+							}
+						} while (opcion4 != '0');
 					}
 				}else{
 					recv(s,recvBuff,sizeof(recvBuff),0);
@@ -431,68 +569,7 @@ int main(int argc, char *argv[]){
 	closesocket(s);
 	WSACleanup();
 	/*
-	 *
-	 *opcion5 = menuModificarReservaC();
-		switch (opcion5) {
-										case '0':
-												ficheroLog("Sale de la modificacion de la reserva",u.usuario, "fichero.log");
-												printf("Se ha cancelado la modificacion\n");fflush(stdout);
-												break;
-											case '1':
-												ficheroLog("Se empieza con la modificacion de la reserva",u.usuario, "fichero.log");
-												printf("Reservas actuales...\n");fflush(stdout);
-												obtenerReservasUsuario(lR, u.usuario, &numReserH);
-												printf("Introduzca el numero y la fecha de la habitacion que deseas modificar o eliminar...\n");fflush(stdout);
-												int numH2 = numHabitacion();
-												r3 = comenzarReserva();
-												if(numReserH > 0 && fechaCorrecta(r3)){
-													ficheroLog("El usuario ha introducido el numero y fecha de la reserva antigua",u.usuario, "fichero.log");
-													printf("¿Desea borrar su reserva [S/N]?: ");fflush(stdout);fflush(stdin);
-													scanf("%c", &opcion7);
-													if(opcion7 == 'S'){
-														ficheroLog("Se borra esa reserva",u.usuario, "fichero.log");
-														eliminarReserva(&lR, numH2, u.usuario, r3);
-														printf("La reserva se ha eliminado con exito\n");fflush(stdout);
-														printf("Reservas actuales...\n");fflush(stdout);
-														obtenerReservasUsuario(lR, u.usuario, &numReserH);
-														volcadoListaRFichero(lR, "reservas.txt");
-													}else{
-														ficheroLog("Se modifica la fecha",u.usuario, "fichero.log");
-														printf("Se modificara solo la fecha de la reserva, si usted quiere añadir mas personas debera eliminar la reserva y volver a realizar una reserva\n");fflush(stdout);
-														printf("Porfavor ingrese la nueva fecha...\n");fflush(stdout);
-														r2 = comenzarReserva();
-														if(fechaCorrecta(r2)){
-															contR = conthabitacionesDisponiblesReserva(lR, r2, numH2);
-															ficheroLog("Introduce la nueva fecha y se mira que haya habitaciones disponibles y la fecha sea correcta",u.usuario, "fichero.log");
-															if(contR == -1){
-																modificarReserva(&lR, numH2,r2, r3, u.usuario);
-																volcadoListaRFichero(lR, "reservas.txt");
-																printf("La reserva se ha modificado con exito...\n");fflush(stdout);
-																obtenerReservasUsuario(lR, u.usuario, &numReserH);
-																ficheroLog("Se modifica la reserva",u.usuario, "fichero.log");
-															}else{
-																ficheroLog("En las fechas seleccionadas no se puede reservar",u.usuario, "fichero.log");
-																printf("En esas fechas exite una reserva activa\n");
-																fflush(stdout);
-															}
-														}else{
-															ficheroLog("Introduce una fecha erronea",u.usuario, "fichero.log");
-															printf("Error. Fecha incorrecta\n");fflush(stdout);
-														}
-													}
-												}else{
-													ficheroLog("No tiene reservas",u.usuario, "fichero.log");
-													printf("No se han encontrado reservas a su nombre\n");fflush(stdout);
-												}
-												}
-											} while (opcion5 != '0');
-											break;
 
-									default:
-										printf("Error. La opcion introducida no es correcta o realize alguna reserva\n");
-										fflush(stdout);
-										break;
-								}
 	do{
 		opcion = menuPrincipal();
 		switch(opcion){
