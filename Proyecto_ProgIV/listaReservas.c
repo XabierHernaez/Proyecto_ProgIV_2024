@@ -21,27 +21,69 @@ void anyadirReserva(ListaReservas *aR, Reserva r)
 	aR->listaR[aR->numR] = r;
 	(aR->numR)++;
 }
+void visualizarReservasActias(ListaReservas listaR)
+{
+	printf("Reservas activas...\n");fflush(stdout);
+	printf("----------\n");fflush(stdout);
+	printf("----------\n");fflush(stdout);
+	for(int i =0;i<listaR.numR;i++){
+		mostrarReserva(listaR.listaR[i]);
+	}
+}
+int encontrarReserva(ListaReservas listaR, Reserva r,  int numH)
+{
+	int enc = 0, i = 0;
+	while(!enc && i < listaR.numR){
+		if(listaR.listaR[i].habitacion.numA == numH && listaR.listaR[i].entrada.dia == r.entrada.dia && listaR.listaR[i].entrada.mes == r.entrada.mes &&
+				listaR.listaR[i].entrada.anyo == r.entrada.anyo && listaR.listaR[i].salida.dia == r.salida.dia && listaR.listaR[i].salida.mes == r.salida.mes && listaR.listaR[i].salida.anyo == r.salida.anyo){
+			enc = 1;
+		}else{
+			i++;
+		}
+	}
+	if(enc){
+		return i;
+	}else{
+		printf("Habitacion no encontrada...\n");fflush(stdout);
+		return -1;
+	}
+}
+int disponibilidadHabitacion(ListaReservas listaR, Reserva r)
+{
+	int enc = 0, i = 0;
+	while(!enc && i < listaR.numR){
+		if(listaR.listaR[i].entrada.dia == r.entrada.dia && listaR.listaR[i].entrada.mes == r.entrada.mes &&
+			listaR.listaR[i].entrada.anyo == r.entrada.anyo && listaR.listaR[i].salida.dia == r.salida.dia && listaR.listaR[i].salida.mes == r.salida.mes && listaR.listaR[i].salida.anyo == r.salida.anyo){
+				enc = 1;
+		}else{
+			i++;
+		}
+	}
+	if(enc){
+		return 1;
+	}else{
+		return -1;
+	}
+}
+void modificarReserva(ListaReservas *listaR, Reserva nuevaReserva, int posH)
+{
+	listaR->listaR[posH].entrada.anyo = nuevaReserva.entrada.anyo;
+	listaR->listaR[posH].entrada.mes = nuevaReserva.entrada.mes;
+	listaR->listaR[posH].entrada.dia = nuevaReserva.entrada.dia;
+	listaR->listaR[posH].salida.anyo = nuevaReserva.salida.anyo;
+	listaR->listaR[posH].salida.mes = nuevaReserva.salida.mes;
+	listaR->listaR[posH].salida.dia = nuevaReserva.salida.dia;
+}
+void eliminarReserva(ListaReservas *listaR, int posH)
+{
+	for(int i=posH;i<listaR->numR-1;i++){
+		listaR->listaR[i] = listaR->listaR[i+1];
+	}
+	(listaR->numR)--;
+}
 void liberarMemoria(ListaReservas *aR)
 {
 	free(aR->listaR);
-}
-void visualizarR(ListaReservas lR)
-{
-	for(int i=0;i<lR.numR;i++){
-		printf("%s %d %s %d %d %.2f %d %d %d %d %d %d\n",
-				lR.listaR[i].usuario,
-				lR.listaR[i].habitacion.numA,
-				lR.listaR[i].habitacion.tipo,
-				lR.listaR[i].habitacion.numP,
-				lR.listaR[i].habitacion.ocupada,
-				lR.listaR[i].habitacion.precio,
-				lR.listaR[i].entrada.anyo,
-				lR.listaR[i].entrada.mes,
-				lR.listaR[i].entrada.dia,
-				lR.listaR[i].salida.anyo,
-				lR.listaR[i].salida.mes,
-				lR.listaR[i].salida.dia);fflush(stdout);
-	}
 }
 /*
 ListaReservas reservarMemoria(int tam)

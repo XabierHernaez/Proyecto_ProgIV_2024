@@ -26,12 +26,6 @@ void anyadirUsuario(ListaUsuarios *lU, Usuario u)
 	lU->aUsuario[lU->numU] = u;
 	(lU->numU)++;
 }
-void visualizarU(ListaUsuarios lU)
-{
-	for(int i =0;i<lU.numU;i++){
-		printf("%s %s %s %s %s %s %d %c\n", lU.aUsuario[i].nombre, lU.aUsuario[i].primerApellido, lU.aUsuario[i].segundoApellido, lU.aUsuario[i].dni,lU.aUsuario[i].usuario,lU.aUsuario[i].contrasenya, lU.aUsuario[i].telefono, lU.aUsuario[i].tipo);fflush(stdout);
-	}
-}
 /*
 ListaUsuarios reservarMemoriaLU(int tam)
 {

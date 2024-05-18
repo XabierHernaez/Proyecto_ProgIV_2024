@@ -11,7 +11,12 @@ typedef struct{
 
 void liberarMemoria(ListaReservas *aR);
 void anyadirReserva(ListaReservas *aR, Reserva r);
-void visualizarR(ListaReservas lR);
+void visualizarReservasActias(ListaReservas listaR);
+int encontrarReserva(ListaReservas listaR, Reserva r, int numH);
+void eliminarReserva(ListaReservas *listaR, int posH);
+void modificarReserva(ListaReservas *listaR, Reserva nuevaReserva, int posH);
+int disponibilidadHabitacion(ListaReservas listaR, Reserva nuevaReserva);
+
 /*
 ListaReservas reservarMemoria(int tam);
 void obtenerReservasUsuario(ListaReservas aR, char *usuario, int *numReserActu);

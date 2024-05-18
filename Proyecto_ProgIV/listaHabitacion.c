@@ -15,6 +15,24 @@ void anyadirHabitacion(ListaHabitacion *lH,Habitacion h, int tam)
 		(lH->numH)++;
 	}
 }
+Habitacion buscarHabitacion(ListaHabitacion listaH, int numH)
+{
+	Habitacion h;
+	int enc = 0, i = 0;
+	while(!enc && i < listaH.numH){
+		if(listaH.aHabitacion[i].numA == numH){
+			enc = 1;
+		}else{
+			i++;
+		}
+	}
+	if(enc){
+		h = listaH.aHabitacion[i];
+		return h;
+	}else{
+		return h;
+	}
+}
 void liberarMemoriaH(ListaHabitacion *aH)
 {
 

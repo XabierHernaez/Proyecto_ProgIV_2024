@@ -9,6 +9,7 @@ typedef struct{
 
 ListaHabitacion reservarMemoriaH(int tam);
 void anyadirHabitacion(ListaHabitacion *lH,Habitacion h, int tam);
+Habitacion buscarHabitacion(ListaHabitacion listaH, int numH);
 void liberarMemoriaH(ListaHabitacion *aH);
 /*
 void habitacionesDisponibles(ListaHabitacion aH, int numP,int *numHD);

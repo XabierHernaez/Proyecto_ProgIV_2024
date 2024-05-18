@@ -11,10 +11,10 @@
 #include "listaReservas.h"
 #define TAM 100
 
-
 #include <winsock2.h>
 #define SERVER_IP "127.0.0.1"
 #define SERVER_PORT 6000
+
 
 int main(int argc, char *argv[]){
 	/*
@@ -71,8 +71,8 @@ int main(int argc, char *argv[]){
 	ntohs(server.sin_port));
 
 
-	char opcion, opcion2, opcion3,opcion4, opcion5, opcion6, opcion7;
-	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH, numReserAct, reservaCorrecta, fechaCorrecta2, contR, tamH, tamU, tamR;
+	char opcion, opcion2, opcion3,opcion4, opcion5, opcion6, opcion7, opcion8, opcion9;
+	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH, numReserAct, reservaCorrecta, fechaCorrecta2, contR, tamH, tamU, tamR, numH3, posH2;
 	char mensaje1[100];
 	char mensaje2[100];
 	char mensaje3[100];
@@ -80,8 +80,8 @@ int main(int argc, char *argv[]){
 	char mensaje5[100];
 	char mensaje6[100];
 	Usuario u, u2;
-	Reserva r, r2, r3, r4, r5;
-	Habitacion h, h2;
+	Reserva r, r2, r3, r4, r5, r6, r7;
+	Habitacion h, h2, h3, h4;
 
 	ListaHabitacion lH;
 	ListaUsuarios lU;
@@ -420,18 +420,13 @@ int main(int argc, char *argv[]){
 							strcpy(r5.usuario, u);
 							recv(s,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%d",&r5.habitacion.numA);
-							//recv(s,recvBuff,sizeof(recvBuff),0);
 							char t[20];
 							recv(s,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%s",t);
 							r5.habitacion.tipo = (char*)malloc((strlen(t)+1)*sizeof(char));
 							strcpy(r5.habitacion.tipo, t);
 							recv(s,recvBuff,sizeof(recvBuff),0);
-							sscanf(recvBuff,"%d",&r5.habitacion.numP);
-							recv(s,recvBuff,sizeof(recvBuff),0);
-							sscanf(recvBuff,"%d",&r5.habitacion.ocupada);
-							recv(s,recvBuff,sizeof(recvBuff),0);
-							sscanf(recvBuff,"%f",&r5.habitacion.precio);
+							sscanf(recvBuff,"%f",&r5.precio);
 							recv(s,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%d",&r5.entrada.anyo);
 							recv(s,recvBuff,sizeof(recvBuff),0);
@@ -444,10 +439,11 @@ int main(int argc, char *argv[]){
 							sscanf(recvBuff,"%d",&r5.salida.mes);
 							recv(s,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%d",&r5.salida.dia);
+							h3 = buscarHabitacion(lH, r5.habitacion.numA);
+							r5.habitacion.numP = h3.numA;
+							r5.habitacion.precio = h3.precio;
 							anyadirReserva(&lR, r5);
 						}
-						visualizarR(lR);
-
 						do {
 							opcion4 = menuAdministrador();
 							sprintf(sendBuff,"%c",opcion4);
@@ -457,10 +453,48 @@ int main(int argc, char *argv[]){
 								printf("Saliendo del sistema...\n");fflush(stdout);
 								printf("Muchas gracias\n");fflush(stdout);
 								liberarMemoriaH(&lH);
-								//liberarMemoriaLU(&lU);
-								//liberarMemoria(&lR);
+								liberarMemoriaLU(&lU);
+								liberarMemoria(&lR);
 								break;
-							case '1': break;
+							case '1':
+								visualizarReservasActias(lR);
+								printf("Quieres eliminar o modificar alguna reserva[S/N]: ");
+								fflush(stdout);
+								fflush(stdin);
+								scanf("%c", &opcion8);
+								if(opcion8 == 'S'){
+									printf("Rellene la siguinete informacion...\n");fflush(stdout);
+									int numH3 = numHabitacion();
+									r6 = comenzarReserva();
+									posH2 = encontrarReserva(lR, r6, numH3);
+									if(posH2 != -1){
+										printf("Eliminar [1] / Modificar [2]: ");
+										fflush(stdout);
+										fflush(stdin);
+										scanf("%c", &opcion9);
+										if(opcion9 == '1'){
+											printf("Eliminar reserva...\n");fflush(stdout);
+											printf("Reserva eliminada con exito\n");fflush(stdout);
+											eliminarReserva(&lR, posH2);
+										}else{
+											printf("Modificar reserva...\n");fflush(stdout);
+											printf("Se modificara solo la fecha de la reserva, si usted quiere añadir mas personas debera eliminar la reserva y volver a realizar una reserva\n");fflush(stdout);
+											printf("Porfavor ingrese la nueva fecha...\n");fflush(stdout);
+											r7 = comenzarReserva();
+											if(reservafechaCorrecta(r7) == 1){
+													if(disponibilidadHabitacion(lR, r7,numH3) == -1){
+														printf("Reserva modificada...\n");fflush(stdout);
+													modificarReserva(&lR, r7, posH2);
+													}else{
+														printf("Habitacion ocupada en esas fechas\n");fflush(stdout);
+													}
+											}else{
+												printf("Fecha incorrecta\n");fflush(stdout);
+											}
+										}
+									}
+								}
+								break;
 							case '2': break;
 							case '3':break;
 							default: break;
