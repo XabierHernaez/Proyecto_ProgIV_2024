@@ -48,12 +48,12 @@ int encontrarReserva(ListaReservas listaR, Reserva r,  int numH)
 		return -1;
 	}
 }
-int disponibilidadHabitacion(ListaReservas listaR, Reserva r)
+int disponibilidadHabitacion(ListaReservas listaR, Reserva r, int numH)
 {
 	int enc = 0, i = 0;
 	while(!enc && i < listaR.numR){
 		if(listaR.listaR[i].entrada.dia == r.entrada.dia && listaR.listaR[i].entrada.mes == r.entrada.mes &&
-			listaR.listaR[i].entrada.anyo == r.entrada.anyo && listaR.listaR[i].salida.dia == r.salida.dia && listaR.listaR[i].salida.mes == r.salida.mes && listaR.listaR[i].salida.anyo == r.salida.anyo){
+			listaR.listaR[i].entrada.anyo == r.entrada.anyo && listaR.listaR[i].salida.dia == r.salida.dia && listaR.listaR[i].salida.mes == r.salida.mes && listaR.listaR[i].salida.anyo == r.salida.anyo && listaR.listaR[i].habitacion.numA == numH){
 				enc = 1;
 		}else{
 			i++;
@@ -80,6 +80,33 @@ void eliminarReserva(ListaReservas *listaR, int posH)
 		listaR->listaR[i] = listaR->listaR[i+1];
 	}
 	(listaR->numR)--;
+}
+int estaEnLista(char **listaUsuarios, int numUsuarios, const char *usuario) {
+    for (int i = 0; i < numUsuarios; i++) {
+        if (strcmp(listaUsuarios[i], usuario) == 0) {
+            return 1; // Usuario encontrado
+        }
+    }
+    return 0; // Usuario no encontrado
+}
+char** usuariosConReserva(ListaReservas lR, int *numUsuariosUnicos)
+{
+    char **listaUsuarios = (char **)malloc(lR.numR * sizeof(char *));
+    *numUsuariosUnicos = 0;
+
+    // Recorrer la lista de reservas para obtener usuarios únicos
+    for (int i = 0; i < lR.numR; i++) {
+        // Verificar si el usuario ya está en la lista
+        if (!estaEnLista(listaUsuarios, *numUsuariosUnicos, lR.listaR[i].usuario)) {
+            // Si no está en la lista, agregarlo
+            listaUsuarios[*numUsuariosUnicos] = strdup(lR.listaR[i].usuario);
+            (*numUsuariosUnicos)++;
+        }
+    }
+
+    // Devolver el arreglo de usuarios únicos y actualizar el número de usuarios
+    // Sin necesidad de asignación indirecta
+    return listaUsuarios;
 }
 void liberarMemoria(ListaReservas *aR)
 {

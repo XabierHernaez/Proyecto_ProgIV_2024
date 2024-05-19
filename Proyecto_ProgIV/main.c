@@ -72,13 +72,14 @@ int main(int argc, char *argv[]){
 
 
 	char opcion, opcion2, opcion3,opcion4, opcion5, opcion6, opcion7, opcion8, opcion9;
-	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH, numReserAct, reservaCorrecta, fechaCorrecta2, contR, tamH, tamU, tamR, numH3, posH2;
+	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, numHD, numHabitacionUsaurio, posH, numReserAct, reservaCorrecta, fechaCorrecta2, contR, tamH, tamU, tamR, numH3, posH2, telCorrec, dniCorrec,numUsuariosUnicos;
 	char mensaje1[100];
 	char mensaje2[100];
 	char mensaje3[100];
 	char mensaje4[100];
 	char mensaje5[100];
 	char mensaje6[100];
+	char **listaUsuario;
 	Usuario u, u2;
 	Reserva r, r2, r3, r4, r5, r6, r7;
 	Habitacion h, h2, h3, h4;
@@ -86,6 +87,7 @@ int main(int argc, char *argv[]){
 	ListaHabitacion lH;
 	ListaUsuarios lU;
 	ListaReservas lR;
+
 
 	do {
 		opcion = menuPrincipal();
@@ -366,6 +368,7 @@ int main(int argc, char *argv[]){
 							}
 						} while (opcion3 != '0');
 					}else{
+						/*EMPIEZA EL PROGRAMA ADMINISTRADOR*/
 						recv(s,recvBuff,sizeof(recvBuff),0);
 						sscanf(recvBuff,"%d", &tamH);
 						lH = reservarMemoriaH(tamH);
@@ -407,11 +410,10 @@ int main(int argc, char *argv[]){
 							sscanf(recvBuff,"%c",&u2.tipo);
 							anyadirUsuario(&lU,u2);
 						}
-
+						//visualizarLU(lU);
 						recv(s,recvBuff,sizeof(recvBuff),0);
 						sscanf(recvBuff,"%d", &tamR);
 						lR.numR = 0;
-
 						for(int i = 0;i<tamR;i++){
 							char u[20];
 							recv(s,recvBuff,sizeof(recvBuff),0);
@@ -452,6 +454,51 @@ int main(int argc, char *argv[]){
 							case '0':
 								printf("Saliendo del sistema...\n");fflush(stdout);
 								printf("Muchas gracias\n");fflush(stdout);
+
+								sprintf(sendBuff,"%d",lU.numU);
+								send(s,sendBuff,sizeof(sendBuff),0);
+								for(int i=0;i<lU.numU;i++){
+									sprintf(sendBuff,"%s",lU.aUsuario[i].nombre);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%s",lU.aUsuario[i].primerApellido);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%s",lU.aUsuario[i].segundoApellido);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%s",lU.aUsuario[i].dni);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%s",lU.aUsuario[i].usuario);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%s",lU.aUsuario[i].contrasenya);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%d",lU.aUsuario[i].telefono);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%c",lU.aUsuario[i].tipo);
+									send(s,sendBuff,sizeof(sendBuff),0);
+								}
+
+								sprintf(sendBuff,"%d",lR.numR);
+								send(s,sendBuff,sizeof(sendBuff),0);
+								for(int i=0;i<lR.numR;i++){
+									sprintf(sendBuff,"%s",lR.listaR[i].usuario);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%d",lR.listaR[i].habitacion.numA);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%f",lR.listaR[i].precio);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%d",lR.listaR[i].entrada.anyo);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%d",lR.listaR[i].entrada.mes);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%d",lR.listaR[i].entrada.dia);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%d",lR.listaR[i].salida.anyo);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%d",lR.listaR[i].salida.mes);
+									send(s,sendBuff,sizeof(sendBuff),0);
+									sprintf(sendBuff,"%d",lR.listaR[i].salida.dia);
+									send(s,sendBuff,sizeof(sendBuff),0);
+								}
+
 								liberarMemoriaH(&lH);
 								liberarMemoriaLU(&lU);
 								liberarMemoria(&lR);
@@ -464,7 +511,7 @@ int main(int argc, char *argv[]){
 								scanf("%c", &opcion8);
 								if(opcion8 == 'S'){
 									printf("Rellene la siguinete informacion...\n");fflush(stdout);
-									int numH3 = numHabitacion();
+									numH3 = numHabitacion();
 									r6 = comenzarReserva();
 									posH2 = encontrarReserva(lR, r6, numH3);
 									if(posH2 != -1){
@@ -482,9 +529,9 @@ int main(int argc, char *argv[]){
 											printf("Porfavor ingrese la nueva fecha...\n");fflush(stdout);
 											r7 = comenzarReserva();
 											if(reservafechaCorrecta(r7) == 1){
-													if(disponibilidadHabitacion(lR, r7,numH3) == -1){
+													if(disponibilidadHabitacion(lR, r7, numH3) == -1){
 														printf("Reserva modificada...\n");fflush(stdout);
-													modificarReserva(&lR, r7, posH2);
+														modificarReserva(&lR, r7, posH2);
 													}else{
 														printf("Habitacion ocupada en esas fechas\n");fflush(stdout);
 													}
@@ -495,8 +542,10 @@ int main(int argc, char *argv[]){
 									}
 								}
 								break;
-							case '2': break;
-							case '3':break;
+							case '2':
+								listaUsuario = usuariosConReserva(lR, &numUsuariosUnicos);
+								borrarUsuariosSinReserva(&lU, listaUsuario, numUsuariosUnicos);
+								break;
 							default: break;
 							}
 						} while (opcion4 != '0');
@@ -541,9 +590,26 @@ int main(int argc, char *argv[]){
 					sscanf(recvBuff,"%d",&posU);
 					if(posU == -1){
 						recv(s,recvBuff,sizeof(recvBuff),0);
-						sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
-						printf("%s %s %s %s", mensaje1, mensaje2, mensaje3, mensaje4);fflush(stdout);
-						printf("\n");fflush(stdout);
+						sscanf(recvBuff,"%d",&telCorrec);
+						if(telCorrec == -1){
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%d",&dniCorrec);
+							if(dniCorrec == -1){
+								recv(s,recvBuff,sizeof(recvBuff),0);
+								sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
+								printf("%s %s %s %s", mensaje1, mensaje2, mensaje3, mensaje4);fflush(stdout);
+								printf("\n");fflush(stdout);
+							}else{
+								recv(s,recvBuff,sizeof(recvBuff),0);
+								sscanf(recvBuff,"%s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);
+								printf("%s %s %s %s %s", mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);fflush(stdout);
+								printf("\n");fflush(stdout);
+							}
+						}else{
+							recv(s,recvBuff,sizeof(recvBuff),0);
+							sscanf(recvBuff,"%s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);
+							printf("%s %s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);
+						}
 					}else{
 						recv(s,recvBuff,sizeof(recvBuff),0);
 						sscanf(recvBuff,"%s %s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5, mensaje6);

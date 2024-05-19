@@ -15,7 +15,9 @@ void visualizarReservasActias(ListaReservas listaR);
 int encontrarReserva(ListaReservas listaR, Reserva r, int numH);
 void eliminarReserva(ListaReservas *listaR, int posH);
 void modificarReserva(ListaReservas *listaR, Reserva nuevaReserva, int posH);
-int disponibilidadHabitacion(ListaReservas listaR, Reserva nuevaReserva);
+int disponibilidadHabitacion(ListaReservas listaR, Reserva r, int numH);
+char** usuariosConReserva(ListaReservas lR, int *numUsuariosUnicos);
+int estaEnLista(char **listaUsuarios, int numUsuarios, const char *usuario);
 
 /*
 ListaReservas reservarMemoria(int tam);

@@ -86,8 +86,17 @@ char mostrarDatosUsuario(Usuario u)
 	fflush(stdin);
 	scanf("%c", &opcion);
 	return opcion;
-
-
+}
+void mostrarDatosUsuario2(Usuario u)
+{
+	printf("Nombre: %s\n", u.nombre);
+	printf("Primer apellido: %s\n", u.primerApellido);
+	printf("Segundo apellido: %s\n", u.segundoApellido);
+	printf("DNI: %s\n", u.dni);
+	printf("Usuario: %s\n", u.usuario);
+	printf("Contraseña: %s\n", u.contrasenya);
+	printf("Telefono: %d\n", u.telefono);
+	printf("Tipo: %c\n",u.tipo);
 }
 int tipoUsuario(char tipo)
 {
