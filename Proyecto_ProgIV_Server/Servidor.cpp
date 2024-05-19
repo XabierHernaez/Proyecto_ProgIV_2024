@@ -100,10 +100,10 @@ int main(int argc, char *argv[]) {
 
 
 	char opcion, opcion2, opcion3,opcion4, opcion5, opcion6, opcion7;
-	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, *numHabitacionesReser, contHDis, numHD, numeroHabitacionUsuario, posH, numReserAct, fechaCorrecta2, contR;
+	int posU, contraCorrecta, tipoU, numP, fechaCorrecta, *numHabitacionesReser, contHDis, numHD, numeroHabitacionUsuario, posH, numReserAct, fechaCorrecta2, contR, telCorrec, dniCorrec, numU, numR;
 	char mensaje[200];
-	Usuario u;
-	Reserva r, r2, r3;
+	Usuario u, u2;
+	Reserva r, r2, r3, r4;
 	Habitacion *aux = NULL;
 	Reserva *aux2 = NULL;
 	Habitacion h;
@@ -444,10 +444,58 @@ int main(int argc, char *argv[]) {
 							recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%c",&opcion4);
 							switch(opcion4){
-							case '0':break;
+							case '0':
+								baseDatos.borrarTablasUsuarioReserva(db);
+
+								baseDatos.crearTablas(&db);
+								recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+								sscanf(recvBuff,"%d",&numU);
+								for(int i=0;i<numU;i++){
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%s",u2.nombre);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%s",u2.primerApellido);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%s",u2.segundoApellido);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%s",u2.dni);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%s",u2.usuario);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%s",u2.contrasenya);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%d",&u2.telefono);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%c",&u2.tipo);
+									baseDatos.anyadirUsuarioBaseDatos(db, u2);
+								}
+								recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+								sscanf(recvBuff,"%d",&numR);
+								for(int i=0;i<numR;i++){
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%s",r4.usuario);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%d",&r4.habitacion.numA);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%f",&r4.precio);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%d",&r4.entrada.anyo);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%d",&r4.entrada.mes);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%d",&r4.entrada.dia);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%d",&r4.salida.anyo);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%d",&r4.salida.mes);
+									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
+									sscanf(recvBuff,"%d",&r4.salida.dia);
+									baseDatos.anyadirReservaBaseDatos(db, r4);
+								}
+
+								break;
 							case '1': break;
 							case '2': break;
-							case '3': break;
 							default:break;
 							}
 						} while (opcion4 != '0');
@@ -487,10 +535,28 @@ int main(int argc, char *argv[]) {
 				sprintf(sendBuff,"%d", posU);
 				send(comm_socket,sendBuff,sizeof(sendBuff),0);
 				if(posU == -1){
-					baseDatos.anyadirUsuarioBaseDatos(db, u);
-					strcpy(mensaje,"Usuario añadido con exito" );
-					sprintf(sendBuff,mensaje, "%s %s %s %s", recvBuff);
+					telCorrec = lU.buscarTelefonoExiste(u.telefono);
+					sprintf(sendBuff,"%d", telCorrec);
 					send(comm_socket,sendBuff,sizeof(sendBuff),0);
+					if(telCorrec == -1){
+						dniCorrec = lU.buscarDniExiste(u.dni);
+						sprintf(sendBuff,"%d", dniCorrec);
+						send(comm_socket,sendBuff,sizeof(sendBuff),0);
+						if(dniCorrec == -1){
+							//baseDatos.anyadirUsuarioBaseDatos(db, u);
+							strcpy(mensaje,"Usuario añadido con exito" );
+							sprintf(sendBuff,mensaje, "%s %s %s %s", recvBuff);
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+						}else{
+							strcpy(mensaje, "El dni introducido ya existe");
+							sprintf(sendBuff,mensaje, "%s %s %s %s %s", recvBuff);
+							send(comm_socket,sendBuff,sizeof(sendBuff),0);
+						}
+					}else{
+						strcpy(mensaje, "El telefono introducido ya existe");
+						sprintf(sendBuff,mensaje, "%s %s %s %s %s", recvBuff);
+						send(comm_socket,sendBuff,sizeof(sendBuff),0);
+					}
 				}else{
 					strcpy(mensaje, "El usuario introducido esta en uso");
 					sprintf(sendBuff,mensaje, "%s %s %s %s %s %s", recvBuff);

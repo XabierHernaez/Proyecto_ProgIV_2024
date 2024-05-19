@@ -10,6 +10,8 @@ public:
 	ListaUsuario();
 	void anyadirUsuario(const Usuario &u);
 	int buscarUsuarioExiste(char *usuario);
+	int buscarTelefonoExiste(int tel);
+	int buscarDniExiste(char *dni);
 	virtual ~ListaUsuario();
 };
 

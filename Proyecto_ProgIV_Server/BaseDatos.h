@@ -25,8 +25,9 @@ public:
     void volcarBaseDatosListaHabitacion(sqlite3 *db, ListaHabitacion &lH);
     void volcarBaseDatosListaUsuario(sqlite3 *db, ListaUsuario &lU);
     void volcarBaseDatosListaReserva(sqlite3 *db, ListaReserva &lR);
+    void borrarTablasUsuarioReserva(sqlite3 *db);
     //void cargarFicheroABaseHabitacion(sqlite3 *db);
-   // void cargarFicheroABaseUsuario(sqlite3 *db);
+    //void cargarFicheroABaseUsuario(sqlite3 *db);
     void anyadirUsuarioBaseDatos(sqlite3 *db, Usuario u);
     void anyadirReservaBaseDatos(sqlite3 *db, Reserva r);
     void borrarReserva(sqlite3 *db, Reserva &r);

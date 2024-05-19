@@ -43,6 +43,38 @@ int ListaUsuario::buscarUsuarioExiste(char *usuario)
 		return -1;
 	}
 }
+int ListaUsuario::buscarTelefonoExiste(int tel)
+{
+	int pos = 0, enc = 0;
+	while(!enc && pos<numU){
+		if(listaUsuario[pos].telefono == tel){
+			enc = 1;
+		}else{
+			pos++;
+		}
+	}
+	if(enc){
+		return 1;
+	}else{
+		return -1;
+	}
+}
+int ListaUsuario::buscarDniExiste(char *dni)
+{
+	int pos = 0, enc = 0;
+	while(!enc && pos<numU){
+		if(strcmp(listaUsuario[pos].getDni(), dni) == 0){
+			enc = 1;
+		}else{
+			pos++;
+		}
+	}
+	if(enc){
+		return 1;
+	}else{
+		return -1;
+	}
+}
 ListaUsuario::~ListaUsuario()
 {
 	if(listaUsuario !=NULL){
