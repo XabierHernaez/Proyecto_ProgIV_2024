@@ -425,11 +425,7 @@ int main(int argc, char *argv[]) {
 							send(comm_socket,sendBuff,sizeof(sendBuff),0);
 							sprintf(sendBuff,"%s",lR.listaR[i].habitacion.getTipo());
 							send(comm_socket,sendBuff,sizeof(sendBuff),0);
-							sprintf(sendBuff,"%d",lR.listaR[i].habitacion.getNumP());
-							send(comm_socket,sendBuff,sizeof(sendBuff),0);
-							sprintf(sendBuff,"%d",lR.listaR[i].habitacion.getOcupada());
-							send(comm_socket,sendBuff,sizeof(sendBuff),0);
-							sprintf(sendBuff,"%f",lR.listaR[i].habitacion.getPrecio());
+							sprintf(sendBuff,"%f",lR.listaR[i].getPrecio());
 							send(comm_socket,sendBuff,sizeof(sendBuff),0);
 							sprintf(sendBuff,"%d",lR.listaR[i].entrada.anyo);
 							send(comm_socket,sendBuff,sizeof(sendBuff),0);
@@ -444,7 +440,6 @@ int main(int argc, char *argv[]) {
 							sprintf(sendBuff,"%d",lR.listaR[i].salida.dia);
 							send(comm_socket,sendBuff,sizeof(sendBuff),0);
 						}
-
 						do {
 							recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%c",&opcion4);
