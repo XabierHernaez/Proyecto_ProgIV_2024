@@ -9,6 +9,9 @@ typedef struct{
 
 void liberarMemoriaLU(ListaUsuarios *lu); // Liberamos la memoria reservada
 void anyadirUsuario(ListaUsuarios *lU, Usuario u);
+void visualizarLU(ListaUsuarios lU);
+void eliminarUsuario(ListaUsuarios *lU, int pos);
+void borrarUsuariosSinReserva(ListaUsuarios *lU, char **listaU, int contU);
 /*
 ListaUsuarios reservarMemoriaLU(int tam); //Reservamos memoria para la lista de usuarios
 void liberarMemoriaLU(ListaUsuarios *lu); // Liberamos la memoria reservada

@@ -16,5 +16,6 @@ Usuario datosUsuarioR();
 Usuario datosUsuarioI();
 int contraseniaCorrecta(char *conU, char *con);
 char mostrarDatosUsuario(Usuario u);
+void mostrarDatosUsuario2(Usuario u);
 int tipoUsuario(char tipo);
 #endif
