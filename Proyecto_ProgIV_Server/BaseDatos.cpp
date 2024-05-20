@@ -5,25 +5,12 @@ BaseDatos::BaseDatos() {
 }
 void BaseDatos::abrirBaseDatos(sqlite3 **db)
 {
-    int result;
-    result = sqlite3_open("hotel.db", db);
-    if (result != SQLITE_OK) {
-        cout << "Error al abrir la BBDD" << endl;
-    }
-    else {
-        cout << "Base de datos abierta correctamente" << endl;
-    }
+	sqlite3_open("hotel.db", db);
 }
 
 void BaseDatos::cerrarBaseDatos(sqlite3 **db)
 {
-    int result = sqlite3_close(*db);
-    if (result != SQLITE_OK) {
-        cout << "Error al cerrar la base de datos" << endl;
-    }
-    else {
-        cout << "Base de datos cerrada correctamente" << endl;
-    }
+    sqlite3_close(*db);
 }
 void BaseDatos::crearTablas(sqlite3 **db)
 {
