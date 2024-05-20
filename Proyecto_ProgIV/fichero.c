@@ -88,6 +88,7 @@ void volcadoFicheroListaR(ListaReservas *aR, char *nomFich)
 		}
 	}
 }
+*/
 void ficheroLog(char *mensaje, char *usuario, char * nomFich)
 {
 	FILE * pf;
@@ -97,4 +98,4 @@ void ficheroLog(char *mensaje, char *usuario, char * nomFich)
 		fclose(pf);
 	}
 }
-*/
+
