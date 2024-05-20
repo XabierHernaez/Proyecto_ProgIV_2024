@@ -5,25 +5,12 @@ BaseDatos::BaseDatos() {
 }
 void BaseDatos::abrirBaseDatos(sqlite3 **db)
 {
-    int result;
-    result = sqlite3_open("hotel.db", db);
-    if (result != SQLITE_OK) {
-        cout << "Error al abrir la BBDD" << endl;
-    }
-    else {
-        cout << "Base de datos abierta correctamente" << endl;
-    }
+	sqlite3_open("hotel.db", db);
 }
 
 void BaseDatos::cerrarBaseDatos(sqlite3 **db)
 {
-    int result = sqlite3_close(*db);
-    if (result != SQLITE_OK) {
-        cout << "Error al cerrar la base de datos" << endl;
-    }
-    else {
-        cout << "Base de datos cerrada correctamente" << endl;
-    }
+    sqlite3_close(*db);
 }
 void BaseDatos::crearTablas(sqlite3 **db)
 {
@@ -155,6 +142,21 @@ void BaseDatos::modificarReserva(sqlite3 *db, Reserva &nuevaReserva, Reserva &vi
 	sqlite3_reset(stmt);
 	sqlite3_finalize(stmt);
 }
+void BaseDatos::borrarTablasUsuarioReserva(sqlite3 *db)
+{
+	char sql[200];
+	char sql2[200];
+	sprintf(sql, "DROP TABLE usuario");
+	sprintf(sql2, "DROP TABLE reserva");
+	sqlite3_stmt *stmt1; // Puntero para la primera sentencia SQL
+	sqlite3_stmt *stmt2; // Puntero para la segunda sentencia SQL
+	sqlite3_prepare_v2(db, sql, -1, &stmt1, NULL);
+	sqlite3_prepare_v2(db, sql2, -1, &stmt2, NULL);
+	sqlite3_step(stmt1);
+	sqlite3_step(stmt2);
+	sqlite3_finalize(stmt1);
+	sqlite3_finalize(stmt2);
+}
 BaseDatos::~BaseDatos() {
 }
 /*
@@ -204,7 +206,7 @@ void BaseDatos::cargarFicheroABaseUsuario(sqlite3 *db)
 			u.setContrasenya(contra);
 			u.setTelefono(tel);
 			u.setTipo(tipo);
-			sprintf(sql, "insert into usuario values('%s','%s','%s','%s','%s','%s',%d,'%c')", u.getNombre(), u.getprimerApellido(), u.getsegundoApellido(), u.getDni(), u.getUsuario(), u.getContrasenya(), u.getTelefono(), u.getTipo());
+	sprintf(sql, "insert into usuario values('%s','%s','%s','%s','%s','%s',%d,'%c')", u.getNombre(), u.getprimerApellido(), u.getsegundoApellido(), u.getDni(), u.getUsuario(), u.getContrasenya(), u.getTelefono(), u.getTipo());
 			sqlite3_prepare_v2(db, sql, -1, &stmt, NULL); //Preparar la sentencia
 			sqlite3_step(stmt); //Ejecutar la sentencia
 			sqlite3_reset(stmt); // Resetear la sentencia para reutilizarla en la siguiente iteración
@@ -213,4 +215,4 @@ void BaseDatos::cargarFicheroABaseUsuario(sqlite3 *db)
 		fclose(pf);
 	}
 }
-* */
+*/

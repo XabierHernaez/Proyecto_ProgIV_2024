@@ -139,6 +139,9 @@ Usuario& Usuario::operator=(const Usuario &u)
 	delete[] segundoApellido;
 	segundoApellido = new char[strlen(u.segundoApellido) +1];
 	strcpy(segundoApellido, u.segundoApellido);
+	delete [] dni;
+	dni = new char[strlen(u.dni) +1];
+	strcpy(dni, u.dni);
 	delete[] usuario;
 	usuario = new char[strlen(u.usuario) +1];
 	strcpy(usuario, u.usuario);
