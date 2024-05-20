@@ -1,0 +1,8 @@
+Waiting for incoming connections...
+ - Usuario: 
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created.
+ - Usuario: 
+Waiting for incoming connections...
+ - Usuario: 

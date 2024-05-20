@@ -16,7 +16,21 @@ using namespace std;
 #include "Usuario.h"
 #include "ListaReserva.h"
 
+
+void ficheroLog(const char *mensaje,const char *usuario,const char * nomFich)
+{
+	FILE * pf;
+	pf = fopen(nomFich, "a");
+	if(pf != (FILE*)NULL){
+		fprintf(pf, "%s - Usuario: %s\n", mensaje, usuario);
+		fclose(pf);
+	}
+}
+
 int main(int argc, char *argv[]) {
+
+
+	char mensajeLog[200];
 
 	WSADATA wsaData;
 	SOCKET conn_socket; //el que lleva la conexion
@@ -25,22 +39,32 @@ int main(int argc, char *argv[]) {
 	struct sockaddr_in client;
 	char sendBuff[512], recvBuff[512]; // lo que yo envio, lo que yo recibo
 
-	cout<<("\nInitialising Winsock...\n")<<endl; // inicializa la libreria
+	strcpy(mensajeLog, "Initialising Winsock...");
+	ficheroLog(mensajeLog, "","log.txt");
+	//cout<<("\nInitialising Winsock...\n")<<endl; // inicializa la libreria
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-		cout<<("Failed. Error Code : %d", WSAGetLastError())<<endl;
+		snprintf(mensajeLog, sizeof(mensajeLog), "Failed. Error Code : %d", WSAGetLastError());
+		ficheroLog(mensajeLog, "","log.txt");
+		//cout<<("Failed. Error Code : %d", WSAGetLastError())<<endl;
 		return -1;
 	}
 
-	printf("Initialised.\n");
+	strcpy(mensajeLog, "Initialised.");
+	ficheroLog(mensajeLog, "","log.txt");
+	//printf("Initialised.\n");
 
 	//SOCKET creation creacion del socket( la primera estructura
 	if ((conn_socket = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
-		cout<<("Could not create socket : %d", WSAGetLastError())<<endl;
+		snprintf(mensajeLog, sizeof(mensajeLog), "Could not create socket : %d", WSAGetLastError());
+		ficheroLog(mensajeLog, "","log.txt");
+		//cout<<("Could not create socket : %d", WSAGetLastError())<<endl;
 		WSACleanup();
 		return -1;
 	}
 
-	cout<<("Socket created.\n")<<endl;
+	strcpy(mensajeLog, "Socket created.");
+	ficheroLog(mensajeLog, "","log.txt");
+	//cout<<("Socket created.\n")<<endl;
 	// cual es la ip y cual es el puerto
 	server.sin_addr.s_addr = inet_addr(SERVER_IP); //INADDR_ANY;
 	server.sin_family = AF_INET;
@@ -49,35 +73,46 @@ int main(int argc, char *argv[]) {
 	//BIND (the IP/port with socket)
 	if (bind(conn_socket, (struct sockaddr*) &server,
 			sizeof(server)) == SOCKET_ERROR) {
-		cout<<("Bind failed with error code: %d", WSAGetLastError())<<endl;
+		snprintf(mensajeLog, sizeof(mensajeLog),"Bind failed with error code: %d",  WSAGetLastError());
+		ficheroLog(mensajeLog, "","log.txt");
+		//cout<<("Bind failed with error code: %d", WSAGetLastError())<<endl;
 		closesocket(conn_socket);
 		WSACleanup();
 		return -1;
 	}
 
-	cout<<("Bind done.\n")<<endl; //DEJAR EL SOCKET EN ESPERA
+	strcpy(mensajeLog, "Bind done.");
+	ficheroLog(mensajeLog, "","log.txt");
+	//cout<<("Bind done.\n")<<endl; //DEJAR EL SOCKET EN ESPERA
 
 	//LISTEN to incoming connections (socket server moves to listening mode)
 	if (listen(conn_socket, 1) == SOCKET_ERROR) {
-		cout<<("Listen failed with error code: %d", WSAGetLastError())<<endl;
+		snprintf(mensajeLog, sizeof(mensajeLog),"Listen failed with error code: %d", WSAGetLastError());
+		ficheroLog(mensajeLog, "","log.txt");
+		//cout<<("Listen failed with error code: %d", WSAGetLastError())<<endl;
 		closesocket(conn_socket);
 		WSACleanup();
 		return -1;
 	}
 
 	//ACCEPT incoming connections (server keeps waiting for them)
-	cout<<("Waiting for incoming connections...\n")<<endl;
+	strcpy(mensajeLog, "Waiting for incoming connections...");
+	ficheroLog(mensajeLog, "","log.txt");
+	//cout<<("Waiting for incoming connections...\n")<<endl;
 	int stsize = sizeof(struct sockaddr);
 	comm_socket = accept(conn_socket, (struct sockaddr*) &client, &stsize);
 	// Using comm_socket is able to send/receive data to/from connected client
 	if (comm_socket == INVALID_SOCKET) {
-		cout<<("accept failed with error code : %d", WSAGetLastError())<<endl;
+		snprintf(mensajeLog, sizeof(mensajeLog),"accept failed with error code : %d", WSAGetLastError());
+		ficheroLog(mensajeLog, "","log.txt");
+		//cout<<("accept failed with error code : %d", WSAGetLastError())<<endl;
 		closesocket(conn_socket);
 		WSACleanup();
 		return -1;
 	}
-	cout<<("Incomming connection from: %s (%d)\n", inet_ntoa(client.sin_addr),
-			ntohs(client.sin_port))<<endl;
+	snprintf(mensajeLog, sizeof(mensajeLog),"Incomming connection from: %s (%d)", inet_ntoa(client.sin_addr),ntohs(client.sin_port));
+	ficheroLog(mensajeLog, "","log.txt");
+	//cout<<("Incomming connection from: %s (%d)\n", inet_ntoa(client.sin_addr),ntohs(client.sin_port))<<endl;
 
 	// Closing the listening sockets (is not going to be used anymore)
 	closesocket(conn_socket);
