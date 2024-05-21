@@ -17,22 +17,7 @@
 
 
 int main(int argc, char *argv[]){
-	/*
-	char opcion, opcion2, opcion3, opcion4, opcion5, opcion6, opcion7;
-	int posU, tipoU, numHDisponibles, numReserH, *numHreser, contHDis, contR;
-	Usuario u;
-	ListaUsuarios lu;
-	ListaHabitacion lH;
-	ListaReservas lR;
-	Reserva r, r2, r3;
-	lH = reservarMemoriaH(TAM);
-	lu = reservarMemoriaLU(TAM);
-	lR = reservarMemoria(TAM);
-	Habitacion h2;
-	volcadoFicheroListaU(&lu,"usuarios.txt");
-	volcadoFicheroListaH(&lH, "habitaciones.txt");
-	volcadoFicheroListaR(&lR, "reservas.txt");
-	*/
+
 	WSADATA wsaData;
 	SOCKET s;
 	struct sockaddr_in server;
@@ -97,7 +82,7 @@ int main(int argc, char *argv[]){
 	char **listaUsuario;
 	Usuario u, u2;
 	Reserva r, r2, r3, r4, r5, r6, r7;
-	Habitacion h, h2, h3, h4;
+	Habitacion h, h2, h3;
 
 	ListaHabitacion lH;
 	ListaUsuarios lU;
@@ -411,8 +396,8 @@ int main(int argc, char *argv[]){
 												strcpy(mensajeLog, "Recibe que no es valida la reserva");
 												ficheroLog(mensajeLog, u.usuario,"log.txt");
 												recv(s,recvBuff,sizeof(recvBuff),0);
-												sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
-												printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);
+												sscanf(recvBuff,"%s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);
+												printf("%s %s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);
 											}
 
 										}else{
@@ -748,11 +733,36 @@ int main(int argc, char *argv[]){
 					printf("\n");fflush(stdout);
 				}
 				break;
+		case '3':
+			recv(s,recvBuff,sizeof(recvBuff),0);
+			sscanf(recvBuff,"%s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);
+			printf("%s %s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4,  mensaje5);fflush(stdout);
+			printf("INFORMACION: \n");fflush(stdout);
+			printf("-----------\n");fflush(stdout);
+			printf("-----------\n");fflush(stdout);
+			printf("Inicio Sesion:\n");fflush(stdout);
+			printf("	En el inicio de sesion solo tendra que meter el usuario y contraseña introducidos en el registro.\n");fflush(stdout);
+			printf("	Si tuviera algun problema con su usuario o contraseña debera notificarlo al personal de trabajo.\n");fflush(stdout);
+			printf("-------------\n");fflush(stdout);
+			printf("Registro:\n");fflush(stdout);
+			printf("	Para completar el registro, se le pediran los datos basicos.\n");fflush(stdout);
+			printf("	Una vez completado el registro no tendria que tener problema para realizar el inicio de sesion.\n");fflush(stdout);
+			printf("-------------\n");fflush(stdout);
+			printf("Realizar una reserva:\n");fflush(stdout);
+			printf("	Para realizar una reserva se pediran datos tales como la fecha de entrada y salida.\n");fflush(stdout);
+			printf("	A continuacion se le muestra todas las habitaciones disponibles, solo debe escoger una y se completara la reserva.\n");fflush(stdout);
+			printf("-------------\n");fflush(stdout);
+			printf("Modificar una reserva:\n");fflush(stdout);
+			printf("	Para modificar una reserva debera escoger la reserva deseada y tendra dos opciones.\n");fflush(stdout);
+			printf("	Si desea eliminarla, solo tendra que confirmarlo y se eliminara automaticamente\n");fflush(stdout);
+			printf("	Si desea modificarla tendra que meter la nueva fecha y esperar a que este disponible en esa fecha.\n");fflush(stdout);
+			printf("	Recuerde que solo se puede modificar la fecha de la reserva, no se puede añadir mas personas o elegir otra habitacion\n");fflush(stdout);
+			printf("-------------\n");fflush(stdout);
+			break;
 		default:
 			recv(s,recvBuff,sizeof(recvBuff),0);
 			sscanf(recvBuff,"%s %s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5, mensaje6);
 			printf("%s %s %s %s %s %s", mensaje1, mensaje2, mensaje3, mensaje4,  mensaje5, mensaje6);fflush(stdout);
-			printf("\n");fflush(stdout);
 			break;
 		}
 	} while (opcion != '0');

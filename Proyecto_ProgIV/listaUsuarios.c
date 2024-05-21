@@ -74,30 +74,4 @@ void borrarUsuariosSinReserva(ListaUsuarios *lU, char **listaU, int contU)
         }
     }
 }
-/*
-ListaUsuarios reservarMemoriaLU(int tam)
-{
-	ListaUsuarios lu;
-	lu.tam = tam;
-	lu.numU = 0;
-	lu.aUsuario = (Usuario*)malloc(tam * sizeof(Usuario));
-	return lu;
-}
-int buscarUsuario(ListaUsuarios lu, char *usuario)
-{
-	int pos = 0, enc = 0;
-	while(!enc && pos < lu.numU){
-		if(strcmp(lu.aUsuario[pos].usuario, usuario) == 0){
-			enc = 1;
-		}else{
-			pos++;
-		}
-	}
-	if(enc){
-		return pos;
-	}else{
-		return -1;
-	}
-	return pos;
-}
-*/
+
