@@ -36,24 +36,35 @@ int main(int argc, char *argv[]){
 	WSADATA wsaData;
 	SOCKET s;
 	struct sockaddr_in server;
-	char sendBuff[512], recvBuff[512];
+	char sendBuff[512], recvBuff[512], mensajeLog[200];
 
-	printf("\nInitialising Winsock...\n");
+
+	strcpy(mensajeLog, "Initialising Winsock...");
+	ficheroLog(mensajeLog, "","log.txt");
+	//printf("\nInitialising Winsock...\n");
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
-		printf("Failed. Error Code : %d", WSAGetLastError());
+		snprintf(mensajeLog, sizeof(mensajeLog), "Failed. Error Code : %d", WSAGetLastError());
+		ficheroLog(mensajeLog, "","log.txt");
+		//printf("Failed. Error Code : %d", WSAGetLastError());
 		return -1;
 	}
 
-	printf("Initialised.\n");
+	strcpy(mensajeLog, "Initialised.");
+	ficheroLog(mensajeLog, "","log.txt");
+	//printf("Initialised.\n");
 
 	//SOCKET creation
 	if ((s = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
-		printf("Could not create socket : %d", WSAGetLastError());
+		snprintf(mensajeLog, sizeof(mensajeLog), "Could not create socket : %d", WSAGetLastError());
+		ficheroLog(mensajeLog, "","log.txt");
+		//printf("Could not create socket : %d", WSAGetLastError());
 		WSACleanup();
 		return -1;
 	}
 
-	printf("Socket created.\n");
+	strcpy(mensajeLog, "Socket created.");
+	ficheroLog(mensajeLog, "","log.txt");
+	//printf("Socket created.\n");
 
 	server.sin_addr.s_addr = inet_addr(SERVER_IP); //INADDR_ANY;
 	server.sin_family = AF_INET;
@@ -61,14 +72,18 @@ int main(int argc, char *argv[]){
 
 	//CONNECT to remote server
 	if (connect(s, (struct sockaddr*) &server, sizeof(server)) == SOCKET_ERROR) {
-		printf("Connection error: %d", WSAGetLastError());
+		snprintf(mensajeLog, sizeof(mensajeLog),"Connection error: %d",  WSAGetLastError());
+		ficheroLog(mensajeLog, "","log.txt");
+		//printf("Connection error: %d", WSAGetLastError());
 		closesocket(s);
 		WSACleanup();
 		return -1;
 	}
 
-	printf("Connection stablished with: %s (%d)\n", inet_ntoa(server.sin_addr),
-	ntohs(server.sin_port));
+	snprintf(mensajeLog, sizeof(mensajeLog),"Connection stablished with: %s (%d)",  inet_ntoa(server.sin_addr),ntohs(server.sin_port));
+	ficheroLog(mensajeLog, "","log.txt");
+	//printf("Connection stablished with: %s (%d)\n", inet_ntoa(server.sin_addr),
+	//ntohs(server.sin_port));
 
 
 	char opcion, opcion2, opcion3,opcion4, opcion5, opcion6, opcion7, opcion8, opcion9;
@@ -93,6 +108,8 @@ int main(int argc, char *argv[]){
 		opcion = menuPrincipal();
 		sprintf(sendBuff,"%c",opcion);
 		send(s,sendBuff,sizeof(sendBuff),0);
+		snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion);
+		ficheroLog(mensajeLog, "","log.txt");
 		switch(opcion){
 		case '0':
 			recv(s,recvBuff,sizeof(recvBuff),0);
@@ -113,12 +130,18 @@ int main(int argc, char *argv[]){
 			send(s,sendBuff,sizeof(sendBuff),0);
 			sprintf(sendBuff,"%s",u.contrasenya);
 			send(s,sendBuff,sizeof(sendBuff),0);
+			strcpy(mensajeLog, "Ingresa el usuario y contraseña");
+			ficheroLog(mensajeLog, u.usuario,"log.txt");
 			recv(s,recvBuff,sizeof(recvBuff),0);
 			sscanf(recvBuff,"%d",&posU);
 			if(posU != -1){
+				strcpy(mensajeLog, "Se valida si el usuario ya existe");
+				ficheroLog(mensajeLog, u.usuario,"log.txt");
 				recv(s,recvBuff,sizeof(recvBuff),0);
 				sscanf(recvBuff,"%d",&contraCorrecta);
 				if(contraCorrecta == 1){
+					strcpy(mensajeLog, "Se valida si la contraseña ya existe");
+					ficheroLog(mensajeLog, u.usuario,"log.txt");
 					recv(s,recvBuff,sizeof(recvBuff),0);
 					sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 					printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
@@ -126,9 +149,13 @@ int main(int argc, char *argv[]){
 					sscanf(recvBuff,"%d",&tipoU);
 					if(tipoU == 0){
 						do {
+							strcpy(mensajeLog, "Validacion correcta, ingresa al menu cliente");
+							ficheroLog(mensajeLog, u.usuario,"log.txt");
 							opcion3 = menuCliente();
 							sprintf(sendBuff,"%c",opcion3);
 							send(s,sendBuff,sizeof(sendBuff),0);
+							snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion3);
+							ficheroLog(mensajeLog, u.usuario,"log.txt");
 							switch(opcion3){
 							case '0':
 								recv(s,recvBuff,sizeof(recvBuff),0);
@@ -152,14 +179,22 @@ int main(int argc, char *argv[]){
 								send(s,sendBuff,sizeof(sendBuff),0);
 								sprintf(sendBuff,"%d",r.salida.dia);
 								send(s,sendBuff,sizeof(sendBuff),0);
+								strcpy(mensajeLog, "Se le pide la informacion de la reserva");
+								ficheroLog(mensajeLog, u.usuario,"log.txt");
 								recv(s,recvBuff,sizeof(recvBuff),0);
 								sscanf(recvBuff,"%d",&fechaCorrecta);
+								strcpy(mensajeLog, "Se recibe si la fecha de la reserva es correcta");
+								ficheroLog(mensajeLog, u.usuario,"log.txt");
 								if(fechaCorrecta == 1){
 									numP = numeroPersonas();
+									strcpy(mensajeLog, "Se pide el numero de persona y se envia");
+									ficheroLog(mensajeLog, u.usuario,"log.txt");
 									sprintf(sendBuff,"%d",numP);
 									send(s,sendBuff,sizeof(sendBuff),0);
 									recv(s,recvBuff,sizeof(recvBuff),0);
 									sscanf(recvBuff,"%d",&numHD);
+									strcpy(mensajeLog, "Se recibe las habitaciones disponibles");
+									ficheroLog(mensajeLog, u.usuario,"log.txt");
 									if(numHD > 0){
 										for(int i =0;i<numHD;i++){
 											char tipo[200];
@@ -173,6 +208,8 @@ int main(int argc, char *argv[]){
 											sscanf(recvBuff,"%f",&h.precio);
 											mostrarHabitacion(h);
 										}
+										strcpy(mensajeLog, "El usuario escoge la habitacion que desea y se la envia");
+										ficheroLog(mensajeLog, u.usuario,"log.txt");
 										numHabitacionUsaurio = numHabitacion();
 										sprintf(sendBuff,"%d",numHabitacionUsaurio);
 										send(s,sendBuff,sizeof(sendBuff),0);
@@ -190,6 +227,8 @@ int main(int argc, char *argv[]){
 											sscanf(recvBuff,"%d", &r.habitacion.numP);
 											recv(s,recvBuff,sizeof(recvBuff),0);
 											sscanf(recvBuff,"%f", &r.precio);
+											strcpy(mensajeLog, "Se recibe la informacion de la habitacion");
+											ficheroLog(mensajeLog, u.usuario,"log.txt");
 											mostrarReserva(r);
 											printf("Es correcta la reserva [S/N]: ");
 											fflush(stdout);
@@ -197,26 +236,38 @@ int main(int argc, char *argv[]){
 											scanf("%c", &opcion6);
 											sprintf(sendBuff,"%c",opcion6);
 											send(s,sendBuff,sizeof(sendBuff),0);
+											snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion6);
+											ficheroLog(mensajeLog, u.usuario,"log.txt");
 											if(opcion6 == 'S'){
+												strcpy(mensajeLog, "Se recibe confirmacion de la reserva");
+												ficheroLog(mensajeLog, u.usuario,"log.txt");
 												recv(s,recvBuff,sizeof(recvBuff),0);
 												sscanf(recvBuff,"%s %s %s",mensaje1, mensaje2, mensaje3);
 												printf("%s %s %s\n", mensaje1, mensaje2, mensaje3);
 											}else{
+												strcpy(mensajeLog, "Recibe cancelacion de la reserva");
+												ficheroLog(mensajeLog, u.usuario,"log.txt");
 												recv(s,recvBuff,sizeof(recvBuff),0);
 												sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 												printf("%s %s\n", mensaje1, mensaje2);
 											}
 										}else{
+											strcpy(mensajeLog, "Recibe que el numero de habitaciones es erroneo");
+											ficheroLog(mensajeLog, u.usuario,"log.txt");
 											recv(s,recvBuff,sizeof(recvBuff),0);
 											sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
 											printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);fflush(stdout);
 										}
 									}else{
+										strcpy(mensajeLog, "Recibe que no hay habitaciones libres");
+										ficheroLog(mensajeLog, u.usuario,"log.txt");
 										recv(s,recvBuff,sizeof(recvBuff),0);
 										sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
 										printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);fflush(stdout);
 									}
 								}else{
+									strcpy(mensajeLog, "Recibe que la fecha es incorrecta");
+									ficheroLog(mensajeLog, u.usuario,"log.txt");
 									recv(s,recvBuff,sizeof(recvBuff),0);
 									sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 									printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
@@ -230,6 +281,8 @@ int main(int argc, char *argv[]){
 									opcion5 = menuModificarReservaC();
 									sprintf(sendBuff,"%c",opcion5);
 									send(s,sendBuff,sizeof(sendBuff),0);
+									snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion5);
+									ficheroLog(mensajeLog, u.usuario,"log.txt");
 									switch(opcion5){
 									case '0':
 										recv(s,recvBuff,sizeof(recvBuff),0);
@@ -241,7 +294,6 @@ int main(int argc, char *argv[]){
 										sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 										printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
 										printf("Reservas actuales...\n");fflush(stdout);
-
 										recv(s,recvBuff,sizeof(recvBuff),0);
 										sscanf(recvBuff,"%d",&numReserAct);
 										if(numReserAct > 0){
@@ -273,7 +325,8 @@ int main(int argc, char *argv[]){
 												sscanf(recvBuff,"%d",&r2.salida.dia);
 												mostrarReserva(r2);
 											}
-
+											strcpy(mensajeLog, "Recibe toda la informacion de las reservas del usuario");
+											ficheroLog(mensajeLog, u.usuario,"log.txt");
 											printf("Introduzca el numero y la fecha de la habitacion que deseas modificar o eliminar...\n");fflush(stdout);
 											int numH2 = numHabitacion();
 											r3 = comenzarReserva();
@@ -293,13 +346,18 @@ int main(int argc, char *argv[]){
 											send(s,sendBuff,sizeof(sendBuff),0);
 											recv(s,recvBuff,sizeof(recvBuff),0);
 											sscanf(recvBuff,"%d",&reservaCorrecta);
-											printf("%d\n", reservaCorrecta);fflush(stdout);
+											strcpy(mensajeLog, "Se envia la informacion de la reserva a modificar o borrar");
+											ficheroLog(mensajeLog, u.usuario,"log.txt");
 											if(reservaCorrecta == 1){
 												printf("¿Desea borrar su reserva [S/N]?: ");fflush(stdout);fflush(stdin);
 												scanf("%c", &opcion7);
 												sprintf(sendBuff,"%c",opcion7);
 												send(s,sendBuff,sizeof(sendBuff),0);
+												snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion7);
+												ficheroLog(mensajeLog, u.usuario,"log.txt");
 												if(opcion7 == 'S'){
+													strcpy(mensajeLog, "Recibe validacion de la transaccion");
+													ficheroLog(mensajeLog, u.usuario,"log.txt");
 													recv(s,recvBuff,sizeof(recvBuff),0);
 													sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 													printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
@@ -321,31 +379,45 @@ int main(int argc, char *argv[]){
 													send(s,sendBuff,sizeof(sendBuff),0);
 													recv(s,recvBuff,sizeof(recvBuff),0);
 													sscanf(recvBuff,"%d",&fechaCorrecta2);
+													strcpy(mensajeLog, "Se envia la fecha nueva a modificar y recibe si es correcta");
+													ficheroLog(mensajeLog, u.usuario,"log.txt");
 													if(fechaCorrecta2 == 1){
+														strcpy(mensajeLog, "Recibe si hay disponibilidad de fechas");
+														ficheroLog(mensajeLog, u.usuario,"log.txt");
 														recv(s,recvBuff,sizeof(recvBuff),0);
 														sscanf(recvBuff,"%d",&contR);
 														if(contR == -1){
+															strcpy(mensajeLog, "Recibe mensaje de validacion");
+															ficheroLog(mensajeLog, u.usuario,"log.txt");
 															recv(s,recvBuff,sizeof(recvBuff),0);
 															sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 															printf("%s %s\n", mensaje1, mensaje2);
 														}else{
+															strcpy(mensajeLog, "Recibe validacion de la transaccion erroneo");
+															ficheroLog(mensajeLog, u.usuario,"log.txt");
 															recv(s,recvBuff,sizeof(recvBuff),0);
 															sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
 															printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);
 														}
 													}else{
+														strcpy(mensajeLog, "Recibe que la fecha no es correcta");
+														ficheroLog(mensajeLog, u.usuario,"log.txt");
 														recv(s,recvBuff,sizeof(recvBuff),0);
 														sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
 														printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);
 													}
 												}
 											}else{
+												strcpy(mensajeLog, "Recibe que no es valida la reserva");
+												ficheroLog(mensajeLog, u.usuario,"log.txt");
 												recv(s,recvBuff,sizeof(recvBuff),0);
 												sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
 												printf("%s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4);
 											}
 
 										}else{
+											strcpy(mensajeLog, "Recibe que no se han encotrado reservas");
+											ficheroLog(mensajeLog, u.usuario,"log.txt");
 											recv(s,recvBuff,sizeof(recvBuff),0);
 											sscanf(recvBuff,"%s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);
 											printf("%s %s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4,  mensaje5);fflush(stdout);
@@ -369,6 +441,8 @@ int main(int argc, char *argv[]){
 						} while (opcion3 != '0');
 					}else{
 						/*EMPIEZA EL PROGRAMA ADMINISTRADOR*/
+						strcpy(mensajeLog, "Entra en la parte de administrador");
+						ficheroLog(mensajeLog, u.usuario,"log.txt");
 						recv(s,recvBuff,sizeof(recvBuff),0);
 						sscanf(recvBuff,"%d", &tamH);
 						lH = reservarMemoriaH(tamH);
@@ -446,10 +520,14 @@ int main(int argc, char *argv[]){
 							r5.habitacion.precio = h3.precio;
 							anyadirReserva(&lR, r5);
 						}
+						strcpy(mensajeLog, "Recibe todos los datos para realizar las operaciones");
+						ficheroLog(mensajeLog, u.usuario,"log.txt");
 						do {
 							opcion4 = menuAdministrador();
 							sprintf(sendBuff,"%c",opcion4);
 							send(s,sendBuff,sizeof(sendBuff),0);
+							snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion4);
+							ficheroLog(mensajeLog, u.usuario,"log.txt");
 							switch(opcion4){
 							case '0':
 								printf("Saliendo del sistema...\n");fflush(stdout);
@@ -498,28 +576,39 @@ int main(int argc, char *argv[]){
 									sprintf(sendBuff,"%d",lR.listaR[i].salida.dia);
 									send(s,sendBuff,sizeof(sendBuff),0);
 								}
-
+								strcpy(mensajeLog, "Se le envian los datos modificados");
+								ficheroLog(mensajeLog, u.usuario,"log.txt");
 								liberarMemoriaH(&lH);
 								liberarMemoriaLU(&lU);
 								liberarMemoria(&lR);
 								break;
 							case '1':
 								visualizarReservasActias(lR);
+								strcpy(mensajeLog, "Se visualizan todas las reservas");
+								ficheroLog(mensajeLog, u.usuario,"log.txt");
 								printf("Quieres eliminar o modificar alguna reserva[S/N]: ");
 								fflush(stdout);
 								fflush(stdin);
 								scanf("%c", &opcion8);
+								snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion8);
+								ficheroLog(mensajeLog, u.usuario,"log.txt");
 								if(opcion8 == 'S'){
 									printf("Rellene la siguinete informacion...\n");fflush(stdout);
 									numH3 = numHabitacion();
 									r6 = comenzarReserva();
 									posH2 = encontrarReserva(lR, r6, numH3);
+									strcpy(mensajeLog, "Se pide informacion sobre esa reserva y se mira que exista");
+									ficheroLog(mensajeLog, u.usuario,"log.txt");
 									if(posH2 != -1){
 										printf("Eliminar [1] / Modificar [2]: ");
 										fflush(stdout);
 										fflush(stdin);
 										scanf("%c", &opcion9);
+										snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion9);
+										ficheroLog(mensajeLog, u.usuario,"log.txt");
 										if(opcion9 == '1'){
+											strcpy(mensajeLog, "Se elimina la reserva");
+											ficheroLog(mensajeLog, u.usuario,"log.txt");
 											printf("Eliminar reserva...\n");fflush(stdout);
 											printf("Reserva eliminada con exito\n");fflush(stdout);
 											eliminarReserva(&lR, posH2);
@@ -528,14 +617,22 @@ int main(int argc, char *argv[]){
 											printf("Se modificara solo la fecha de la reserva, si usted quiere añadir mas personas debera eliminar la reserva y volver a realizar una reserva\n");fflush(stdout);
 											printf("Porfavor ingrese la nueva fecha...\n");fflush(stdout);
 											r7 = comenzarReserva();
+											strcpy(mensajeLog, "Se pide informacion sobre la nueva fecha y se comprueba que sea valida");
+											ficheroLog(mensajeLog, u.usuario,"log.txt");
 											if(reservafechaCorrecta(r7) == 1){
 													if(disponibilidadHabitacion(lR, r7, numH3) == -1){
+														strcpy(mensajeLog, "Reserva modificada");
+														ficheroLog(mensajeLog, u.usuario,"log.txt");
 														printf("Reserva modificada...\n");fflush(stdout);
 														modificarReserva(&lR, r7, posH2);
 													}else{
+														strcpy(mensajeLog, "No se pudo modificar la habitacion en esas fechas");
+														ficheroLog(mensajeLog, u.usuario,"log.txt");
 														printf("Habitacion ocupada en esas fechas\n");fflush(stdout);
 													}
 											}else{
+												strcpy(mensajeLog, "Fecha incorrecta");
+												ficheroLog(mensajeLog, u.usuario,"log.txt");
 												printf("Fecha incorrecta\n");fflush(stdout);
 											}
 										}
@@ -544,18 +641,26 @@ int main(int argc, char *argv[]){
 								break;
 							case '2':
 								listaUsuario = usuariosConReserva(lR, &numUsuariosUnicos);
+								strcpy(mensajeLog, "Se sacan todos los usuarios que tengan reserva");
+								ficheroLog(mensajeLog, u.usuario,"log.txt");
 								borrarUsuariosSinReserva(&lU, listaUsuario, numUsuariosUnicos);
+								strcpy(mensajeLog, "Se mira uno por uno cada usuario si se elimina de la base de datos");
+								ficheroLog(mensajeLog, u.usuario,"log.txt");
 								break;
 							default: break;
 							}
 						} while (opcion4 != '0');
 					}
 				}else{
+					strcpy(mensajeLog, "Recibe que la contraseña es incorrecta");
+					ficheroLog(mensajeLog, u.usuario,"log.txt");
 					recv(s,recvBuff,sizeof(recvBuff),0);
 					sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 					printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
 				}
 			}else{
+				strcpy(mensajeLog, "Recibe que el usuario no existe en la base de datos");
+				ficheroLog(mensajeLog, u.usuario,"log.txt");
 				recv(s,recvBuff,sizeof(recvBuff),0);
 				sscanf(recvBuff,"%s %s %s",mensaje1, mensaje2, mensaje3);
 				printf("%s %s %s\n", mensaje1, mensaje2, mensaje3);fflush(stdout);
@@ -564,11 +669,15 @@ int main(int argc, char *argv[]){
 		case '2':
 				printf("A continucacion se va a realizar el registro del usuario...\n");fflush(stdout);
 				u = datosUsuarioR();
+				strcpy(mensajeLog, 	"Se piden los datos al usuario");
+				ficheroLog(mensajeLog, u.usuario,"log.txt");
 				printf("---------\n");
 				fflush(stdout);
 				opcion2 = mostrarDatosUsuario(u);
 				sprintf(sendBuff,"%c",opcion2);
 				send(s,sendBuff,sizeof(sendBuff),0);
+				snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion2);
+				ficheroLog(mensajeLog, u.usuario,"log.txt");
 				if(opcion2 == '1'){
 					sprintf(sendBuff,"%s",u.nombre);
 					send(s,sendBuff,sizeof(sendBuff),0);
@@ -588,35 +697,51 @@ int main(int argc, char *argv[]){
 					send(s,sendBuff,sizeof(sendBuff),0);
 					recv(s,recvBuff,sizeof(recvBuff),0);
 					sscanf(recvBuff,"%d",&posU);
+					strcpy(mensajeLog, 	"Se envia los datos y recibe si el usario ya existia");
+					ficheroLog(mensajeLog, u.usuario,"log.txt");
 					if(posU == -1){
 						recv(s,recvBuff,sizeof(recvBuff),0);
 						sscanf(recvBuff,"%d",&telCorrec);
+						strcpy(mensajeLog, 	"Recibe si el telefono no esta repetido");
+						ficheroLog(mensajeLog, u.usuario,"log.txt");
 						if(telCorrec == -1){
 							recv(s,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%d",&dniCorrec);
+							strcpy(mensajeLog, 	"Recibe si el dni no esta repetido");
+							ficheroLog(mensajeLog, u.usuario,"log.txt");
 							if(dniCorrec == -1){
+								strcpy(mensajeLog, 	"Recibe confirmacion de registro");
+								ficheroLog(mensajeLog, u.usuario,"log.txt");
 								recv(s,recvBuff,sizeof(recvBuff),0);
 								sscanf(recvBuff,"%s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4);
 								printf("%s %s %s %s", mensaje1, mensaje2, mensaje3, mensaje4);fflush(stdout);
 								printf("\n");fflush(stdout);
 							}else{
+								strcpy(mensajeLog, 	"Recibe que el dni existe");
+								ficheroLog(mensajeLog, u.usuario,"log.txt");
 								recv(s,recvBuff,sizeof(recvBuff),0);
 								sscanf(recvBuff,"%s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);
 								printf("%s %s %s %s %s", mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);fflush(stdout);
 								printf("\n");fflush(stdout);
 							}
 						}else{
+							strcpy(mensajeLog, 	"Recibe que el telefono ya existe");
+							ficheroLog(mensajeLog, u.usuario,"log.txt");
 							recv(s,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);
 							printf("%s %s %s %s %s\n", mensaje1, mensaje2, mensaje3, mensaje4, mensaje5);
 						}
 					}else{
+						strcpy(mensajeLog, 	"Recibe que el usuario introducido esta en uso");
+						ficheroLog(mensajeLog, u.usuario,"log.txt");
 						recv(s,recvBuff,sizeof(recvBuff),0);
 						sscanf(recvBuff,"%s %s %s %s %s %s",mensaje1, mensaje2, mensaje3, mensaje4, mensaje5, mensaje6);
 						printf("%s %s %s %s %s %s", mensaje1, mensaje2, mensaje3, mensaje4,  mensaje5, mensaje6);fflush(stdout);
 						printf("\n");fflush(stdout);
 					}
 				}else{
+					strcpy(mensajeLog, 	"Recibe que se esta cancelando el registro");
+					ficheroLog(mensajeLog, u.usuario,"log.txt");
 					recv(s,recvBuff,sizeof(recvBuff),0);
 					sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 					printf("%s %s", mensaje1, mensaje2);fflush(stdout);
