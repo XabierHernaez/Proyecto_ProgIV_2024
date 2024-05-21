@@ -199,7 +199,7 @@ int main(int argc, char *argv[]) {
 								sprintf(sendBuff,mensaje, "%s", recvBuff);
 								send(comm_socket,sendBuff,sizeof(sendBuff),0);
 								break;
-							case '1': /*TERMINADO NO MODIFICAR*/
+							case '1':
 								strcpy(mensaje, "Completar reserva...");
 								sprintf(sendBuff,mensaje, "%s %s", recvBuff);
 								send(comm_socket,sendBuff,sizeof(sendBuff),0);
@@ -424,7 +424,7 @@ int main(int argc, char *argv[]) {
 															ficheroLog(mensajeLog, u.usuario,"log.txt");
 															baseDatos.modificarReserva(db, r3, r2);
 															strcpy(mensaje, "Reserva modificada");
-															sprintf(sendBuff,mensaje, "%s %s", recvBuff);
+															sprintf(sendBuff, "%s %s", mensaje, recvBuff);
 															send(comm_socket,sendBuff,sizeof(sendBuff),0);
 														}else{
 															strcpy(mensajeLog, "Se le envia validacion de la transaccion erroneo");
@@ -545,7 +545,6 @@ int main(int argc, char *argv[]) {
 							switch(opcion4){
 							case '0':
 								baseDatos.borrarTablasUsuarioReserva(db);
-
 								baseDatos.crearTablas(&db);
 								recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 								sscanf(recvBuff,"%d",&numU);
@@ -689,6 +688,11 @@ int main(int argc, char *argv[]) {
 				sprintf(sendBuff,mensaje, "%s %s", recvBuff);
 				send(comm_socket,sendBuff,sizeof(sendBuff),0);
 			}
+			break;
+		case '3':
+			strcpy(mensaje, "La opcion introducida es ayuda.");
+			sprintf(sendBuff,mensaje, "%s %s %s %s %s %s", recvBuff);
+			send(comm_socket,sendBuff,sizeof(sendBuff),0);
 			break;
 		default:
 			strcpy(mensaje, "La opcion introducida no es correcta.");

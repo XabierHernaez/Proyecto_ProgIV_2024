@@ -28,31 +28,20 @@ void ListaReserva::anyadirReserva(const Reserva &r)
 }
 int* ListaReserva::habitacionesDisponibles(Reserva r, int numP, int *cont)
 {
-	// Contador de habitaciones disponibles
 	*cont = 0;
-
-	// Iterar sobre cada reserva en la lista
 	for (int i = 0; i < numR; i++) {
-		// Verificar si la habitación está disponible para la reserva actual
 		if (listaR[i].fechaDisponible(r) == 1) {
-			// Si la habitación está disponible, agregar su número al arreglo
-			(*cont)++; // Incrementar el contador de habitaciones disponibles
+			(*cont)++;
 	        }
 	}
-
 	int* numH = new int[*cont];
 	int j = 0;
-	// Iterar sobre cada reserva en la lista
 	for (int i = 0; i < numR; i++) {
-	// Verificar si la habitación está disponible para la reserva actual
 		if (listaR[i].fechaDisponible(r) == 1) {
-	// Si la habitación está disponible, agregar su número al arreglo
 			numH[j] = listaR[i].habitacion.numA;
 			j++;
 		}
 	}
-
-	// Devolver el arreglo de números de habitación disponibles
 	return numH;
 }
 Reserva* ListaReserva::obtenerReservasUsuario(char *usuario,int *numReser)
@@ -102,26 +91,6 @@ int ListaReserva::contHabitacionesDisponibles(Reserva r)
 		return -1;
 	}
 }
-/*
-int* ListaReserva::habitacionesDisponibles(Reserva r, int numP, int *cont)
-{
-	int i, *numH, j = 0;
-	*cont = 0;
-	for(i=0;i<numR;i++){
-		//		1               5							3				4
-		if((r.entrada.dia - listaR[i].salida.dia < 0 && r.salida.dia >  listaR[i].entrada.dia&& r.entrada.mes == listaR[i].salida.mes) && listaR[i].habitacion.numP == numP){
-			(*cont)++;
-		}
-	}
-	numH = new int[*cont];
-	for(i=0;i<numR;i++){
-		if((r.entrada.dia - listaR[i].salida.dia < 0 && r.salida.dia >  listaR[i].entrada.dia&& r.entrada.mes == listaR[i].salida.mes) && listaR[i].habitacion.numP == numP){
-			numH[j] = listaR[i].habitacion.numA;
-			j++;
-		}
-	}
-	return numH;
-}*/
 ListaReserva::~ListaReserva() {
 	if(listaR != NULL){
 		delete[] listaR;

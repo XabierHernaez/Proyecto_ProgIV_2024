@@ -17,9 +17,9 @@ void BaseDatos::crearTablas(sqlite3 **db)
     const char *sql_insert = "CREATE TABLE IF NOT EXISTS habitacion(numH INT, tipo VARCHAR(20), numP INT, precio DOUBLE, ocupada INT)";
     const char *sql_insert2 = "CREATE TABLE IF NOT EXISTS usuario(nombre VARCHAR(20), primerApellido VARCHAR(20), segundoApellido VARCHAR(20), dni VARCHAR(20), usuario VARCHAR(20), contrasenya VARCHAR(20), telefono INT, tipo CHAR(1))";
     const char *sql_insert3 = "CREATE TABLE IF NOT EXISTS reserva(usuario VARCHAR(20), numH INT, precio DOUBLE, añoE INT, mesE INT, diaE INT, añoS INT, mesS INT, diaS INT)";
-    sqlite3_stmt *stmt1; // Puntero para la primera sentencia SQL
-    sqlite3_stmt *stmt2; // Puntero para la segunda sentencia SQL
-    sqlite3_stmt *stmt3; // Puntero para la segunda sentencia SQL
+    sqlite3_stmt *stmt1;
+    sqlite3_stmt *stmt2;
+    sqlite3_stmt *stmt3;
     sqlite3_prepare_v2(*db, sql_insert, -1, &stmt1, NULL);
     sqlite3_prepare_v2(*db, sql_insert2, -1, &stmt2, NULL);
     sqlite3_prepare_v2(*db, sql_insert3, -1, &stmt3, NULL);
@@ -36,19 +36,19 @@ void BaseDatos::volcarBaseDatosListaHabitacion(sqlite3 *db, ListaHabitacion &lH)
     Habitacion h;
     sprintf(sql, "SELECT * FROM habitacion");
     sqlite3_stmt *stmt;
-    sqlite3_prepare_v2(db, sql, -1, &stmt, NULL); // Preparar la sentencia
-    int result = sqlite3_step(stmt); // Ejecutar la sentencia
-    while (result == SQLITE_ROW) { // Mientras haya tuplas/filas que mirar
+    sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    int result = sqlite3_step(stmt);
+    while (result == SQLITE_ROW) {
         h.numA = sqlite3_column_int(stmt, 0);
         sprintf(h.tipo, "%s", (char*)sqlite3_column_text(stmt, 1));
         h.numP = sqlite3_column_int(stmt, 2);
-        h.precio = sqlite3_column_double(stmt, 3); // Utilizar sqlite3_column_double para campos DOUBLE
+        h.precio = sqlite3_column_double(stmt, 3);
         h.ocupada = sqlite3_column_int(stmt, 4);
-        result = sqlite3_step(stmt); // Ejecutar la sentencia
+        result = sqlite3_step(stmt);
         lH.listaHabitacion[lH.numE] = h;
-        lH.numE++; // Incrementar el contador de habitaciones en la lista
+        lH.numE++;
     }
-    sqlite3_finalize(stmt); // Cerrar la sentencia
+    sqlite3_finalize(stmt);
 }
 void BaseDatos::volcarBaseDatosListaUsuario(sqlite3 *db, ListaUsuario &lU)
 {
@@ -56,21 +56,21 @@ void BaseDatos::volcarBaseDatosListaUsuario(sqlite3 *db, ListaUsuario &lU)
     Usuario u;
     sprintf(sql, "SELECT * FROM usuario");
     sqlite3_stmt *stmt;
-    sqlite3_prepare_v2(db, sql, -1, &stmt, NULL); // Preparar la sentencia
-    int result = sqlite3_step(stmt); // Ejecutar la sentencia
-    while (result == SQLITE_ROW) { // Mientras haya tuplas/filas que mirar
+    sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+    int result = sqlite3_step(stmt);
+    while (result == SQLITE_ROW) {
         sprintf(u.nombre, "%s", (char*)sqlite3_column_text(stmt, 0));
         sprintf(u.primerApellido, "%s", (char*)sqlite3_column_text(stmt, 1));
         sprintf(u.segundoApellido, "%s", (char*)sqlite3_column_text(stmt, 2));
         sprintf(u.dni, "%s", (char*)sqlite3_column_text(stmt, 3));
         sprintf(u.usuario, "%s", (char*)sqlite3_column_text(stmt, 4));
         sprintf(u.contrasenya, "%s", (char*)sqlite3_column_text(stmt, 5));
-        u.telefono = sqlite3_column_int(stmt, 6); // Correcta posición de la columna del teléfono
-        u.tipo = sqlite3_column_text(stmt, 7)[0]; // Correcta posición de la columna del tipo
-        result = sqlite3_step(stmt); // Ejecutar la sentencia
+        u.telefono = sqlite3_column_int(stmt, 6);
+        u.tipo = sqlite3_column_text(stmt, 7)[0];
+        result = sqlite3_step(stmt);
         lU.anyadirUsuario(u);
     }
-    sqlite3_finalize(stmt); // Cerrar la sentencia
+    sqlite3_finalize(stmt);
 }
 void BaseDatos::volcarBaseDatosListaReserva(sqlite3 *db, ListaReserva &lR)
 {
@@ -78,10 +78,9 @@ void BaseDatos::volcarBaseDatosListaReserva(sqlite3 *db, ListaReserva &lR)
 	Reserva r;
 	sprintf(sql, "SELECT * FROM reserva");
 	sqlite3_stmt *stmt;
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL); // Preparar la sentencia
-	int result = sqlite3_step(stmt); // Ejecutar la sentencia
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	int result = sqlite3_step(stmt);
 	while (result == SQLITE_ROW) {
-		//(usuario VARCHAR(20), numH INT, precio DOUBLE, añoE INT, mesE INT, diaE INT, añoS INT, mesS INT, diaS INT)";
 		sprintf(r.usuario, "%s", (char*)sqlite3_column_text(stmt, 0));
 		r.habitacion.numA = sqlite3_column_int(stmt, 1);
 		r.precio = sqlite3_column_double(stmt, 2);
@@ -101,9 +100,9 @@ void BaseDatos::anyadirUsuarioBaseDatos(sqlite3 *db, Usuario u)
 	char sql[100];
 	sqlite3_stmt *stmt;
 	sprintf(sql, "insert into usuario values('%s','%s','%s','%s','%s','%s',%d,'%c')", u.getNombre(), u.getprimerApellido(), u.getsegundoApellido(), u.getDni(), u.getUsuario(), u.getContrasenya(), u.getTelefono(), u.getTipo());
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL); //Preparar la sentencia
-	sqlite3_step(stmt); //Ejecutar la sentencia
-	sqlite3_reset(stmt); // Resetear la sentencia para reutilizarla en la siguiente iteración
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	sqlite3_step(stmt);
+	sqlite3_reset(stmt);
 	sqlite3_finalize(stmt);
 }
 void BaseDatos::anyadirReservaBaseDatos(sqlite3 *db, Reserva r)
@@ -111,9 +110,9 @@ void BaseDatos::anyadirReservaBaseDatos(sqlite3 *db, Reserva r)
 	char sql[100];
 	sqlite3_stmt *stmt;
 	sprintf(sql, "insert into reserva values('%s',%d,%f,%d,%d,%d,%d,%d,%d)", r.usuario,r.habitacion.numA , r.precio,r.entrada.anyo, r.entrada.mes,r.entrada.dia,r.salida.anyo, r.salida.mes, r.salida.dia);
-	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL); //Preparar la sentencia
-	sqlite3_step(stmt); //Ejecutar la sentencia
-	sqlite3_reset(stmt); // Resetear la sentencia para reutilizarla en la siguiente iteración
+	sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	sqlite3_step(stmt);
+	sqlite3_reset(stmt);
 	sqlite3_finalize(stmt);
 }
 void BaseDatos::borrarReserva(sqlite3 *db, Reserva &r)
@@ -129,11 +128,8 @@ void BaseDatos::borrarReserva(sqlite3 *db, Reserva &r)
 }
 void BaseDatos::modificarReserva(sqlite3 *db, Reserva &nuevaReserva, Reserva &viejaReserva)
 {
-
 	char sql[300];
 	sqlite3_stmt *stmt;
-
-	// Construir la consulta SQL con los parámetros adecuados
 	sprintf(sql, "UPDATE Reserva SET añoE = %d, mesE = %d, diaE = %d, añoS = %d, mesS = %d, diaS = %d WHERE usuario = '%s' AND numH = %d AND añoE = %d AND mesE = %d AND diaE = %d AND añoS = %d AND mesS = %d AND diaS = %d",
 			nuevaReserva.entrada.anyo, nuevaReserva.entrada.mes, nuevaReserva.entrada.dia, nuevaReserva.salida.anyo, nuevaReserva.salida.mes, nuevaReserva.salida.dia, viejaReserva.usuario,
 			viejaReserva.habitacion.numA, viejaReserva.entrada.anyo, viejaReserva.entrada.mes, viejaReserva.entrada.dia, viejaReserva.salida.anyo, viejaReserva.salida.mes, viejaReserva.salida.dia);
@@ -148,8 +144,8 @@ void BaseDatos::borrarTablasUsuarioReserva(sqlite3 *db)
 	char sql2[200];
 	sprintf(sql, "DROP TABLE usuario");
 	sprintf(sql2, "DROP TABLE reserva");
-	sqlite3_stmt *stmt1; // Puntero para la primera sentencia SQL
-	sqlite3_stmt *stmt2; // Puntero para la segunda sentencia SQL
+	sqlite3_stmt *stmt1;
+	sqlite3_stmt *stmt2;
 	sqlite3_prepare_v2(db, sql, -1, &stmt1, NULL);
 	sqlite3_prepare_v2(db, sql2, -1, &stmt2, NULL);
 	sqlite3_step(stmt1);
