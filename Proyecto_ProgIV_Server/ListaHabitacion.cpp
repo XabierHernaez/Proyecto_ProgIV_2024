@@ -35,25 +35,15 @@ void ListaHabitacion::modificarOcupacionRestante(int numP)
 		}
 	}
 }
-Habitacion* ListaHabitacion::habitacionesDisponibles(int numP, int *numHD) {
-    if (numHD == nullptr) {
-        // Manejar el caso de un puntero nulo
-        return nullptr;
-    }
-
+Habitacion* ListaHabitacion::habitacionesDisponibles(int numP, int *numHD)
+{
     *numHD = 0;
-
-    // Primera pasada para contar las habitaciones disponibles
     for (int i = 0; i < numE; i++) {
         if (listaHabitacion[i].numP == numP && listaHabitacion[i].ocupada == 0) {
             (*numHD)++;
         }
     }
-
-    // Crear un nuevo arreglo de habitaciones disponibles
     Habitacion* aux = new Habitacion[*numHD];
-
-    // Segunda pasada para asignar las habitaciones disponibles al arreglo auxiliar
     int index = 0;
     for (int i = 0; i < numE; i++) {
         if (listaHabitacion[i].numP == numP && listaHabitacion[i].ocupada == 0) {
@@ -61,7 +51,6 @@ Habitacion* ListaHabitacion::habitacionesDisponibles(int numP, int *numHD) {
             index++;
         }
     }
-
     return aux;
 }
 int ListaHabitacion::buscarHabitacion(int numH)
