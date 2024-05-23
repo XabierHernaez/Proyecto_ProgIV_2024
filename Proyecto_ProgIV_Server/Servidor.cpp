@@ -41,30 +41,25 @@ int main(int argc, char *argv[]) {
 
 	strcpy(mensajeLog, "Initialising Winsock...");
 	ficheroLog(mensajeLog, "","log.txt");
-	//cout<<("\nInitialising Winsock...\n")<<endl; // inicializa la libreria
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
 		snprintf(mensajeLog, sizeof(mensajeLog), "Failed. Error Code : %d", WSAGetLastError());
 		ficheroLog(mensajeLog, "","log.txt");
-		//cout<<("Failed. Error Code : %d", WSAGetLastError())<<endl;
 		return -1;
 	}
 
 	strcpy(mensajeLog, "Initialised.");
 	ficheroLog(mensajeLog, "","log.txt");
-	//printf("Initialised.\n");
 
 	//SOCKET creation creacion del socket( la primera estructura
 	if ((conn_socket = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
 		snprintf(mensajeLog, sizeof(mensajeLog), "Could not create socket : %d", WSAGetLastError());
 		ficheroLog(mensajeLog, "","log.txt");
-		//cout<<("Could not create socket : %d", WSAGetLastError())<<endl;
 		WSACleanup();
 		return -1;
 	}
 
 	strcpy(mensajeLog, "Socket created.");
 	ficheroLog(mensajeLog, "","log.txt");
-	//cout<<("Socket created.\n")<<endl;
 	// cual es la ip y cual es el puerto
 	server.sin_addr.s_addr = inet_addr(SERVER_IP); //INADDR_ANY;
 	server.sin_family = AF_INET;
@@ -75,7 +70,6 @@ int main(int argc, char *argv[]) {
 			sizeof(server)) == SOCKET_ERROR) {
 		snprintf(mensajeLog, sizeof(mensajeLog),"Bind failed with error code: %d",  WSAGetLastError());
 		ficheroLog(mensajeLog, "","log.txt");
-		//cout<<("Bind failed with error code: %d", WSAGetLastError())<<endl;
 		closesocket(conn_socket);
 		WSACleanup();
 		return -1;
@@ -83,13 +77,11 @@ int main(int argc, char *argv[]) {
 
 	strcpy(mensajeLog, "Bind done.");
 	ficheroLog(mensajeLog, "","log.txt");
-	//cout<<("Bind done.\n")<<endl; //DEJAR EL SOCKET EN ESPERA
 
 	//LISTEN to incoming connections (socket server moves to listening mode)
 	if (listen(conn_socket, 1) == SOCKET_ERROR) {
 		snprintf(mensajeLog, sizeof(mensajeLog),"Listen failed with error code: %d", WSAGetLastError());
 		ficheroLog(mensajeLog, "","log.txt");
-		//cout<<("Listen failed with error code: %d", WSAGetLastError())<<endl;
 		closesocket(conn_socket);
 		WSACleanup();
 		return -1;
@@ -98,21 +90,18 @@ int main(int argc, char *argv[]) {
 	//ACCEPT incoming connections (server keeps waiting for them)
 	strcpy(mensajeLog, "Waiting for incoming connections...");
 	ficheroLog(mensajeLog, "","log.txt");
-	//cout<<("Waiting for incoming connections...\n")<<endl;
 	int stsize = sizeof(struct sockaddr);
 	comm_socket = accept(conn_socket, (struct sockaddr*) &client, &stsize);
 	// Using comm_socket is able to send/receive data to/from connected client
 	if (comm_socket == INVALID_SOCKET) {
 		snprintf(mensajeLog, sizeof(mensajeLog),"accept failed with error code : %d", WSAGetLastError());
 		ficheroLog(mensajeLog, "","log.txt");
-		//cout<<("accept failed with error code : %d", WSAGetLastError())<<endl;
 		closesocket(conn_socket);
 		WSACleanup();
 		return -1;
 	}
 	snprintf(mensajeLog, sizeof(mensajeLog),"Incomming connection from: %s (%d)", inet_ntoa(client.sin_addr),ntohs(client.sin_port));
 	ficheroLog(mensajeLog, "","log.txt");
-	//cout<<("Incomming connection from: %s (%d)\n", inet_ntoa(client.sin_addr),ntohs(client.sin_port))<<endl;
 
 	// Closing the listening sockets (is not going to be used anymore)
 	closesocket(conn_socket);
@@ -339,13 +328,7 @@ int main(int argc, char *argv[]) {
 											for(int i =0;i<numReserAct;i++){
 												sprintf(sendBuff,"%d",aux2[i].habitacion.numA);
 												send(comm_socket,sendBuff,sizeof(sendBuff),0);
-												sprintf(sendBuff,"%d",aux2[i].habitacion.numP);
-												send(comm_socket,sendBuff,sizeof(sendBuff),0);
-												sprintf(sendBuff,"%d",aux2[i].habitacion.ocupada);
-												send(comm_socket,sendBuff,sizeof(sendBuff),0);
-												sprintf(sendBuff,"%s",aux2[i].habitacion.tipo);
-												send(comm_socket,sendBuff,sizeof(sendBuff),0);
-												sprintf(sendBuff,"%f",aux2[i].habitacion.precio);
+												sprintf(sendBuff,"%f",aux2[i].precio);
 												send(comm_socket,sendBuff,sizeof(sendBuff),0);
 												sprintf(sendBuff,"%d",aux2[i].entrada.anyo);
 												send(comm_socket,sendBuff,sizeof(sendBuff),0);

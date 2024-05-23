@@ -137,18 +137,19 @@ int Reserva::fechaDisponible(const Reserva& otraReserva) const
 		return 0;
 	}
 }
-/*
-int Reserva::validarReserva(const Reserva &r) const
+
+int Reserva::validarReserva2(const Reserva &r) const
 {
-	if(entrada.anyo == r.entrada.anyo && entrada.dia == r.entrada.dia && entrada.dia < r.entrada.dia && entrada.mes == r.entrada.mes && salida.anyo == r.salida.anyo && salida.mes == r.salida.mes && salida.dia == r.salida.dia && habitacion.numA == r.habitacion.numA){
+	if(entrada.dia == r.entrada.dia && entrada.mes == r.entrada.mes && entrada.anyo == r.entrada.anyo
+			&& salida.dia == r.salida.dia && salida.mes == r.salida.mes && salida.anyo == r.salida.anyo && habitacion.numA == r.habitacion.numA){
 		return 1;
 	}else{
 		return 0;
 	}
-}*/
+}
 int Reserva::validarReserva(const Reserva &r) const
 {
-	if( salida.dia < r.entrada.dia &&entrada.anyo == r.entrada.anyo  && entrada.mes == r.entrada.mes && salida.mes == r.salida.mes && salida.dia == r.salida.dia && habitacion.numA == r.habitacion.numA){
+	if(salida.dia < r.entrada.dia &&entrada.anyo == r.entrada.anyo  && entrada.mes == r.entrada.mes && salida.mes == r.salida.mes && salida.dia == r.salida.dia && habitacion.numA == r.habitacion.numA){
 		return 1;
 	}else{
 		return 0;

@@ -1,0 +1,140 @@
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Bind done. - Usuario: 
+Waiting for incoming connections... - Usuario: 
+Incomming connection from: 127.0.0.1 (4477) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se recibe la informacion de la reserva - Usuario: mikelGonz
+Se envia si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se recibe el numero de personas y se realiza la comprobacion de habitaciones - Usuario: mikelGonz
+Se envia las habitaciones disponibles - Usuario: mikelGonz
+Recibe el numero de habitacion y se busca para verificar que esta libre - Usuario: mikelGonz
+Se envia la informacion de la habitacion - Usuario: mikelGonz
+Selecciona la opcion: 	  - Usuario: mikelGonz
+Se envia la cancelacion de la reserva - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se recibe la informacion de la reserva - Usuario: mikelGonz
+Se envia si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se recibe el numero de personas y se realiza la comprobacion de habitaciones - Usuario: mikelGonz
+Se envia las habitaciones disponibles - Usuario: mikelGonz
+Recibe el numero de habitacion y se busca para verificar que esta libre - Usuario: mikelGonz
+Se envia la informacion de la habitacion - Usuario: mikelGonz
+Selecciona la opcion: N  - Usuario: mikelGonz
+Se envia la cancelacion de la reserva - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se recibe la informacion de la reserva - Usuario: mikelGonz
+Se envia si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se recibe el numero de personas y se realiza la comprobacion de habitaciones - Usuario: mikelGonz
+Se envia las habitaciones disponibles - Usuario: mikelGonz
+Recibe el numero de habitacion y se busca para verificar que esta libre - Usuario: mikelGonz
+Se envia la informacion de la habitacion - Usuario: mikelGonz
+Selecciona la opcion: N  - Usuario: mikelGonz
+Se envia la cancelacion de la reserva - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se recibe la informacion de la reserva - Usuario: mikelGonz
+Se envia si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se recibe el numero de personas y se realiza la comprobacion de habitaciones - Usuario: mikelGonz
+Se envia las habitaciones disponibles - Usuario: mikelGonz
+Recibe el numero de habitacion y se busca para verificar que esta libre - Usuario: mikelGonz
+Se envia que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: 
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Bind done. - Usuario: 
+Waiting for incoming connections... - Usuario: 
+Incomming connection from: 127.0.0.1 (4483) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se recibe la informacion de la reserva - Usuario: mikelGonz
+Se envia si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se recibe el numero de personas y se realiza la comprobacion de habitaciones - Usuario: mikelGonz
+Se envia las habitaciones disponibles - Usuario: mikelGonz
+Recibe el numero de habitacion y se busca para verificar que esta libre - Usuario: mikelGonz
+Se envia que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se recibe la informacion de la reserva - Usuario: mikelGonz
+Se envia si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se recibe el numero de personas y se realiza la comprobacion de habitaciones - Usuario: mikelGonz
+Se envia las habitaciones disponibles - Usuario: mikelGonz
+Recibe el numero de habitacion y se busca para verificar que esta libre - Usuario: mikelGonz
+Se envia que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se recibe la informacion de la reserva - Usuario: mikelGonz
+Se envia si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se recibe el numero de personas y se realiza la comprobacion de habitaciones - Usuario: mikelGonz
+Se envia las habitaciones disponibles - Usuario: mikelGonz
+Recibe el numero de habitacion y se busca para verificar que esta libre - Usuario: mikelGonz
+Se envia que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se recibe la informacion de la reserva - Usuario: mikelGonz
+Se envia si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se recibe el numero de personas y se realiza la comprobacion de habitaciones - Usuario: mikelGonz
+Se envia las habitaciones disponibles - Usuario: mikelGonz
+Recibe el numero de habitacion y se busca para verificar que esta libre - Usuario: mikelGonz
+Se envia que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: 
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Bind done. - Usuario: 
+Waiting for incoming connections... - Usuario: 
+Incomming connection from: 127.0.0.1 (4484) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 2  - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se envia la informacion de todas las reservas del usuario - Usuario: mikelGonz
+Recibe la informacion de la reserva a modificar - Usuario: mikelGonz
+Selecciona la opcion: N  - Usuario: mikelGonz
+Recibe la nueva fecha a modificar y comprueba que la fecha es correcta y se envia - Usuario: mikelGonz
+Se le envia si hay disponibilidad de fechas - Usuario: mikelGonz
+Realiza la modificacion y envia mensaje de validacion - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: 
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Bind done. - Usuario: 
+Waiting for incoming connections... - Usuario: 
+Incomming connection from: 127.0.0.1 (4488) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se recibe la informacion de la reserva - Usuario: mikelGonz
+Se envia si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se recibe el numero de personas y se realiza la comprobacion de habitaciones - Usuario: mikelGonz
+Se envia las habitaciones disponibles - Usuario: mikelGonz
+Recibe el numero de habitacion y se busca para verificar que esta libre - Usuario: mikelGonz
+Se envia que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: 
