@@ -9,7 +9,8 @@ char menuPrincipal()
 	printf("0. Salir\n");
 	printf("1. Inicio de sesion\n");
 	printf("2. Registrarse\n");
-	printf("Elija una opcion[0-2]: ");
+	printf("3. Ayuda\n");
+	printf("Elija una opcion[0-3]: ");
 	fflush(stdout);
 	fflush(stdin);
 	scanf("%c", &opcion);

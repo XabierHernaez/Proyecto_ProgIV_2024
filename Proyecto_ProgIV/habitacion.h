@@ -3,11 +3,11 @@
 #define HABITACION_H_
 
 typedef struct{
-	int numA; // Numero de habitacio
+	int numA;
 	char *tipo;
-	int numP; // El numero de personas que entran en la habiatcion
+	int numP;
 	float precio;
-	int ocupada; // 1 ocupada; 0 libre
+	int ocupada;
 }Habitacion;
 
 int numeroPersonas();
