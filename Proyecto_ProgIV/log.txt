@@ -1,4 +1,3 @@
-
 Initialising Winsock... - Usuario: 
 Initialised. - Usuario: 
 Socket created. - Usuario: 
@@ -8,15 +7,23 @@ Ingresa el usuario y contraseña - Usuario: mikelGonz
 Se valida si el usuario ya existe - Usuario: mikelGonz
 Se valida si la contraseña ya existe - Usuario: mikelGonz
 Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 2  - Usuario: mikelGonz
 Selecciona la opcion: 1  - Usuario: mikelGonz
-Se le pide la informacion de la reserva - Usuario: mikelGonz
-Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
-Se pide el numero de persona y se envia - Usuario: mikelGonz
-Se recibe las habitaciones disponibles - Usuario: mikelGonz
-El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
-Se recibe la informacion de la habitacion - Usuario: mikelGonz
-Selecciona la opcion: S  - Usuario: mikelGonz
-Se recibe confirmacion de la reserva - Usuario: mikelGonz
+Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
+Se envia la informacion de la reserva a modificar o borrar - Usuario: mikelGonz
+Recibe que no es valida la reserva - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
+Se envia la informacion de la reserva a modificar o borrar - Usuario: mikelGonz
+Recibe que no es valida la reserva - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
 Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
 Selecciona la opcion: 2  - Usuario: mikelGonz
 Selecciona la opcion: 1  - Usuario: mikelGonz
@@ -45,29 +52,6 @@ Selecciona la opcion: N  - Usuario: mikelGonz
 Se envia la fecha nueva a modificar y recibe si es correcta - Usuario: mikelGonz
 Recibe si hay disponibilidad de fechas - Usuario: mikelGonz
 Recibe validacion de la transaccion erroneo - Usuario: mikelGonz
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
-Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: mikelGonz
-Se valida si el usuario ya existe - Usuario: mikelGonz
-Se valida si la contraseña ya existe - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 2  - Usuario: mikelGonz
-Selecciona la opcion: 1  - Usuario: mikelGonz
-Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
-Se envia la informacion de la reserva a modificar o borrar - Usuario: mikelGonz
-Selecciona la opcion: N  - Usuario: mikelGonz
-Se envia la fecha nueva a modificar y recibe si es correcta - Usuario: mikelGonz
-Recibe si hay disponibilidad de fechas - Usuario: mikelGonz
-Recibe validacion de la transaccion erroneo - Usuario: mikelGonz
-Selecciona la opcion: 1  - Usuario: mikelGonz
-Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
-Se envia la informacion de la reserva a modificar o borrar - Usuario: mikelGonz
-Selecciona la opcion: N  - Usuario: mikelGonz
-Se envia la fecha nueva a modificar y recibe si es correcta - Usuario: mikelGonz
-Recibe que la fecha no es correcta - Usuario: mikelGonz
 Selecciona la opcion: 0  - Usuario: mikelGonz
 Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
 Selecciona la opcion: 0  - Usuario: mikelGonz
@@ -80,119 +64,6 @@ Selecciona la opcion: 1  - Usuario:
 Ingresa el usuario y contraseña - Usuario: mikelGonz
 Se valida si el usuario ya existe - Usuario: mikelGonz
 Se valida si la contraseña ya existe - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 2  - Usuario: mikelGonz
-Selecciona la opcion: 1  - Usuario: mikelGonz
-Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
-Se envia la informacion de la reserva a modificar o borrar - Usuario: mikelGonz
-Selecciona la opcion: N  - Usuario: mikelGonz
-Se envia la fecha nueva a modificar y recibe si es correcta - Usuario: mikelGonz
-Recibe si hay disponibilidad de fechas - Usuario: mikelGonz
-Recibe validacion de la transaccion erroneo - Usuario: mikelGonz
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
-Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: mikelGonz
-Se valida si el usuario ya existe - Usuario: mikelGonz
-Se valida si la contraseña ya existe - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 2  - Usuario: mikelGonz
-Selecciona la opcion: 1  - Usuario: mikelGonz
-Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
-Se envia la informacion de la reserva a modificar o borrar - Usuario: mikelGonz
-Selecciona la opcion: N  - Usuario: mikelGonz
-Se envia la fecha nueva a modificar y recibe si es correcta - Usuario: mikelGonz
-Recibe si hay disponibilidad de fechas - Usuario: mikelGonz
-Recibe validacion de la transaccion erroneo - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: 
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
-Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: xabih
-Se valida si el usuario ya existe - Usuario: xabih
-Se valida si la contraseña ya existe - Usuario: xabih
-Entra en la parte de administrador - Usuario: xabih
-Recibe todos los datos para realizar las operaciones - Usuario: xabih
-Selecciona la opcion: 1  - Usuario: xabih
-Se visualizan todas las reservas - Usuario: xabih
-Selecciona la opcion: N  - Usuario: xabih
-Selecciona la opcion: 0  - Usuario: xabih
-Se le envian los datos modificados - Usuario: xabih
-Selecciona la opcion: 0  - Usuario: 
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
-Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: xabih
-Se valida si el usuario ya existe - Usuario: xabih
-Se valida si la contraseña ya existe - Usuario: xabih
-Entra en la parte de administrador - Usuario: xabih
-Recibe todos los datos para realizar las operaciones - Usuario: xabih
-Selecciona la opcion: 1  - Usuario: xabih
-Se visualizan todas las reservas - Usuario: xabih
-Selecciona la opcion: N  - Usuario: xabih
-Selecciona la opcion: 0  - Usuario: xabih
-Se le envian los datos modificados - Usuario: xabih
-Selecciona la opcion: 0  - Usuario: 
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
-Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: xabih
-Se valida si el usuario ya existe - Usuario: xabih
-Se valida si la contraseña ya existe - Usuario: xabih
-Entra en la parte de administrador - Usuario: xabih
-Recibe todos los datos para realizar las operaciones - Usuario: xabih
-Selecciona la opcion: 1  - Usuario: xabih
-Se visualizan todas las reservas - Usuario: xabih
-Selecciona la opcion: N  - Usuario: xabih
-Selecciona la opcion: 0  - Usuario: xabih
-Se le envian los datos modificados - Usuario: xabih
-Selecciona la opcion: 0  - Usuario: 
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
-Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: mikelGonz
-Se valida si el usuario ya existe - Usuario: mikelGonz
-Se valida si la contraseña ya existe - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 2  - Usuario: mikelGonz
-Selecciona la opcion: 1  - Usuario: mikelGonz
-Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
-Se envia la informacion de la reserva a modificar o borrar - Usuario: mikelGonz
-Recibe que no es valida la reserva - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: 
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
-Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: mikelGonz
-Se valida si el usuario ya existe - Usuario: mikelGonz
-Se valida si la contraseña ya existe - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 2  - Usuario: mikelGonz
-Selecciona la opcion: 
-  - Usuario: mikelGonz
-Selecciona la opcion: 1  - Usuario: mikelGonz
-Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
-Se envia la informacion de la reserva a modificar o borrar - Usuario: mikelGonz
-Recibe que no es valida la reserva - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: mikelGonz
 Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
 Selecciona la opcion: 1  - Usuario: mikelGonz
 Se le pide la informacion de la reserva - Usuario: mikelGonz
@@ -200,43 +71,7 @@ Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
 Se pide el numero de persona y se envia - Usuario: mikelGonz
 Se recibe las habitaciones disponibles - Usuario: mikelGonz
 El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
-Se recibe la informacion de la habitacion - Usuario: mikelGonz
-Selecciona la opcion: N  - Usuario: mikelGonz
-Recibe cancelacion de la reserva - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: 
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
-Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: mikelGonz
-Se valida si el usuario ya existe - Usuario: mikelGonz
-Se valida si la contraseña ya existe - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 2  - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: 
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
-Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: mikelGonz
-Se valida si el usuario ya existe - Usuario: mikelGonz
-Se valida si la contraseña ya existe - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 2  - Usuario: mikelGonz
-Selecciona la opcion: 1  - Usuario: mikelGonz
-Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
-Se envia la informacion de la reserva a modificar o borrar - Usuario: mikelGonz
-Selecciona la opcion: N  - Usuario: mikelGonz
-Se envia la fecha nueva a modificar y recibe si es correcta - Usuario: mikelGonz
-Recibe que la fecha no es correcta - Usuario: mikelGonz
-Selecciona la opcion: 0  - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
 Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
 Selecciona la opcion: 0  - Usuario: mikelGonz
 Selecciona la opcion: 0  - Usuario: 
@@ -250,49 +85,6 @@ Se valida si el usuario ya existe - Usuario: xabih
 Se valida si la contraseña ya existe - Usuario: xabih
 Entra en la parte de administrador - Usuario: xabih
 Recibe todos los datos para realizar las operaciones - Usuario: xabih
-Selecciona la opcion: 1  - Usuario: xabih
-Se visualizan todas las reservas - Usuario: xabih
-Selecciona la opcion: N  - Usuario: xabih
-Selecciona la opcion: 0  - Usuario: xabih
-Se le envian los datos modificados - Usuario: xabih
-Selecciona la opcion: 0  - Usuario: 
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
-Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: x0
-Recibe que el usuario no existe en la base de datos - Usuario: x0
-Selecciona la opcion: 2  - Usuario: 
-Se piden los datos al usuario - Usuario: x
-Selecciona la opcion: 2  - Usuario: x
-Recibe que se esta cancelando el registro - Usuario: x
-Selecciona la opcion: 0  - Usuario: 
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
-Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: xabih
-Se valida si el usuario ya existe - Usuario: xabih
-Se valida si la contraseña ya existe - Usuario: xabih
-Entra en la parte de administrador - Usuario: xabih
-Recibe todos los datos para realizar las operaciones - Usuario: xabih
-Selecciona la opcion: 1  - Usuario: xabih
-Se visualizan todas las reservas - Usuario: xabih
-Selecciona la opcion: 8  - Usuario: xabih
-Selecciona la opcion: 1  - Usuario: xabih
-Se visualizan todas las reservas - Usuario: xabih
-Selecciona la opcion: S  - Usuario: xabih
-Se pide informacion sobre esa reserva y se mira que exista - Usuario: xabih
-Selecciona la opcion: 1  - Usuario: xabih
-Se visualizan todas las reservas - Usuario: xabih
-Selecciona la opcion: S  - Usuario: xabih
-Se pide informacion sobre esa reserva y se mira que exista - Usuario: xabih
-Selecciona la opcion: 1  - Usuario: xabih
-Se visualizan todas las reservas - Usuario: xabih
-Selecciona la opcion: S  - Usuario: xabih
-Se pide informacion sobre esa reserva y se mira que exista - Usuario: xabih
 Selecciona la opcion: 1  - Usuario: xabih
 Se visualizan todas las reservas - Usuario: xabih
 Selecciona la opcion: S  - Usuario: xabih
@@ -316,16 +108,25 @@ Selecciona la opcion: 1  - Usuario: xabih
 Se visualizan todas las reservas - Usuario: xabih
 Selecciona la opcion: S  - Usuario: xabih
 Se pide informacion sobre esa reserva y se mira que exista - Usuario: xabih
-Selecciona la opcion: 1  - Usuario: xabih
-Se visualizan todas las reservas - Usuario: xabih
-Selecciona la opcion: 8  - Usuario: xabih
-Selecciona la opcion: 1  - Usuario: xabih
-Se visualizan todas las reservas - Usuario: xabih
-Selecciona la opcion: S  - Usuario: xabih
-Se pide informacion sobre esa reserva y se mira que exista - Usuario: xabih
 Selecciona la opcion: 2  - Usuario: xabih
 Se pide informacion sobre la nueva fecha y se comprueba que sea valida - Usuario: xabih
 Reserva modificada - Usuario: xabih
+Selecciona la opcion: 0  - Usuario: xabih
+Se le envian los datos modificados - Usuario: xabih
+Selecciona la opcion: 0  - Usuario: 
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: xabih
+Se valida si el usuario ya existe - Usuario: xabih
+Se valida si la contraseña ya existe - Usuario: xabih
+Entra en la parte de administrador - Usuario: xabih
+Recibe todos los datos para realizar las operaciones - Usuario: xabih
+Selecciona la opcion: 2  - Usuario: xabih
+Se sacan todos los usuarios que tengan reserva - Usuario: xabih
+Se mira uno por uno cada usuario si se elimina de la base de datos - Usuario: xabih
 Selecciona la opcion: 0  - Usuario: xabih
 Se le envian los datos modificados - Usuario: xabih
 Selecciona la opcion: 0  - Usuario: 
@@ -348,15 +149,93 @@ Se recibe la informacion de la habitacion - Usuario: mikelGonz
 Selecciona la opcion: S  - Usuario: mikelGonz
 Se recibe confirmacion de la reserva - Usuario: mikelGonz
 Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 2  - Usuario: mikelGonz
 Selecciona la opcion: 1  - Usuario: mikelGonz
-Se le pide la informacion de la reserva - Usuario: mikelGonz
-Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
-Se pide el numero de persona y se envia - Usuario: mikelGonz
-Se recibe las habitaciones disponibles - Usuario: mikelGonz
-El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
-Se recibe la informacion de la habitacion - Usuario: mikelGonz
-Selecciona la opcion: N  - Usuario: mikelGonz
-Recibe cancelacion de la reserva - Usuario: mikelGonz
+Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 2  - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 2  - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 2  - Usuario: mikelGonz
+Selecciona la opcion: 2  - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: xabih
+Se valida si el usuario ya existe - Usuario: xabih
+Se valida si la contraseña ya existe - Usuario: xabih
+Entra en la parte de administrador - Usuario: xabih
+Recibe todos los datos para realizar las operaciones - Usuario: xabih
+Selecciona la opcion: 1  - Usuario: xabih
+Se visualizan todas las reservas - Usuario: xabih
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: xabih
+Se valida si el usuario ya existe - Usuario: xabih
+Se valida si la contraseña ya existe - Usuario: xabih
+Entra en la parte de administrador - Usuario: xabih
+Recibe todos los datos para realizar las operaciones - Usuario: xabih
+Selecciona la opcion: 1  - Usuario: xabih
+Se visualizan todas las reservas - Usuario: xabih
+Selecciona la opcion: N  - Usuario: xabih
+Selecciona la opcion: 0  - Usuario: xabih
+Se le envian los datos modificados - Usuario: xabih
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 2  - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
+Se envia la informacion de la reserva a modificar o borrar - Usuario: mikelGonz
+Recibe que no es valida la reserva - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
 Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
 Selecciona la opcion: 0  - Usuario: mikelGonz
 Selecciona la opcion: 0  - Usuario: 
@@ -365,44 +244,13 @@ Initialised. - Usuario:
 Socket created. - Usuario: 
 Connection stablished with: 127.0.0.1 (6000) - Usuario: 
 Selecciona la opcion: 1  - Usuario: 
-Ingresa el usuario y contraseña - Usuario: mikelGonz
-Se valida si el usuario ya existe - Usuario: mikelGonz
-Se valida si la contraseña ya existe - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 1  - Usuario: mikelGonz
-Se le pide la informacion de la reserva - Usuario: mikelGonz
-Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
-Se pide el numero de persona y se envia - Usuario: mikelGonz
-Se recibe las habitaciones disponibles - Usuario: mikelGonz
-El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
-Se recibe la informacion de la habitacion - Usuario: mikelGonz
-Selecciona la opcion: N  - Usuario: mikelGonz
-Recibe cancelacion de la reserva - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 1  - Usuario: mikelGonz
-Se le pide la informacion de la reserva - Usuario: mikelGonz
-Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
-Se pide el numero de persona y se envia - Usuario: mikelGonz
-Se recibe las habitaciones disponibles - Usuario: mikelGonz
-El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
-Initialising Winsock... - Usuario: 
-Initialised. - Usuario: 
-Socket created. - Usuario: 
-Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelgOnz
+Recibe que el usuario no existe en la base de datos - Usuario: mikelgOnz
+Selecciona la opcion: m  - Usuario: 
 Selecciona la opcion: 1  - Usuario: 
 Ingresa el usuario y contraseña - Usuario: mikelGonz
 Se valida si el usuario ya existe - Usuario: mikelGonz
 Se valida si la contraseña ya existe - Usuario: mikelGonz
-Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
-Selecciona la opcion: 1  - Usuario: mikelGonz
-Se le pide la informacion de la reserva - Usuario: mikelGonz
-Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
-Se pide el numero de persona y se envia - Usuario: mikelGonz
-Se recibe las habitaciones disponibles - Usuario: mikelGonz
-El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
-Se recibe la informacion de la habitacion - Usuario: mikelGonz
-Selecciona la opcion: N  - Usuario: mikelGonz
-Recibe cancelacion de la reserva - Usuario: mikelGonz
 Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
 Selecciona la opcion: 1  - Usuario: mikelGonz
 Se le pide la informacion de la reserva - Usuario: mikelGonz
@@ -438,7 +286,17 @@ Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
 Selecciona la opcion: 1  - Usuario: mikelGonz
 Se le pide la informacion de la reserva - Usuario: mikelGonz
 Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
-Recibe que la fecha es incorrecta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
 Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
 Selecciona la opcion: 1  - Usuario: mikelGonz
 Se le pide la informacion de la reserva - Usuario: mikelGonz
@@ -449,6 +307,344 @@ El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
 Se recibe la informacion de la habitacion - Usuario: mikelGonz
 Selecciona la opcion: N  - Usuario: mikelGonz
 Recibe cancelacion de la reserva - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Se recibe la informacion de la habitacion - Usuario: mikelGonz
+Selecciona la opcion: N  - Usuario: mikelGonz
+Recibe cancelacion de la reserva - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Se recibe la informacion de la habitacion - Usuario: mikelGonz
+Selecciona la opcion: N  - Usuario: mikelGonz
+Recibe cancelacion de la reserva - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: 
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGon
+Recibe que el usuario no existe en la base de datos - Usuario: mikelGon
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: 
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 
+  - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Se recibe la informacion de la habitacion - Usuario: mikelGonz
+Selecciona la opcion: 	  - Usuario: mikelGonz
+Recibe cancelacion de la reserva - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Se recibe la informacion de la habitacion - Usuario: mikelGonz
+Selecciona la opcion: N  - Usuario: mikelGonz
+Recibe cancelacion de la reserva - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Se recibe la informacion de la habitacion - Usuario: mikelGonz
+Selecciona la opcion: N  - Usuario: mikelGonz
+Recibe cancelacion de la reserva - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: 
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: 
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 2  - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Recibe toda la informacion de las reservas del usuario - Usuario: mikelGonz
+Se envia la informacion de la reserva a modificar o borrar - Usuario: mikelGonz
+Selecciona la opcion: N  - Usuario: mikelGonz
+Se envia la fecha nueva a modificar y recibe si es correcta - Usuario: mikelGonz
+Recibe si hay disponibilidad de fechas - Usuario: mikelGonz
+Recibe validacion de la transaccion erroneo - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: mikelGonz
+Selecciona la opcion: 0  - Usuario: 
+Initialising Winsock... - Usuario: 
+Initialised. - Usuario: 
+Socket created. - Usuario: 
+Connection stablished with: 127.0.0.1 (6000) - Usuario: 
+Selecciona la opcion: 1  - Usuario: 
+Ingresa el usuario y contraseña - Usuario: mikelGonz
+Se valida si el usuario ya existe - Usuario: mikelGonz
+Se valida si la contraseña ya existe - Usuario: mikelGonz
+Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
+Selecciona la opcion: 1  - Usuario: mikelGonz
+Se le pide la informacion de la reserva - Usuario: mikelGonz
+Se recibe si la fecha de la reserva es correcta - Usuario: mikelGonz
+Se pide el numero de persona y se envia - Usuario: mikelGonz
+Se recibe las habitaciones disponibles - Usuario: mikelGonz
+El usuario escoge la habitacion que desea y se la envia - Usuario: mikelGonz
+Recibe que el numero de habitaciones es erroneo - Usuario: mikelGonz
 Validacion correcta, ingresa al menu cliente - Usuario: mikelGonz
 Selecciona la opcion: 0  - Usuario: mikelGonz
 Selecciona la opcion: 0  - Usuario: 

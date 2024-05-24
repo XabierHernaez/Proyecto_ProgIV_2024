@@ -82,7 +82,7 @@ int main(int argc, char *argv[]){
 	char **listaUsuario;
 	Usuario u, u2;
 	Reserva r, r2, r3, r4, r5, r6, r7;
-	Habitacion h, h2, h3;
+	Habitacion h, h2, h3, h4;
 
 	ListaHabitacion lH;
 	ListaUsuarios lU;
@@ -147,7 +147,7 @@ int main(int argc, char *argv[]){
 								sscanf(recvBuff,"%s",mensaje1);
 								printf("%s\n", mensaje1);fflush(stdout);
 								break;
-							case '1':/*TERMINADO NO MODIFICAR*/
+							case '1':
 								recv(s,recvBuff,sizeof(recvBuff),0);
 								sscanf(recvBuff,"%s %s",mensaje1, mensaje2);
 								printf("%s %s\n", mensaje1, mensaje2);fflush(stdout);
@@ -286,16 +286,7 @@ int main(int argc, char *argv[]){
 												recv(s,recvBuff,sizeof(recvBuff),0);
 												sscanf(recvBuff,"%d",&r2.habitacion.numA);
 												recv(s,recvBuff,sizeof(recvBuff),0);
-												sscanf(recvBuff,"%d",&r2.habitacion.numP);
-												recv(s,recvBuff,sizeof(recvBuff),0);
-												sscanf(recvBuff,"%d",&r2.habitacion.ocupada);
-												char tipo[20];
-												recv(s,recvBuff,sizeof(recvBuff),0);
-												sscanf(recvBuff,"%s",tipo);
-												r2.habitacion.tipo = (char*)malloc(strlen(tipo)*sizeof(char));
-												strcpy(r2.habitacion.tipo, tipo);
-												recv(s,recvBuff,sizeof(recvBuff),0);
-												sscanf(recvBuff,"%f",&r2.habitacion.precio);
+												sscanf(recvBuff,"%f",&r2.precio);
 												recv(s,recvBuff,sizeof(recvBuff),0);
 												sscanf(recvBuff,"%d",&r2.entrada.anyo);
 												recv(s,recvBuff,sizeof(recvBuff),0);
@@ -308,6 +299,8 @@ int main(int argc, char *argv[]){
 												sscanf(recvBuff,"%d",&r2.salida.mes);
 												recv(s,recvBuff,sizeof(recvBuff),0);
 												sscanf(recvBuff,"%d",&r2.salida.dia);
+												h4 = buscarHabitacion(lH, r2.habitacion.numA);
+												r2.habitacion.numP = h4.numP;
 												mostrarReserva(r2);
 											}
 											strcpy(mensajeLog, "Recibe toda la informacion de las reservas del usuario");
@@ -469,7 +462,6 @@ int main(int argc, char *argv[]){
 							sscanf(recvBuff,"%c",&u2.tipo);
 							anyadirUsuario(&lU,u2);
 						}
-						//visualizarLU(lU);
 						recv(s,recvBuff,sizeof(recvBuff),0);
 						sscanf(recvBuff,"%d", &tamR);
 						lR.numR = 0;
@@ -501,7 +493,7 @@ int main(int argc, char *argv[]){
 							recv(s,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%d",&r5.salida.dia);
 							h3 = buscarHabitacion(lH, r5.habitacion.numA);
-							r5.habitacion.numP = h3.numA;
+							r5.habitacion.numP = h3.numP;
 							r5.habitacion.precio = h3.precio;
 							anyadirReserva(&lR, r5);
 						}
