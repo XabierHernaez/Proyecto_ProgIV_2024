@@ -31,7 +31,6 @@ public:
 	void resalizarReserva(char *usu, Habitacion h);
 	int fechaDisponible(const Reserva& otraReserva) const;
 	int validarReserva(const Reserva &r) const;
-	int validarReserva2(const Reserva &r) const;
 	virtual ~Reserva();
 };
 

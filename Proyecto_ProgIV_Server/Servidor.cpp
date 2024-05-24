@@ -134,8 +134,6 @@ int main(int argc, char *argv[]) {
 	do {
 		recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 		sscanf(recvBuff,"%c",&opcion);
-		snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion);
-		ficheroLog(mensajeLog, "","log.txt");
 		switch(opcion){
 		case '0':
 			strcpy(mensaje, "Saliendo del sistema...");
@@ -180,8 +178,6 @@ int main(int argc, char *argv[]) {
 							ficheroLog(mensajeLog, u.usuario,"log.txt");
 							recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%c",&opcion3);
-							snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion3);
-							ficheroLog(mensajeLog, u.usuario,"log.txt");
 							switch(opcion3){
 							case '0':
 								strcpy(mensaje, "Saliendo...");
@@ -256,8 +252,6 @@ int main(int argc, char *argv[]) {
 											ficheroLog(mensajeLog, u.usuario,"log.txt");
 											recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 											sscanf(recvBuff,"%c",&opcion6);
-											snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion6);
-											ficheroLog(mensajeLog, u.usuario,"log.txt");
 											if(opcion6 == 'S'){
 												strcpy(mensajeLog, "Se añade a la base de datos y se envia confirmacion");
 												ficheroLog(mensajeLog, u.usuario,"log.txt");
@@ -309,8 +303,6 @@ int main(int argc, char *argv[]) {
 									send(comm_socket,sendBuff,sizeof(sendBuff),0);
 									recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 									sscanf(recvBuff,"%c",&opcion5);
-									snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion5);
-									ficheroLog(mensajeLog, u.usuario,"log.txt");
 									switch(opcion5){
 									case '0':
 										strcpy(mensaje, "Cancelando modificacion...");
@@ -369,8 +361,6 @@ int main(int argc, char *argv[]) {
 												recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 												sscanf(recvBuff,"%c",&opcion7);
 												r2.setUsuario(u.usuario);
-												snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion7);
-												ficheroLog(mensajeLog, u.usuario,"log.txt");
 												if(opcion7 == 'S'){
 													strcpy(mensajeLog, "Se borra la reserva y se le envia validacion de la transaccion");
 													ficheroLog(mensajeLog, u.usuario,"log.txt");
@@ -523,8 +513,6 @@ int main(int argc, char *argv[]) {
 						do {
 							recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 							sscanf(recvBuff,"%c",&opcion4);
-							snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion4);
-							ficheroLog(mensajeLog, u.usuario,"log.txt");
 							switch(opcion4){
 							case '0':
 								baseDatos.borrarTablasUsuarioReserva(db);
@@ -600,8 +588,6 @@ int main(int argc, char *argv[]) {
 		case '2':
 			recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 			sscanf(recvBuff,"%c",&opcion2);
-			snprintf(mensajeLog, sizeof(mensajeLog),"Selecciona la opcion: %c ",opcion2);
-			ficheroLog(mensajeLog, u.usuario,"log.txt");
 			if(opcion2 == '1'){
 				recv(comm_socket,recvBuff,sizeof(recvBuff),0);
 				sscanf(recvBuff,"%s",u.nombre);

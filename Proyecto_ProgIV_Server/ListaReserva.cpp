@@ -69,7 +69,7 @@ int ListaReserva::comprobarReservaCorrecta(Reserva r)
 {
 	int i, valido = 0;
 	for(i=0;i<numR;i++){
-		if(listaR[i].validarReserva2(r) == 1){
+		if(listaR[i].validarReserva(r) == 1){
 			valido = 1;
 		}
 	}
@@ -79,7 +79,7 @@ int ListaReserva::contHabitacionesDisponibles(Reserva r)
 {
 	int i = 0, enc = 0;
 	while(!enc && i<numR){
-		if(listaR[i].validarReserva(r) == 1){
+		if(listaR[i].fechaDisponible(r) == 1){
 			enc = 1;
 		}else{
 			i++;
