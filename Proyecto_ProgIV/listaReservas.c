@@ -51,19 +51,18 @@ int encontrarReserva(ListaReservas listaR, Reserva r,  int numH)
 int disponibilidadHabitacion(ListaReservas listaR, Reserva r, int numH)
 {
 	int enc = 0, i = 0;
-	while(!enc && i < listaR.numR){
-		if(listaR.listaR[i].entrada.dia == r.entrada.dia && listaR.listaR[i].entrada.mes == r.entrada.mes &&
-			listaR.listaR[i].entrada.anyo == r.entrada.anyo && listaR.listaR[i].salida.dia == r.salida.dia && listaR.listaR[i].salida.mes == r.salida.mes && listaR.listaR[i].salida.anyo == r.salida.anyo && listaR.listaR[i].habitacion.numA == numH){
+		while(!enc && i < listaR.numR){
+			if(validarReserva(listaR.listaR[i], r, numH) == 1){
 				enc = 1;
-		}else{
-			i++;
+			}else{
+				i++;
+			}
 		}
-	}
-	if(enc){
-		return 1;
-	}else{
-		return -1;
-	}
+		if(enc){
+			return 1;
+		}else{
+			return -1;
+		}
 }
 void modificarReserva(ListaReservas *listaR, Reserva nuevaReserva, int posH)
 {
