@@ -131,7 +131,7 @@ void Reserva::resalizarReserva(char *usu, Habitacion h)
 }
 int Reserva::fechaDisponible(const Reserva& otraReserva) const
 {
-	if((entrada.dia - otraReserva.salida.dia < 0 && salida.dia >  otraReserva.entrada.dia&& entrada.mes == otraReserva.salida.mes) && otraReserva.habitacion.numP == habitacion.numP){
+	if((entrada.dia - otraReserva.salida.dia < 0 && salida.dia >  otraReserva.entrada.dia&& entrada.mes == otraReserva.salida.mes)){
 		return 1;
 	}else{
 		return 0;
