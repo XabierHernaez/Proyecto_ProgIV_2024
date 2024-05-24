@@ -65,7 +65,14 @@ int numHabitacion()
 	scanf("%d", &numH);
 	return numH;
 }
-
+int validarReserva(Reserva r, Reserva r2, int numH)
+{
+	if((r.entrada.dia - r2.salida.dia < 0 && r.salida.dia >  r2.entrada.dia&& r.entrada.mes == r2.salida.mes) && r.habitacion.numA == numH){
+			return 1;
+		}else{
+			return 0;
+		}
+}
 void realizarReserva(Reserva *r, Habitacion h, char *usuario)
 {
 	h.ocupada = 1;
